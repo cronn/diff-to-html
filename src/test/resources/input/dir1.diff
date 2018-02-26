@@ -1,0 +1,133 @@
+diff -u -r src/test/resources/input/dir1_1/subdir1/ssubdir1/CronnDiffToHtml.java src/test/resources/input/dir1_2/subdir1/ssubdir1/CronnDiffToHtml.java
+--- src/test/resources/input/dir1_1/subdir1/ssubdir1/CronnDiffToHtml.java	2018-02-08 10:46:52.247140228 +0100
++++ src/test/resources/input/dir1_2/subdir1/ssubdir1/CronnDiffToHtml.java	2018-02-08 10:46:52.251140245 +0100
+@@ -14,17 +14,17 @@
+ 
+ public class CronnDiffToHtml {
+ 
+-	private static final String NEWLINE = System.lineSeparator();
++	private static final String SYSOUT_MSG_DIRECTORIES_IDENTICAL = "\nDirectories are identical!";
+ 
+-	private static final String SYSOUT_MSG_DIRECTORIES_IDENTICAL = NEWLINE + "Directories are identical!";
++	private static final String SYSOUT_MSG_FILES_IDENTICAL = "\nFiles are identical!";
+ 
+-	private static final String SYSOUT_MSG_FILES_IDENTICAL = NEWLINE + "Files are identical!";
++	private static final String SYSOUT_MSG_DIRECTORIES_DIFFER = "\nDirectories differ!";
+ 
+-	private static final String SYSOUT_MSG_DIRECTORIES_DIFFER = NEWLINE + "Directories differ!";
++	private static final String SYSOUT_MSG_FILES_DIFFER = "\nFiles differ!";
+ 
+-	private static final String SYSOUT_MSG_FILES_DIFFER = NEWLINE + "Files differ!";
++	private static final String SYSOUT_MSG_OUTPUT_WRITTEN_TO = "\nOutput written to: ";
+ 
+-	private static final String SYSOUT_MSG_OUTPUT_WRITTEN_TO = NEWLINE + "Output written to: ";
++	private static final int NUMBER_OF_DIFF_CONTEXT_LINES = 3;
+ 
+ 	private boolean isUseOSDiffTool = true;
+ 
+@@ -40,8 +40,8 @@
+ 
+ 	public int generateDiffToHtmlReport(DiffToHtmlParameters params) throws IOException {
+ 		this.params = params;
+-		String outputDirPath = FilenameUtils.getFullPath(params.getOutputPath());
+-		FileHelper.copyCssFileToDir(outputDirPath);
++		String outputDirUri = FilenameUtils.getFullPath(params.getOutputUri());
++		FileHelper.copyCssFileToDir(outputDirUri);
+ 
+ 		if (isUseOSDiffTool) {
+ 			return generateOSDiffToHtml(params);
+@@ -53,7 +53,7 @@
+ 
+ 	private int generateOSDiffToHtml(DiffToHtmlParameters params) throws IOException {
+ 		OSDiffToHtml osDiffToHtml = new OSDiffToHtml();
+-		String html = osDiffToHtml.generateHtml(params);
++		String html = osDiffToHtml.generateHtml(params, NUMBER_OF_DIFF_CONTEXT_LINES);
+ 		writeToDisk(html);
+ 		int resultCode = osDiffToHtml.getResultCode();
+ 		printResultMessage(resultCode);
+@@ -62,7 +62,7 @@
+ 
+ 	private int generateJavaDiffToHtml(DiffToHtmlParameters params) throws IOException {
+ 		JavaDiffToHtml javaDiffToHtml = new JavaDiffToHtml();
+-		String html = javaDiffToHtml.generateDiff2Html(params);
++		String html = javaDiffToHtml.generateDiff2Html(params, NUMBER_OF_DIFF_CONTEXT_LINES);
+ 		writeToDisk(html);
+ 		int resultCode = javaDiffToHtml.getResultCode();
+ 		printResultMessage(resultCode);
+@@ -70,9 +70,9 @@
+ 	}
+ 
+ 	private void writeToDisk(String html) throws IOException {
+-		String path = params.getOutputPath();
+-		Files.write(Paths.get(path), html.getBytes());
+-		System.out.println(SYSOUT_MSG_OUTPUT_WRITTEN_TO + params.getOutputPath());
++		String uri = params.getOutputUri();
++		Files.write(Paths.get(uri), html.getBytes());
++		System.out.println(SYSOUT_MSG_OUTPUT_WRITTEN_TO + params.getOutputUri());
+ 	}
+ 
+ 	private void printResultMessage(int resultCode) {
+diff -u -r src/test/resources/input/dir1_1/subdir1/ssubdir3/HtmlBuilder.java src/test/resources/input/dir1_2/subdir1/ssubdir3/HtmlBuilder.java
+--- src/test/resources/input/dir1_1/subdir1/ssubdir3/HtmlBuilder.java	2018-02-08 10:46:52.247140228 +0100
++++ src/test/resources/input/dir1_2/subdir1/ssubdir3/HtmlBuilder.java	2018-02-08 10:46:52.255140261 +0100
+@@ -3,7 +3,6 @@
+ import static j2html.TagCreator.html;
+ import static j2html.TagCreator.link;
+ 
+-import java.nio.charset.StandardCharsets;
+ import java.nio.file.Paths;
+ 
+ import org.apache.commons.io.FilenameUtils;
+@@ -38,11 +37,9 @@
+ 	public abstract Tag createHead();
+ 
+ 	public abstract Tag createBody();
+-	
+-	public static final String preferedEncoding = StandardCharsets.UTF_8.toString();
+ 
+ 	public HtmlBuilder(DiffToHtmlParameters params) {
+-		this.outputDirForRelativePaths = FilenameUtils.getFullPath(params.getOutputPath());
++		this.outputDirForRelativePaths = FilenameUtils.getFullPath(params.getOutputUri());
+ 	}
+ 
+ 	@Override
+Binary files src/test/resources/input/dir1_1/subdir2/ssubdir1/sssubdir2/binary2 and src/test/resources/input/dir1_2/subdir2/ssubdir1/sssubdir2/binary2 differ
+diff -u -r src/test/resources/input/dir1_1/subdir3/ssubdir1/azAz123_2.txt src/test/resources/input/dir1_2/subdir3/ssubdir1/azAz123_2.txt
+--- src/test/resources/input/dir1_1/subdir3/ssubdir1/azAz123_2.txt	2018-02-08 10:46:52.251140245 +0100
++++ src/test/resources/input/dir1_2/subdir3/ssubdir1/azAz123_2.txt	2018-02-08 10:46:52.255140261 +0100
+@@ -1,4 +1,4 @@
+-abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
++abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRSdsdUV Wddfg!!XYZ ! "§ $%& /() =? * '<>
+ 
+ |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
+ 
+@@ -16,7 +16,7 @@
+ 
+ |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
+ 
+-|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
++|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs abcsefd wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
+ 
+ |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
+ 
+@@ -36,4 +36,4 @@
+ 
+ |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
+ 
+-|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<> |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<> |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !
+\ No newline at end of file
++|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<> |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<> |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !
+\ No newline at end of file
+Only in src/test/resources/input/dir1_2/subdir3/ssubdir3: sssibdur2
+Only in src/test/resources/input/dir1_1/subdir3/ssubdir3: sssubdir2
+diff -u -r src/test/resources/input/dir1_1/subdir3/ssubdir3/sssubdir3/HelloWorldException.java src/test/resources/input/dir1_2/subdir3/ssubdir3/sssubdir3/HelloWorldException.java
+--- src/test/resources/input/dir1_1/subdir3/ssubdir3/sssubdir3/HelloWorldException.java	2018-02-08 10:46:52.251140245 +0100
++++ src/test/resources/input/dir1_2/subdir3/ssubdir3/sssubdir3/HelloWorldException.java	2018-02-08 10:46:52.255140261 +0100
+@@ -1,6 +1,6 @@
+ public class HelloWorldException {
+     public static void main (String[] args) throws Exception {
+-        System.out.println("Bienvenitos!");
++        System.out.println("Boa tarde, companheiros!");
+         throw new Exception("Generic Exception");
+     }
+ }

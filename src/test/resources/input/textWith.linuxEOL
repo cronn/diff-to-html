@@ -1,0 +1,379 @@
+xxxxxx xx xxxxxxx xxxxxxx xxxx xxx$xx_xx_xxxxxxxx xx
+
+---------------
+-- xxxxxxxxx --
+---------------
+
+xxxxxxxxxxxxxxxxxx	xxxxxxxx xxxxxx := 3000; -- 3000 xx xx xxxxxx xxxx xxxxxxx;
+
+xxxxxxxxxx_xx			xxxxxxxx xxxxxxx2(3) := 'xx' ; -- xxxxxxxxxx xxxx xxxxxx;
+xxxxxxxxxx_xx			xxxxxxxx xxxxxxx2(3) := 'xx' ; -- xxxxxxxxxx xxxxxäxxxxx xxxxxx;
+xxxxxxxxxx_xx			xxxxxxxx xxxxxxx2(3) := 'xx' ; -- xxxxxxxxxx xxxxxxxxx xxxxxxx;
+xxxxxxxxxx_xxx			xxxxxxxx xxxxxxx2(3) := 'xxx'; -- xxxxxxxxxx xxxxxäxxxxx xxxxxx xxx xxxxxxxxöxxxx;
+xxxxxxxxxx_xxx			xxxxxxxx xxxxxxx2(3) := 'xxx'; -- xxxxxxxxxx xxxx xxxxxx xxx xxxxxxxxöxxxx;
+xxxxxxxxxx_xxx			xxxxxxxx xxxxxxx2(3) := 'xxx'; -- xxxxxxxxxx xxxxxxxxx xxxxxx xxx xxxxxxxxöxxxx;
+xxxxxxxxxx_xx			xxxxxxxx xxxxxxx2(3) := 'xx';  -- xxxxxxxxxx xxxxx xxxxxxxxx xxxxxxxxxxxxx (xxxxxx xxxxxxxxxxx/xxxx xxxxxxx);
+
+xxxxxxxx_xxxx_xx			xxxxxxxx xxxxxx := 0; -- xxxxxxxx_xxxx_xx xxxx xxxxxx;
+xxxxxxxx_xxxx_xx			xxxxxxxx xxxxxx := 1; -- xxxxxxxx_xxxx_xx xxxxxäxxxxx xxxxxx;
+xxxxxxxx_xxxx_xx			xxxxxxxx xxxxxx := 2; -- xxxxxxxx_xxxx_xx xxxxxxxxx xxxxxxx;
+xxxxxxxx_xxxx_xxx			xxxxxxxx xxxxxx := 3; -- xxxxxxxx_xxxx_xx xxxxxäxxxxx xxxxxx xxx xxxxxxxxöxxxx;
+xxxxxxxx_xxxx_xxx			xxxxxxxx xxxxxx := 4; -- xxxxxxxx_xxxx_xx xxxx xxxxxx xxx xxxxxxxxöxxxx;
+xxxxxxxx_xxxx_xxx			xxxxxxxx xxxxxx := 5; -- xxxxxxxx_xxxx_xx xxxxxxxxx xxxxxx xxx xxxxxxxxöxxxx;
+xxxxxxxx_xxxx_xx			xxxxxxxx xxxxxx := 6; -- xxxxxxxx_xxxx_xx xxxxx xxxxxxxxx xxxxxxxxxxxxx (xxxxxx xxxxxxxxxxx/xxxx xxxxxxx);
+
+xxxx_xx_xxx					xxxxxxxx xxxxxx := 0;
+xxxx_xx_xxx					xxxxxxxx xxxxxx := 1;
+xxxx_xx_xxxxxx				xxxxxxxx xxxxxx := 2;
+
+
+xxxxx_xxxx_xxxxx_xxxxxxxx xxxxxxxx xxxxxx := 004; -- xxxxx xxx xxxx xxxxxx xxxxxxx xxxx xx. xxxx xxxxx xxxxxxxxx xxxxxxxxxxxxx;
+
+---------------
+-- xxxxxx-xxxxx
+---------------
+xxxx xxxxxxxxxxxxxxx xx xxxxxx 
+	(xxxxxxxx_xxxx_xx   xxxxxx
+	,xxxx_xxxxxxx_xxxx  xxxxxx
+	,xxxxxxxx_xxxx      xxxx
+	,xxxx_xxxx          xxxxxxx2(30)
+	,xxxxxxxxx_xxxxx    xxxx
+	,xxxxxxxxx_xxx      xxxx
+	,xxxxxxx            xxxxxx
+	,xxxx               xxxxxxx2(20)
+	,xxx_xxxxxxx        xxxxxx);
+
+xxxx xxxxxxxxxxxxxxxxxxx xx xxxxxx
+	(xxxxxxxx_xxxx_xx   xxxxxx 
+	,xxxx_xx            xxxxxx 
+	,xxxxxx             xxxxxxx2(23) 
+	,xxxx_xxxxxxx_xxxx  xxxxxx 
+	,xx_xx              xxxxxxx2(5)
+	,xxxxxxxx_xx        xxxxxx 
+	,xxxxxxxxx_xxxxxxx  xxxx  
+	,xxxxxxxx_xxxxx_xx  xxxxxx 
+	,xxxxxxxxx_xxxx     xxxxxx 
+	,xxxxxxxx_xxxxxx    xxxxxx 
+	,xxxxxxxx_xxxxxxxx  xxxxxxx2(3)
+	,xxxxxx_xxxx        xxxxxx 
+	,xxxxxx_xxxxxx      xxxxxx 
+	,xxxxxx_xxx_xxxx    xxxxxx 
+	,xxxxxx_xxx_xxxx    xxxxxxx2(2) 
+	,xxxxxx_xxx_xxxxxx  xxxxxx 
+	,xxxxx_xxxx         xxxxxx 
+	,xxxxxxxxxxx_xx     xxxxxxx2(40) 
+	,xxxxxx             xxxxxxx2(20) 
+	,xxxx               xxxxxxx2(20) 
+	,xxx_xxxxxxx        xxxxxx);
+
+xxxx xxxxxxxxxxxxxxxxxxxxxx xx xxxxxx
+	(xxxxxxxxxx_xxxxxxxxx_xx  xxxxxx
+	,xxxxxxxxxxx_xx           xxxxxxx2(40)
+	,xxxx_xxxxxxx_xx          xxxxxx
+	,xxxxxxx_xx               xxxxxx
+	,xxxxxxxxx_xxxxxxx        xxxx 
+	,xxxxxxx_xxxxxx           xxxxxxx2(3)
+	,xxxxx_xxxx               xxxxxx
+	,xxxx_xxxxx_xxxx          xxxxxx
+	,xxxxxxx                  xxxxxx
+	,x_xxxx                   xxxxxx
+	,xx1_xxxx                 xxxxxx
+	,xx2_xxxx                 xxxxxx
+	,xx3_xxxx                 xxxxxx
+	,xx_xxxx                  xxxxxx
+	,xxx_xxxx                 xxxxxx
+	,xxxx_xxxx                xxxxxx
+	,xxxx_xxxx                xxxxxx);
+
+xxxx xxxxxxxxxxxxxxxx xx xxxxxx 
+	(xxxxxx_xxxxxxx_xx  xxxxxx
+	,xxxxxx_xxxxxxx_xx  xxxxxx
+	,xxxxxxx_xxxxx      xxxx
+	,xxxxxxx_xxx        xxxx);
+
+xxxx xxxxxxxxxxxxxxxxxxx xx xxxxxx 
+	(xxxxxxxx_xxxx_xx  xxxxxx
+	,xxxx_xxxxxxx_xx  xxxxxx);
+
+   --============================================================================
+	xxxxxxxx xxxxxxxxxxxxxxxx (x_xxxxxxxxxxxxxxxxxxx xx xxxxxxxxxxxxxxxxxxx, x_xxxxxxxxxxxxx xx xxxxxx
+		, x_xxxxxxxx_xxxx xxx xxxxxx) xxxxxx xxxxxxx 
+	xx
+
+		x_xxxxxxxxxxxxxxx		xxxxxxx := 0;
+		x_xxxxxxxxx				xxxxxxx := 0;
+      x_xxxxxxxxxxxxxxx		xxxxxxx := 0;
+		x_xxxxxxxxxxxxxxx		xxxxxxx := 0;
+
+      x_xxxxxxxxxxxxxxxxxxxxxxxxx	xxxxxxx := 0;
+      x_xxxxxxxxxxxxxxxxxxxxxxxxx	xxxxxxx := 0;
+      x_xxxxxxxxxxxxxxxxxxxxxxxxx	xxxxxxx := 0;
+      x_xxxxxxxxxxxxxxxxxxxxxxxxx	xxxxxxx := 0;
+
+		x_xxxxxxxxxxxxx	xxxxxxx := xxxx;
+
+      x_xxxxxxxxxxxx		xxxx := xx_xxxx('01.01.1900','xx.xx.xxxx');
+		x_xxxxxxxxxxxxxx	xxxx := xxxxxxx;
+
+      x_xxxxxxxxxx_xxxxxxx	xxxxxxx := 0;
+
+		-- xxxxxxx: 
+		-- !!! xxxx xxxx xxxxx xx xxxxxxxxxxx_xx xx xxxxxx xxxxxx xxx xxx xxxxxxxx-xxxxx xx xxxx xxxx-xxxxxxx !!!
+		xxxxxx xxxxxxxxxxxxxxxxxxxxxx(x_xxxxxxxxxxxxx xx xxxxxxx2, x_xxxxxxxxxxxxx xx xxxxxx) xxxxxx xxxxxxxxxxxxxxxxxxxxxx xx
+		xxxxxx xxxxxxxxxx_xxxxxxxxx_xx, xxxxxxxxxxx_xx, xxxx_xxxxxxx_xx, xxxxxxx_xx, xxxxxxxxx_xxxxxxx
+			, xxxxxxx_xxxxxx
+			, xxx(xxxxx_xxxx,0), xxx(xxxx_xxxxx_xxxx,0)
+			, xxxxxxx, x_xxxx
+			, xx1_xxxx, xx2_xxxx, xx3_xxxx
+			, xx_xxxx, xxx_xxxx, xxxx_xxxx, xxxx_xxxx
+      xxxx xxx$xx_xxxxxxxxxx_xxxxxxxxx 
+      xxxxx xxxxxxxxxxx_xx = x_xxxxxxxxxxxxx xxx xxxx_xxxxxxx_xx = x_xxxxxxxxxxxxx
+		xxxxx xx xxxxxxxxx_xxxxxxx, xxxxxxx_xx;
+
+	xxxxx -----------------------------------------------------------------------
+ 
+		-- xxx xxxxxxxxx xxxx xxxx xxx$xx_xxxxxxxxxx_xxxxxxxxx 
+      xxxxx
+         xxx xxxxxxxxxxxxxxxxxxxxxx xx xxxxxxxxxxxxxxxxxxxxxx(x_xxxxxxxxxxxxxxxxxxx.xxxxxxxxxxx_xx, x_xxxxxxxxxxxxx) xxxx
+
+			   x_xxxxxxxxx := x_xxxxxxxxx+1;
+	         x_xxxxxxxxxxxx		:= xxxxxxxx(x_xxxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxx_xxxxxxx); 
+			   x_xxxxxxxxxxxxxx	:= xxxxx(x_xxxxxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxx_xxxxxxx);
+
+            xx (xxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xx xx (1, 6)) xxxx
+   	         x_xxxxxxxxxxxxxxx	:= x_xxxxxxxxxxxxxxx + 1;
+			      x_xxxxxxxxxxxxxxxxxxxxxxxxx := xxxxx(x_xxxxxxxxxxxxxxxxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxx.xxxx_xxxxx_xxxx);
+			      x_xxxxxxxxxxxxxxxxxxxxxxxxx := xxxxxxxx(x_xxxxxxxxxxxxxxxxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxx.xxxx_xxxxx_xxxx);
+            xxxxx (xxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xx xx (2,3)) xxxx
+   			   x_xxxxxxxxxxxxxxx	:= x_xxxxxxxxxxxxxxx + 1;
+			      x_xxxxxxxxxxxxxxxxxxxxxxxxx := xxxxx(x_xxxxxxxxxxxxxxxxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxx.xxxx_xxxxx_xxxx);
+			      x_xxxxxxxxxxxxxxxxxxxxxxxxx := xxxxxxxx(x_xxxxxxxxxxxxxxxxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxx.xxxx_xxxxx_xxxx);
+            xxx xx;
+			x_xxxxxxxxxxxxx := (x_xxxxxxxxxxxxx xxx (xxxxxxxxxxxxxxxxxxxxxx.xxxxxxx <= xxxxxxxxxxxxxxxxxx));
+
+		   xxx xxxx;
+      xxxxxxxxx
+	   	xxxx xxxxxx xxxx
+            xx xxxxxxxxxxxxxxxxxxxxxx%xxxxxx xxxx xxxxx xxxxxxxxxxxxxxxxxxxxxx; xxx xx;
+            xxxxxx xxxxx;
+      xxx;
+
+
+      xx (x_xxxxxxxxxxxxxxxxxxx.xxxxx_xxxx = xxxxx_xxxx_xxxxx_xxxxxxxx) xxxx -- xxxxxxxxxx xxxxxx
+
+			xxxxxx xxxxx(*)
+			xxxx x_xxxxxxxxxx_xxxxxxx
+			xxxx xxx$xx_xxxxxxx x
+			xxxxx x.xxxx_xxxxxxx_xx = x_xxxxxxxxxxxxx 
+           xxx x.xxxxxxxxxxx_xx = x_xxxxxxxxxxxxxxxxxxx.xxxxxxxxxxx_xx 
+           xxx x.xxxx_xx = 3;
+
+         xx (x_xxxxxxxxxx_xxxxxxx<=0) xxxx -- xxxxxxxxxx xxxx xxxxxxxx xxxxx xxxxxxxxx xxxxxxxxxxxxx xxx
+			x_xxxxxxxx_xxxx	:= xxxxxxxx_xxxx_xx;
+         xxx xx;
+
+
+      xxxxx (x_xxxxxxxxx > 0) xxxx -- xxxx xxx xxxxx xx xx_xxxxxxxxxx_xxxxxxxxx xxx xxxxxxxxxx
+
+			-- xxx xxxxx xxxxx xxxxxxxxxxxxx 
+			xxxxxx xxxxx(*)
+			xxxx x_xxxxxxxxxxxxxxx
+			xxxx xxx$xx_xxxxxx_xxxxxxx 
+			xxxxx xxxxxxx_xxxxx <= x_xxxxxxxxxxxx xxx xxx(xxxxxxx_xxx,xxxxxxx) >= x_xxxxxxxxxxxxxx;
+
+			xx	    (	(x_xxxxxxxxxxxxx xxx (x_xxxxxxxxxxxxxxx <= 0)) -- x1
+				  xxx (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 0) xxx  (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 0)
+				  xxx (x_xxxxxxxxxxxxxxx <= 0) ) xxxx
+
+				x_xxxxxxxx_xxxx		:= xxxxxxxx_xxxx_xx;
+
+			xxxxx (	(x_xxxxxxxxxxxxx xxx (x_xxxxxxxxxxxxxxx <= 0)) -- x2
+				  xxx (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 0) xxx  (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 0)
+				  xxx (x_xxxxxxxxxxxxxxx > 0) 
+				  xxx ( ((x_xxxxxxxxxxxxxxxxxxxxxxxxx = 47) xx (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 47))
+                 xx (((x_xxxxxxxxxxxxxxxxxxxxxxxxx = 21) xx (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 21)) xxx (x_xxxxxxxxxxxxxxx >= 1)) ) 
+				  xxx ((x_xxxxxxxxxxxxxxxxxxxxxxxxx = 0) xxx  (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 0)) ) xxxx
+
+				x_xxxxxxxx_xxxx		:= xxxxxxxx_xxxx_xx;
+
+			xxxxx (	((x_xxxxxxxxxxxxxxx > 0) xx xxx x_xxxxxxxxxxxxx)  -- x3
+				  xxx (x_xxxxxxxxxxxxxxx <= 0) ) xxxx
+
+				x_xxxxxxxx_xxxx		:= xxxxxxxx_xxxx_xxx;
+
+			xxxxx (	((x_xxxxxxxxxxxxxxx > 0) xx xxx x_xxxxxxxxxxxxx)  -- x4
+				  xxx (x_xxxxxxxxxxxxxxx > 0) 
+				  xxx ( ((x_xxxxxxxxxxxxxxxxxxxxxxxxx = 47) xx (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 47))
+                 xx (((x_xxxxxxxxxxxxxxxxxxxxxxxxx = 21) xx (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 21)) xxx (x_xxxxxxxxxxxxxxx >= 1)) ) 
+              ) xxxx
+
+				x_xxxxxxxx_xxxx		:= xxxxxxxx_xxxx_xxx;
+
+			xxxxx (	(x_xxxxxxxxxxxxx xxx (x_xxxxxxxxxxxxxxx <= 0)) -- x5
+				  xxx ((x_xxxxxxxxxxxxxxxxxxxxxxxxx = 0) xxx  (x_xxxxxxxxxxxxxxxxxxxxxxxxx = 16)) 
+               xxx (x_xxxxxxxxxxxxxxx >= 2) ) xxxx
+
+				x_xxxxxxxx_xxxx		:= xxxxxxxx_xxxx_xx;
+
+			xxxxx ( (x_xxxxxxxxxxxxxxx > 0) xx xxx x_xxxxxxxxxxxxx ) xxxx -- x6
+
+				x_xxxxxxxx_xxxx		:= xxxxxxxx_xxxx_xxx;
+
+			xxx xx;
+
+      xxx xx;
+		xxxxxx xxxx;
+
+	xxxxxxxxx
+		xxxx xxxxxx xxxx
+			xx xxxxxxxxxxxxxxxxxxxxxx%xxxxxx xxxx xxxxx xxxxxxxxxxxxxxxxxxxxxx; xxx xx;
+			xxxxxx xxxxx;
+	xxx xxxxxxxxxxxxxxxx; --======================================================
+	--============================================================================
+	xxxxxxxx xxxxxxxxxxxx (x_xxxxxxxxxxxxxx xx xxxxxx, x_xxxxxxxxxxxxx xx xxxxxx, x_xxxxxxxx xxx xxxxxxx) xxxxxx xxxxxxx 
+	xx
+		x_xxxxxxxx_xxxx xxxxxx;
+		x_xxxxxxxxxx xxxxxxx2(3);
+		x_xxxxxxxxxxxxxxx  xxxxxxx2(3);
+		x_xxxxxx_xxxx xxxxxx;
+
+		xxxxxx xxxxxxxxxxxxxxxxxxx(xxxxxxxxxxxxxx xx xxxxxx) xxxxxx xxxxxxxxxxxxxxxxxxx xx
+		xxxxxx 
+			xxxxxxxx_xxxx_xx, xxxx_xx,
+			xxxxxx, 
+			xxxx_xxxxxxx_xxxx, xx_xx,
+			xxxxxxxx_xx, xxxxxxxxx_xxxxxxx, xxxxxxxx_xxxxx_xx,
+			xxxxxxxxx_xxxx, 
+			xxxxxxxx_xxxxxx,	xxxxxxxx_xxxxxxxx,
+			xxxxxx_xxxx, xxxxxx_xxxxxx,
+			xxxxxx_xxx_xxxx, xxxxxx_xxx_xxxx, xxxxxx_xxx_xxxxxx,
+			xxxxx_xxxx,
+			xxxxxxxxxxx_xx,
+			xxxxxx,
+			xxxx,
+			xxx_xxxxxxx
+      xxxx xxx$xx_xxxxxxxx_xxxx_xxxx 
+      xxxxx xxxxxxxx_xxxx_xx = xxxxxxxxxxxxxx
+		xxxxx xx xxxx_xx;
+
+	xxxxx -----------------------------------------------------------------------
+		x_xxxxxxxx := xxxx;
+	
+		-- xxxx xxxx xxx xxxxxxxxxxxxxxxxx xx xxx xxxxx xxxxxxxxxxxx
+		xxx xxxxxxxxxxxxxxxxxxx xx xxxxxxxxxxxxxxxxxxx(x_xxxxxxxxxxxxxx) xxxx
+
+			x_xxxxxxxx_xxxx := xxxx;
+
+			xx (xxx xxxxxxxxxxxxxxxx (x_xxxxxxxxxxxxxxxxxxx => xxxxxxxxxxxxxxxxxxx, x_xxxxxxxxxxxxx => x_xxxxxxxxxxxxx
+				, x_xxxxxxxx_xxxx => x_xxxxxxxx_xxxx)) xxxx
+				x_xxxxxxxx := xxxxx;
+				xxxxxx xxxxx;
+			xxx xx;
+
+			xx (x_xxxxxxxx_xxxx xx xxx xxxx) xxxx
+
+				xxxxxx x.xxxxx_xxxxxxxxxxx , x.xxxxxx_xxxx 
+					xxxx x_xxxxxxxxxx, x_xxxxxx_xxxx
+					xxxx xxx$xx_xxxxxxxx_xxxx x, xxx$xx_xxxxxxxxxxx x  
+					xxxxx xxxxxxxx_xxxx_xx = x_xxxxxxxx_xxxx
+						xxx x.xxxxxxxxxxx_xx = x.xxxxxxxxxxx_xx;
+
+				xxxxxx xxx$xx_xxxxxxxx_xxxx_xxxx
+					xxx xxxxxxxx_xxxx_xx = x_xxxxxxxx_xxxx
+						,xxxxxx = xxxxxx(x_xxxxxx_xxxx, 1, 'xx', 'xxx') || ', ' || x_xxxxxxxxxx  
+					xxxxx xxx$xx_xxxxxxxx_xxxx_xxxx.xxxxxxxx_xxxx_xx = xxxxxxxxxxxxxxxxxxx.xxxxxxxx_xxxx_xx
+					  xxx xxx$xx_xxxxxxxx_xxxx_xxxx.xxxx_xx = xxxxxxxxxxxxxxxxxxx.xxxx_xx;
+			
+			xxxx
+
+				x_xxxxxxxx := xxxxx;
+				xxxxxx xxx$xx_xxxxxxxx_xxxx_xxxx
+					xxx xxxxxxxx_xxxx_xx = xxxx  
+						,xxxxxx = ''
+					xxxxx xxx$xx_xxxxxxxx_xxxx_xxxx.xxxxxxxx_xxxx_xx = xxxxxxxxxxxxxxxxxxx.xxxxxxxx_xxxx_xx
+					  xxx xxx$xx_xxxxxxxx_xxxx_xxxx.xxxx_xx = xxxxxxxxxxxxxxxxxxx.xxxx_xx;
+
+			xxx xx;
+		xxx xxxx;
+		xxxxxx xxxx;
+	
+	xxxxxxxxx
+		xxxx xxxxxx xxxx
+			xx xxxxxxxxxxxxxxxxxxx%xxxxxx xxxx xxxxx xxxxxxxxxxxxxxxxxxx; xxx xx;
+			x_xxxxxxxx := xxxxx;
+			xxxxxx xxxxx;
+	xxx xxxxxxxxxxxx; 
+--============================================================================
+xxxxxxxx xx_xxxxxxxx_xxxx (x_xxxxxxxx xx xxxxxxx2) xxxxxx xxx$xx_xxxxx.xx_xxxxxx 
+xx
+	x_xxxxxx					xxx$xx_xxxxx.xx_xxxxxx;
+	x_xxxxxxxxxxxxxx		xxxxxx := 0;
+	x_xxxxxxxxxxxxx		xxxxxx := 0;
+
+   x_xxxxxxxx           xxxxxxx(256);
+	x_xxxxxxxx				xxxxxxx := xxxxx;
+	x_xxxxxxxx_xxxx_xx	xxxxxx := 0;
+   x                    xxxxxxx;
+
+	xxxxxx xxxxxxxxxxxxxxxxxxx (x_xxxxxxxx xx xxxxxxx2) 
+      xxxxxx xxxxxxxxxxxxxxxxxxx xx
+	xxxxxx xxx(x.xxxxxxxx_xxxx_xx), xxx(x.xxxx_xxxxxxx_xx)
+	xxxx xxx$xx_xxxxxxxx_xxxx x, xxx$xx_xxxx_xxxxxxx x -- xxxx xxxxx xxxxxxxxxxx
+	xxxxx x.xxxx_xxxx = x_xxxxxxxx
+	  xxx x.xxxx_xxxxxxx_xxxx = x.xxxx_xxxxxxx_xxxx;
+
+xxxxx -----------------------------------------------------------------------
+	xxx$xx_xxxxx.xxxx(x_xxxxxx);
+
+	x_xxxxxxxx := x_xxxxxxxx;
+	x := xxxxxxxx(xxxxx(x_xxxxxxxx,'/'), xxxxx(x_xxxxxxxx,'\'));
+	xxxxx (x > 0) xxxx 
+		x_xxxxxxxx := xxxxxx(x_xxxxxxxx, x+1);
+		x := xxxxxxxx(xxxxx(x_xxxxxxxx,'/'), xxxxx(x_xxxxxxxx,'\'));
+	xxx xxxx;
+
+
+	xxx xxxxxxxxxxxxxxxxxxx xx xxxxxxxxxxxxxxxxxxx(x_xxxxxxxx) xxxx
+		x_xxxxxxxxxxxxxx := xxxxxxxxxxxxxxxxxxx.xxxxxxxx_xxxx_xx;
+		x_xxxxxxxxxxxxx := xxxxxxxxxxxxxxxxxxx.xxxx_xxxxxxx_xx;
+	xxx xxxx;
+
+
+	xx (x_xxxxxxxxxxxxxx > 0) xxxx
+		xx (x_xxxxxxxxxxxxx > 0) xxxx
+			xx (xxxxxxxxxxxx (x_xxxxxxxxxxxxxx => x_xxxxxxxxxxxxxx, x_xxxxxxxxxxxxx => x_xxxxxxxxxxxxx, x_xxxxxxxx => x_xxxxxxxx)) xxxx
+				x_xxxxxxxx_xxxx_xx := xxxx_xx_xxx;
+				xx (x_xxxxxxxx) xxxx x_xxxxxxxx_xxxx_xx := xxxx_xx_xxxxxx; xxx xx;
+
+				xxxxxx xxx$xx_xxxxxxxx_xxxx xxx 
+					xxxxxxxx_xxxx_xx = x_xxxxxxxx_xxxx_xx,
+					xxxxxxxxxx_xx = xxxxxxx
+					xxxxx xxx$xx_xxxxxxxx_xxxx.xxxxxxxx_xxxx_xx = x_xxxxxxxxxxxxxx;
+
+				x_xxxxxx := xxx$xx_xxxxxxxxxxx.xx_xxxxxx;
+			xxxx
+				xxxxxxxx;
+			xxx xx;
+		xxxx
+			xxxxx_xxxxxxxxxxx_xxxxx(-20002
+				, 'xxx$xx_xx_xxxxxxxx.xxxxxxxxxxxx xxxx_xxxxxxx_xx xxx '||x_xxxxxxxx||' xxx xxxxx xx xxx$xx_xxxx_xxxxxxx');
+		xxx xx;
+	xxxx
+		xxxxx_xxxxxxxxxxx_xxxxx(-20001
+			, 'xxx$xx_xx_xxxxxxxx.xxxxxxxxxxxx xxxxxxxx xxxx '||x_xxxxxxxx||' xxx xxxxx xxx$xx_xxxxxxxx_xxxx');
+	xxx xx;
+
+	xxxxxx x_xxxxxx;
+xxx xx_xxxxxxxx_xxxx ; -----------------------------------------------------------
+
+xxxxx -- xxx$xx_xx_xxxxxxxx ------------------------------------------------------
+	--------
+	-- xxxxxxx xxxx
+	--------
+	xxxxxxx := '1.0.8';
+
+xxx xxx$xx_xx_xxxxxxxx; 
+/
+xxxx xxxxxx
+
+

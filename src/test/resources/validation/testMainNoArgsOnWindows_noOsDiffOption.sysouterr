@@ -1,0 +1,11 @@
+Parsing failed. Reason: Input arguments are missing
+
+usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
+       [-b] [-or] [-iu] [-de] [-u <arg>]
+ -w,--ignorewhitespaces   ignore all white spaces
+ -b,--ignorespacechange   ignore changes in the amount of white space
+ -or,--onlyreports        always exits with zero
+ -iu,--ignoreunique       ignore unique files
+ -de,--detectencoding     tries to determine encoding type
+ -u,--unified <arg>       output <arg> (default 3) lines of unified
+                          context

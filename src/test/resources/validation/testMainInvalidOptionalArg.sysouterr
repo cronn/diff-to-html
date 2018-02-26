@@ -1,0 +1,16 @@
+Parsing failed. Reason: Unrecognized option: --invalidOptionalArg
+
+usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
+       [-b] [-or] [-od] [-iu] [-de] [-u <arg>]
+ -w,--ignorewhitespaces   ignore all white spaces
+ -b,--ignorespacechange   ignore changes in the amount of white space
+ -or,--onlyreports        always exits with zero
+ -od,--osdiff             uses operating system's diff instead of Java
+                          implementation and parses the output. Might
+                          slightly improve performance, depending on your
+                          machine. Try for large diffs in time-critial
+                          situations. Windows not supported currently
+ -iu,--ignoreunique       ignore unique files
+ -de,--detectencoding     tries to determine encoding type
+ -u,--unified <arg>       output <arg> (default 3) lines of unified
+                          context

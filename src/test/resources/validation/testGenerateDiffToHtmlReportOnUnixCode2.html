@@ -1,0 +1,265 @@
+
+<html>
+<head charset="UTF-8">
+<title>diff code2_1.java.example code2_2.java.example</title>
+<link rel="stylesheet" type="text/css" href="diffToHtml.css"></head>
+<body>
+<div id="wrapper">
+<table>
+<tr>
+<th colspan="3">
+<a href="../input/code2_1.java.example">
+<b>../input/code2_1.java.example</b></a> [DATE] [TIME]  [ZONE]
+<br>
+<a href="../input/code2_2.java.example">
+<b>../input/code2_2.java.example</b></a> [DATE] [TIME]  [ZONE]</th></tr>
+<tr height="16">
+<td></td>
+<td></td>
+<td></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>@@ -8,7 +8,6 @@</pre></td></tr>
+<tr>
+<td class="line-number">8</td>
+<td class="line-number">8</td>
+<td class="context">
+<pre> import static de.cronn.diff.util.UnifiedDiffValues.BINARY_FILES_SUFFIX;</pre></td></tr>
+<tr>
+<td class="line-number">9</td>
+<td class="line-number">9</td>
+<td class="context">
+<pre> import static de.cronn.diff.util.UnifiedDiffValues.BINARY_LINE_SPLIT_STR;</pre></td></tr>
+<tr>
+<td class="line-number">10</td>
+<td class="line-number">10</td>
+<td class="context">
+<pre> import static de.cronn.diff.util.UnifiedDiffValues.DELETION_PREFIX;</pre></td></tr>
+<tr>
+<td class="line-number">11</td>
+<td class="line-number">11</td>
+<td class="delete">
+<pre>-import static de.cronn.diff.util.UnifiedDiffValues.DIFF_FILE_LEFT_PREFIX;</pre></td></tr>
+<tr>
+<td class="line-number">12</td>
+<td class="line-number">11</td>
+<td class="context">
+<pre> import static de.cronn.diff.util.UnifiedDiffValues.DIFF_FILE_RIGHT_PREFIX;</pre></td></tr>
+<tr>
+<td class="line-number">13</td>
+<td class="line-number">12</td>
+<td class="context">
+<pre> import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_PREFIX;</pre></td></tr>
+<tr>
+<td class="line-number">14</td>
+<td class="line-number">13</td>
+<td class="context">
+<pre> import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_SUFFIX;</pre></td></tr>
+<tr height="16">
+<td></td>
+<td></td>
+<td></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>@@ -117,7 +116,7 @@</pre></td></tr>
+<tr>
+<td class="line-number">117</td>
+<td class="line-number">116</td>
+<td class="context">
+<pre> 	private SimpleFileInfo[] getBinaryFileInfos(String line) {</pre></td></tr>
+<tr>
+<td class="line-number">118</td>
+<td class="line-number">117</td>
+<td class="context">
+<pre> 		String binaryFilesDifferPrefix = UnifiedDiffValues.getBinaryFilesDifferPrefix(line);</pre></td></tr>
+<tr>
+<td class="line-number">119</td>
+<td class="line-number">118</td>
+<td class="context">
+<pre> 		String[] paths = StringUtils.substringBeforeLast(</pre></td></tr>
+<tr>
+<td class="line-number">120</td>
+<td class="line-number">119</td>
+<td class="delete">
+<pre>-				StringUtils.substringAfter(line, binaryFilesDifferPrefix),</pre></td></tr>
+<tr>
+<td class="line-number">121</td>
+<td class="line-number">119</td>
+<td class="insert">
+<pre>+				StringUtils.substringafter(line, binaryFilesDifferPrefix),</pre></td></tr>
+<tr>
+<td class="line-number">121</td>
+<td class="line-number">120</td>
+<td class="context">
+<pre> 				BINARY_FILES_SUFFIX).split(BINARY_LINE_SPLIT_STR);</pre></td></tr>
+<tr>
+<td class="line-number">122</td>
+<td class="line-number">121</td>
+<td class="context">
+<pre> 		return createFileInfoPair(paths);</pre></td></tr>
+<tr>
+<td class="line-number">123</td>
+<td class="line-number">122</td>
+<td class="context">
+<pre> 	}</pre></td></tr>
+<tr height="16">
+<td></td>
+<td></td>
+<td></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>@@ -129,7 +128,7 @@</pre></td></tr>
+<tr>
+<td class="line-number">129</td>
+<td class="line-number">128</td>
+<td class="context">
+<pre> 		return createFileInfoPair(paths);</pre></td></tr>
+<tr>
+<td class="line-number">130</td>
+<td class="line-number">129</td>
+<td class="context">
+<pre> 	}</pre></td></tr>
+<tr>
+<td class="line-number">131</td>
+<td class="line-number">130</td>
+<td class="context">
+<pre> </pre></td></tr>
+<tr>
+<td class="line-number">132</td>
+<td class="line-number">131</td>
+<td class="delete">
+<pre>-	private SimpleFileInfo[] createFileInfoPair(String[] paths) {</pre></td></tr>
+<tr>
+<td class="line-number">133</td>
+<td class="line-number">131</td>
+<td class="insert">
+<pre>+	private SimpleFileInfo[] createFileInfoPaiirr(String[] paths) {</pre></td></tr>
+<tr>
+<td class="line-number">133</td>
+<td class="line-number">132</td>
+<td class="context">
+<pre> 		if (paths.length == 2) {</pre></td></tr>
+<tr>
+<td class="line-number">134</td>
+<td class="line-number">133</td>
+<td class="context">
+<pre> 			SimpleFileInfo fileInfoLeft = new SimpleFileInfo(paths[0].trim());</pre></td></tr>
+<tr>
+<td class="line-number">135</td>
+<td class="line-number">134</td>
+<td class="context">
+<pre> 			SimpleFileInfo fileInfoRight = new SimpleFileInfo(paths[1].trim());</pre></td></tr>
+<tr height="16">
+<td></td>
+<td></td>
+<td></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>@@ -142,8 +141,8 @@</pre></td></tr>
+<tr>
+<td class="line-number">142</td>
+<td class="line-number">141</td>
+<td class="context">
+<pre> 		String substringAfter = StringUtils.substringAfter(line, identifierPrefix);</pre></td></tr>
+<tr>
+<td class="line-number">143</td>
+<td class="line-number">142</td>
+<td class="context">
+<pre> 		String[] fileInfos = substringAfter.split(&quot;\t&quot;);</pre></td></tr>
+<tr>
+<td class="line-number">144</td>
+<td class="line-number">143</td>
+<td class="context">
+<pre> 		SimpleFileInfo fInfo = new SimpleFileInfo();</pre></td></tr>
+<tr>
+<td class="line-number">145</td>
+<td class="line-number">144</td>
+<td class="delete">
+<pre>-		fInfo.setPath(fileInfos.length &gt; 0 ? fileInfos[0].trim() : &quot;&quot;);</pre></td></tr>
+<tr>
+<td class="line-number">146</td>
+<td class="line-number">144</td>
+<td class="delete">
+<pre>-		fInfo.setLastModified(fileInfos.length &gt; 1 ? fileInfos[1] : &quot;&quot;);</pre></td></tr>
+<tr>
+<td class="line-number">147</td>
+<td class="line-number">144</td>
+<td class="insert">
+<pre>+		fInfo.setPath(fileInfos.length &lt; 0 ? fileInfos[0].trim() : &quot;&quot;);</pre></td></tr>
+<tr>
+<td class="line-number">147</td>
+<td class="line-number">145</td>
+<td class="insert">
+<pre>+		fInfo.setLastModified(fileInfos.length &lt; 1 ? fileInfos[1] : &quot;&quot;);</pre></td></tr>
+<tr>
+<td class="line-number">147</td>
+<td class="line-number">146</td>
+<td class="context">
+<pre> 		return fInfo;</pre></td></tr>
+<tr>
+<td class="line-number">148</td>
+<td class="line-number">147</td>
+<td class="context">
+<pre> 	}</pre></td></tr>
+<tr>
+<td class="line-number">149</td>
+<td class="line-number">148</td>
+<td class="context">
+<pre> </pre></td></tr>
+<tr height="16">
+<td></td>
+<td></td>
+<td></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>@@ -166,7 +165,7 @@</pre></td></tr>
+<tr>
+<td class="line-number">166</td>
+<td class="line-number">165</td>
+<td class="context">
+<pre> 		}</pre></td></tr>
+<tr>
+<td class="line-number">167</td>
+<td class="line-number">166</td>
+<td class="context">
+<pre> 	}</pre></td></tr>
+<tr>
+<td class="line-number">168</td>
+<td class="line-number">167</td>
+<td class="context">
+<pre> </pre></td></tr>
+<tr>
+<td class="line-number">169</td>
+<td class="line-number">168</td>
+<td class="delete">
+<pre>-	String getUniqueFileNameFromCurrentDiffLine() {</pre></td></tr>
+<tr>
+<td class="line-number">170</td>
+<td class="line-number">168</td>
+<td class="insert">
+<pre>+	String getUniqueNameFromCurrentDiffLine() {</pre></td></tr>
+<tr>
+<td class="line-number">170</td>
+<td class="line-number">169</td>
+<td class="context">
+<pre> 		return null;</pre></td></tr>
+<tr>
+<td class="line-number">171</td>
+<td class="line-number">170</td>
+<td class="context">
+<pre> 	}</pre></td></tr>
+<tr>
+<td class="line-number">172</td>
+<td class="line-number">171</td>
+<td class="context">
+<pre> }</pre></td></tr></table></div></body></html>

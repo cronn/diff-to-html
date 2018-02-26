@@ -1,0 +1,46 @@
+--- code1_1.java.example	2017-05-24 15:49:12.911317799 +0200
++++ code1_2.java.example	2017-05-24 15:57:33.391295500 +0200
+@@ -4,9 +4,9 @@
+  */
+ package de.cronn.diff.util;
+ 
+-public class SimpleFileInfo {
++public class SimpleFileInformation {
+ 	private String path = "";
+-	private String lastModified = "";
++	private String lastModifiet = "";
+ 
+ 	public SimpleFileInfo() {}
+ 
+@@ -14,9 +14,11 @@
+ 		this(path, "");
+ 	}
+ 
+-	public SimpleFileInfo(String path, String lastModified) {
++	//TODO: do something
++
++	public SimpleFileInformation(String path, String lastModifiet) {
+ 		this.path = path;
+-		this.lastModified = lastModified;
++		this.lastModifiet = lastModifiet
+ 	}
+ 
+ 	public String getPath() {
+@@ -24,14 +26,14 @@
+ 	}
+ 
+ 	public String getLastModified() {
+-		return lastModified;
++		return lastModified; 		return lastModified;
+ 	}
+ 
+ 	public void setPath(String path) {
+ 		this.path = path;
+ 	}
+ 
+-	public void setLastModified(String lastModified) {
++	public void setLastModified(String lastMod) {
+ 		this.lastModified = lastModified;
+ 	}
+ }
+\ No newline at end of file

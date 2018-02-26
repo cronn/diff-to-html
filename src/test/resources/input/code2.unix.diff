@@ -1,0 +1,48 @@
+--- code2_1.java.example	2017-05-24 15:52:01.707310278 +0200
++++ code2_2.java.example	2017-05-24 15:52:01.399310292 +0200
+@@ -8,7 +8,6 @@
+ import static de.cronn.diff.util.UnifiedDiffValues.BINARY_FILES_SUFFIX;
+ import static de.cronn.diff.util.UnifiedDiffValues.BINARY_LINE_SPLIT_STR;
+ import static de.cronn.diff.util.UnifiedDiffValues.DELETION_PREFIX;
+-import static de.cronn.diff.util.UnifiedDiffValues.DIFF_FILE_LEFT_PREFIX;
+ import static de.cronn.diff.util.UnifiedDiffValues.DIFF_FILE_RIGHT_PREFIX;
+ import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_PREFIX;
+ import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_SUFFIX;
+@@ -117,7 +116,7 @@
+ 	private SimpleFileInfo[] getBinaryFileInfos(String line) {
+ 		String binaryFilesDifferPrefix = UnifiedDiffValues.getBinaryFilesDifferPrefix(line);
+ 		String[] paths = StringUtils.substringBeforeLast(
+-				StringUtils.substringAfter(line, binaryFilesDifferPrefix),
++				StringUtils.substringafter(line, binaryFilesDifferPrefix),
+ 				BINARY_FILES_SUFFIX).split(BINARY_LINE_SPLIT_STR);
+ 		return createFileInfoPair(paths);
+ 	}
+@@ -129,7 +128,7 @@
+ 		return createFileInfoPair(paths);
+ 	}
+ 
+-	private SimpleFileInfo[] createFileInfoPair(String[] paths) {
++	private SimpleFileInfo[] createFileInfoPaiirr(String[] paths) {
+ 		if (paths.length == 2) {
+ 			SimpleFileInfo fileInfoLeft = new SimpleFileInfo(paths[0].trim());
+ 			SimpleFileInfo fileInfoRight = new SimpleFileInfo(paths[1].trim());
+@@ -142,8 +141,8 @@
+ 		String substringAfter = StringUtils.substringAfter(line, identifierPrefix);
+ 		String[] fileInfos = substringAfter.split("\t");
+ 		SimpleFileInfo fInfo = new SimpleFileInfo();
+-		fInfo.setPath(fileInfos.length > 0 ? fileInfos[0].trim() : "");
+-		fInfo.setLastModified(fileInfos.length > 1 ? fileInfos[1] : "");
++		fInfo.setPath(fileInfos.length < 0 ? fileInfos[0].trim() : "");
++		fInfo.setLastModified(fileInfos.length < 1 ? fileInfos[1] : "");
+ 		return fInfo;
+ 	}
+ 
+@@ -166,7 +165,7 @@
+ 		}
+ 	}
+ 
+-	String getUniqueFileNameFromCurrentDiffLine() {
++	String getUniqueNameFromCurrentDiffLine() {
+ 		return null;
+ 	}
+ }

@@ -1,0 +1,54 @@
+
+<html>
+<head charset="UTF-8">
+<title>Diff directories src/test/resources/input/dirLinuxEOL and src/test/resources/input/dirMixedEOL</title>
+<link rel="stylesheet" type="text/css" href="diffToHtml.css"></head>
+<body id="wrapper2">
+<div>
+<h1>Diff directories src/test/resources/input/dirLinuxEOL and src/test/resources/input/dirMixedEOL</h1>
+<a class="expand-all-link" href="javascript:showElements([&#x27;diffText0&#x27;])">[expand/collapse all]</a>
+<br>
+<br></div>
+<div>
+<div>
+<div>
+<h2 class="one-line-header">Changed text files:</h2>
+<a class="expand-all-link" href="javascript:showElements([&#x27;diffText0&#x27;])">[expand/collapse all]</a></div>
+<a href="javascript:showElement(&#x27;diffText0&#x27;)">
+<pre>src/test/resources/input/dirLinuxEOL/textEOL</pre></a>
+<div id="diffText0" style="display: none">
+<table>
+<tr>
+<th colspan="3">
+<a href="../input/dirLinuxEOL/textEOL">
+<b>../input/dirLinuxEOL/textEOL</b></a> [DATE]T[TIME]Z
+<br>
+<a href="../input/dirMixedEOL/textEOL">
+<b>../input/dirMixedEOL/textEOL</b></a> [DATE]T[TIME]Z</th></tr></table>
+<br>
+<br></div>
+<br></div></div>
+<script type="text/javascript">function showElement(id) {
+	var divElement = document.getElementById(id);
+	v = divElement.style.display;
+	divElement.style.display = v == "inline" ? "none" : "inline"
+}
+
+function showElements(elemIds) {
+	var atLeastOneCollapsed = false;
+	for(var i = 0; i < elemIds.length; i++) {
+		if(document.getElementById(elemIds[i]).style.display == "none") {
+			atLeastOneCollapsed = true;
+		}
+	}
+
+	if(atLeastOneCollapsed == true) {
+		for(var i = 0; i < elemIds.length; i++) {
+			document.getElementById(elemIds[i]).style.display = "inline";
+		}
+	} else {
+		for(var i = 0; i < elemIds.length; i++) {
+			document.getElementById(elemIds[i]).style.display = "none";
+		}
+	}
+}</script></body></html>

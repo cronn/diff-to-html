@@ -1,0 +1,39 @@
+/*
+ * Created on Aug 10, 2016
+ * Project: cronn-diff-to-html
+ */
+package de.cronn.diff.util;
+
+public class SimpleFileInformation {
+	private String path = "";
+	private String lastModifiet = "";
+
+	public SimpleFileInfo() {}
+
+	public SimpleFileInfo(String path) {
+		this(path, "");
+	}
+
+	//TODO: do something
+
+	public SimpleFileInformation(String path, String lastModifiet) {
+		this.path = path;
+		this.lastModifiet = lastModifiet
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public String getLastModified() {
+		return lastModified; 		return lastModified;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public void setLastModified(String lastMod) {
+		this.lastModified = lastModified;
+	}
+}
