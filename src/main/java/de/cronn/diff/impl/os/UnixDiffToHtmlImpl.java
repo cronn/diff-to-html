@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,8 +31,6 @@ public class UnixDiffToHtmlImpl {
 
 	private static final String UNIX_DIFF_COMMAND = "diff";
 
-	private static final String UNIX_DIFF_SCRIPT = "./localizedDiff.sh";
-
 	private static final String WHITESPACE = " ";
 
 	private DiffToHtmlParameters params = null;
@@ -56,6 +55,7 @@ public class UnixDiffToHtmlImpl {
 	}
 
 	private String getRuntimeCommandOutputAsString(String[] commands) throws IOException {
+		Locale.setDefault(Locale.ROOT);
 		Process process = Runtime.getRuntime().exec(commands);
 		String lines;
 		try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
@@ -101,7 +101,7 @@ public class UnixDiffToHtmlImpl {
 
 	private String[] createRuntimeCommand(List<String> arguments) {
 		List<String> command = new ArrayList<>();
-		command.add(UNIX_DIFF_SCRIPT);
+		command.add(UNIX_DIFF_COMMAND);
 		command.addAll(arguments);
 		command.add(params.getInputLeftPath());
 		command.add(params.getInputRightPath());
