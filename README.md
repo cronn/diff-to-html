@@ -8,7 +8,8 @@ Shows diffs in a convenient html page.
 
 ##### Example outputs:
 ---
-![cronn-diff-to-html_outputExample3](cronn-diff-to-html_outputExample1.png) ![cronn-diff-to-html_outputExample2](cronn-diff-to-html_outputExample2.png)
+[![cronn-diff-to-html_outputExample3](cronn-diff-to-html_outputExample1.png)](cronn-diff-to-html_outputExample1_hiRes.png)
+[![cronn-diff-to-html_outputExample2](cronn-diff-to-html_outputExample2.png)](cronn-diff-to-html_outputExample2_hiRes.png)
 ---
 
 ### Usage 
