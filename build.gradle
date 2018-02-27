@@ -3,19 +3,20 @@ task wrapper(type: Wrapper) {
 }
 
 buildscript {
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 }
 
 ext {
-	junitVersion_4 = '4.11'
-	apacheCommonsTextVersion = '1.2'
-	apacheCommonsIOVersion = '2.6'
-	j2htmlVersion = '1.2.2'
-	javaDiffUtilsVersion = '1.3.0'
-	juniversalchardetVersion = '1.0.3'
-	systemRulesVersion = '1.16.0'
+    junitVersion_4 = '4.11'
+    apacheCommonsTextVersion = '1.2'
+    apacheCommonsIOVersion = '2.6'
+    commonsCliVersion = '1.3'
+    j2htmlVersion = '1.2.2'
+    javaDiffUtilsVersion = '1.3.0'
+    juniversalchardetVersion = '1.0.3'
+    systemRulesVersion = '1.16.0'
 }
 
 apply plugin: 'java'
@@ -23,7 +24,7 @@ apply plugin: 'eclipse'
 apply plugin: 'application'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 eclipse {
@@ -33,42 +34,42 @@ eclipse {
 }
 
 sourceSets {
-	main {
-		java {
-		    srcDir 'src/main/java'
-	    }
-		resources {
-			srcDir 'src/main/resources'
-		}
-	}
-	test {
-		java {
-			srcDir 'src/test/java'
-		}
-		resources {
-		    srcDir 'src/test/resources'
-		    exclude '**/*.java'         // workaround to keep eclipse happy
-	    }
-	}
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+            exclude '**/*.java'         // workaround to keep eclipse happy
+        }
+    }
 }
 
 dependencies {
-		compile group: 'org.apache.commons', name: 'commons-text', version: "${apacheCommonsTextVersion}"
-		compile group: 'commons-cli', name: 'commons-cli', version: '1.3'
-		compile group: 'commons-io', name: 'commons-io', version: "${apacheCommonsIOVersion}"
-		compile group: 'com.j2html', name:'j2html', version: "${j2htmlVersion}"
-		compile group: 'com.googlecode.java-diff-utils', name: 'diffutils', version: "${javaDiffUtilsVersion}"
-		compile group: 'com.googlecode.juniversalchardet', name: 'juniversalchardet', version: "${juniversalchardetVersion}"
-		testCompile group: 'junit', name: 'junit', version: "${junitVersion_4}"
-		testCompile group: 'com.github.stefanbirkner', name: 'system-rules', version: "${systemRulesVersion}"
+        compile("org.apache.commons:commons-text:${apacheCommonsTextVersion}")
+        compile("commons-cli:commons-cli:${commonsCliVersion}")
+        compile("commons-io:commons-io:${apacheCommonsIOVersion}")
+        compile("com.j2html:j2html:${j2htmlVersion}")
+        compile("com.googlecode.java-diff-utils:diffutils:${javaDiffUtilsVersion}")
+        compile("com.googlecode.juniversalchardet:juniversalchardet:${juniversalchardetVersion}")
+        testCompile("junit:junit:${junitVersion_4}")
+        testCompile("com.github.stefanbirkner:system-rules:${systemRulesVersion}")
 }
 
 mainClassName = "de.cronn.diff.Main"
 
 run {
-	if(project.hasProperty('arguments')) {
-			args Eval.me(arguments)
-	}
+    if(project.hasProperty('arguments')) {
+            args Eval.me(arguments)
+    }
 }
 
 jar {
