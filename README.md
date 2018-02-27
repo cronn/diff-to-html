@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/cronn-de/diff-to-html.svg?branch=master)](https://travis-ci.org/cronn-de/diff-to-html)
+[![Apache 2.0](https://img.shields.io/github/license/cronn-de/reflection-util.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
+
 # cronn diff-to-html #
 
 Shows diffs in a convenient html page. 
