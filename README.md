@@ -4,7 +4,7 @@
 
 # cronn diff-to-html #
 
-Shows diffs in a convenient html page. 
+Displays diffs in a convenient html page. 
 
 * Useful when dealing with large validation text files or directory structures in automated builds, e.g. on Jenkins. 
 * Collapsible diff sections for each file make the result easy to read when comparing directories
@@ -18,9 +18,29 @@ Shows diffs in a convenient html page.
 
 ### Usage 
 
+Install:
 
 ```
-$ ./gradlew assemble 
+$ ./gradlew installDist
+```
+
+Use the fat jar or the start script, e.g. if you want to compare two directories dir1 and dir2 do
+
+```
+$ java -jar build/libs/diff-to-html.jar dir1 dir2
+```
+or
+```
+$ ./build/install/diff-to-html/scripts/diff-to-html dir1 dir2
+```
+which will give you
+```
+Output written to: file:///home/maurice/Git-Projects/openSource/diff-to-html/diff_dir1_dir2.html
+
+Directories differ!
+```
+Call without arguments for help
+```
 $ java -jar build/libs/cronn-diff-to-html.jar 
 usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
        [-b] [-or] [-od] [-iu] [-de] [-u <arg>]
@@ -35,20 +55,13 @@ usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
  -u,--unified <arg>       output <arg> (default 3) lines of unified
                           context
 Parsing failed. Reason: Input arguments are missing
-
-$ java -jar build/libs/cronn-diff-to-html.jar dir1_1/ dir1_2/ diff.html
-
-Output written to: file:///home/[DEV]/cronn-diff-to-html/diff.html
-
-Directories differ!
-
 ```
-
-Or use the script that wraps the Gradle run task, e.g.: 
-
+Generate your tar (or zip) to take wherever you want
 ```
-./cronn-diff-to-html.sh dir1 dir2 diff.html -or
-```
+$ ./gradlew distTar distZip
+$ ls build/distributions/
+diff-to-html.tar  diff-to-html.zip
+``` 
 
 ### Prerequisites 
 - Java 8

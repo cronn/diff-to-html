@@ -8,20 +8,16 @@ buildscript {
     }
 }
 
-ext {
-    junitVersion_4 = '4.11'
-    apacheCommonsTextVersion = '1.2'
-    apacheCommonsIOVersion = '2.6'
-    commonsCliVersion = '1.3'
-    j2htmlVersion = '1.2.2'
-    javaDiffUtilsVersion = '1.3.0'
-    juniversalchardetVersion = '1.0.3'
-    systemRulesVersion = '1.16.0'
-}
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
+
+executableDir = "scripts"
+
+startScripts {
+    mainClassName = 'de.cronn.diff.Main' 
+    applicationName = 'diff-to-html' 
+}
 
 repositories {
     mavenCentral()
@@ -53,6 +49,17 @@ sourceSets {
     }
 }
 
+ext {
+    junitVersion_4 = '4.11'
+    apacheCommonsTextVersion = '1.2'
+    apacheCommonsIOVersion = '2.6'
+    commonsCliVersion = '1.3'
+    j2htmlVersion = '1.2.2'
+    javaDiffUtilsVersion = '1.3.0'
+    juniversalchardetVersion = '1.0.3'
+    systemRulesVersion = '1.16.0'
+}
+
 dependencies {
         compile("org.apache.commons:commons-text:${apacheCommonsTextVersion}")
         compile("commons-cli:commons-cli:${commonsCliVersion}")
@@ -62,14 +69,6 @@ dependencies {
         compile("com.googlecode.juniversalchardet:juniversalchardet:${juniversalchardetVersion}")
         testCompile("junit:junit:${junitVersion_4}")
         testCompile("com.github.stefanbirkner:system-rules:${systemRulesVersion}")
-}
-
-mainClassName = "de.cronn.diff.Main"
-
-run {
-    if(project.hasProperty('arguments')) {
-            args Eval.me(arguments)
-    }
 }
 
 jar {
@@ -83,5 +82,5 @@ jar {
 }
 
 clean {
-    delete "${rootDir}/src/test/resources/output"
+    delete "${rootDir}/src/test/resources/output", fileTree("${rootDir}"){ include '*.html', '*.css' }
 }
