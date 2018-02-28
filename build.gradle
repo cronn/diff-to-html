@@ -11,6 +11,10 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
+apply plugin: 'maven-publish'
+
+group = 'de.cronn'
+
 
 executableDir = "scripts"
 
@@ -71,7 +75,7 @@ dependencies {
         testCompile("com.github.stefanbirkner:system-rules:${systemRulesVersion}")
 }
 
-jar {
+task fatJar (type: Jar) {
     manifest {
         attributes 'Main-Class': 'de.cronn.diff.Main'
     }
@@ -79,6 +83,7 @@ jar {
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    with jar
 }
 
 clean {

@@ -18,19 +18,15 @@ Displays diffs in a convenient html page.
 
 ### Usage 
 
-Install:
-
-```
-$ ./gradlew installDist
-```
-
 Use the fat jar or the start script, e.g. if you want to compare two directories dir1 and dir2 do
 
 ```
+$ ./gradlew fatJar
 $ java -jar build/libs/diff-to-html.jar dir1 dir2
 ```
 or
 ```
+$ ./gradlew installDist
 $ ./build/install/diff-to-html/scripts/diff-to-html dir1 dir2
 ```
 which will give you
