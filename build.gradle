@@ -1,26 +1,26 @@
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.5'
-}
-
 buildscript {
     repositories {
         mavenCentral()
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
-apply plugin: 'maven-publish'
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'application'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version "1.7.3"
+}
 
 group = 'de.cronn'
 
+version = '1.0'
 
 executableDir = "scripts"
 
 startScripts {
     mainClassName = 'de.cronn.diff.Main' 
-    applicationName = 'diff-to-html' 
+    applicationName = project.name
 }
 
 repositories {
@@ -31,6 +31,10 @@ eclipse {
     classpath {
        downloadSources=true
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.5'
 }
 
 sourceSets {
@@ -51,6 +55,101 @@ sourceSets {
             exclude '**/*.java'         // workaround to keep eclipse happy
         }
     }
+}
+
+clean {
+    delete "${rootDir}/src/test/resources/output", fileTree("${rootDir}"){ include '*.html', '*.css' }
+}
+
+task fatJar (type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'de.cronn.diff.Main'
+    }
+ 
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+
+    developers {
+        developer {
+            id "maurice.velte"
+            name "Maurice Velte"
+            email "maurice.velte@cronn.de"
+        }
+    }
+
+    scm {
+        url "https://github.com/cronn-de/diff-to-html"
+    }
+}
+
+publishing {
+    publications {
+        CronnPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'Display diffs in a convenient html page')
+                root.appendNode('name', project.name)
+                root.appendNode('url', 'https://github.com/cronn-de/diff-to-html')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_API_KEY')
+    if (user == null) println "Please set env var BINTRAY_USER"
+    if (key == null) println "Please set env var BINTRAY_API_KEY"
+
+    publications = ['CronnPublication']
+    dryRun = false
+    pkg {
+        repo = 'maven'
+        name = project.name
+        userOrg = 'cronn'
+        licenses = ['Apache-2.0']
+        websiteUrl = 'https://github.com/cronn-de/diff-to-html'
+        issueTrackerUrl = 'https://github.com/cronn-de/diff-to-html/issues'
+        vcsUrl = 'https://github.com/cronn-de/diff-to-html.git'
+        version {
+            name = project.version
+            released = new Date()
+        }
+    }
+    override = true
 }
 
 ext {
@@ -75,17 +174,4 @@ dependencies {
         testCompile("com.github.stefanbirkner:system-rules:${systemRulesVersion}")
 }
 
-task fatJar (type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'de.cronn.diff.Main'
-    }
- 
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    with jar
-}
 
-clean {
-    delete "${rootDir}/src/test/resources/output", fileTree("${rootDir}"){ include '*.html', '*.css' }
-}
