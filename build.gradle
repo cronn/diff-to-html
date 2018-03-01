@@ -61,7 +61,7 @@ clean {
     delete "${rootDir}/src/test/resources/output", fileTree("${rootDir}"){ include '*.html', '*.css' }
 }
 
-task fatJar (type: Jar) {
+jar {
     manifest {
         attributes 'Main-Class': 'de.cronn.diff.Main'
     }
@@ -69,7 +69,6 @@ task fatJar (type: Jar) {
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
-    with jar
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

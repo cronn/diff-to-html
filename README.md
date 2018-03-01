@@ -2,7 +2,7 @@
 [![Apache 2.0](https://img.shields.io/github/license/cronn-de/reflection-util.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 
-# cronn diff-to-html #
+# diff-to-html #
 
 Displays diffs in a convenient html page. 
 
@@ -18,18 +18,20 @@ Displays diffs in a convenient html page.
 
 ### Usage 
 
-Use the fat jar or the start script, e.g. if you want to compare two directories dir1 and dir2 do
-
-```
-$ ./gradlew fatJar
-$ java -jar build/libs/diff-to-html.jar dir1 dir2
-```
-or
+Install: 
 ```
 $ ./gradlew installDist
+```
+To compare two directories (or files), e.g. dir1 and dir2, use the fat jar
+
+```
+$ java -jar build/libs/diff-to-html-1.0.jar dir1 dir2
+```
+or the start script
+```
 $ ./build/install/diff-to-html/scripts/diff-to-html dir1 dir2
 ```
-which will give you
+which will give you something like
 ```
 Output written to: file:///home/maurice/Git-Projects/openSource/diff-to-html/diff_dir1_dir2.html
 
@@ -37,7 +39,7 @@ Directories differ!
 ```
 Call without arguments for help
 ```
-$ java -jar build/libs/cronn-diff-to-html.jar 
+$ java -jar build/libs/cronn-diff-to-html-1.0.jar 
 usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
        [-b] [-or] [-od] [-iu] [-de] [-u <arg>]
  -w,--ignorewhitespaces   ignore all white spaces
@@ -56,7 +58,7 @@ Generate your tar (or zip) to take wherever you want
 ```
 $ ./gradlew distTar distZip
 $ ls build/distributions/
-diff-to-html.tar  diff-to-html.zip
+diff-to-html-1.0.tar  diff-to-html-1.0.zip
 ``` 
 
 ### Prerequisites 
