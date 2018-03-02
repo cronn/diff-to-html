@@ -85,6 +85,16 @@ artifacts {
     archives sourcesJar, javadocJar
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+                from components.java
+                artifact sourcesJar
+                artifact javadocJar
+            }
+        }
+}
+
 def pomConfig = {
     licenses {
         license {
