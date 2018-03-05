@@ -57,9 +57,9 @@ sourceSets {
     }
 }
 
-clean {
-    delete "${rootDir}/src/test/resources/output", fileTree("${rootDir}"){ include '*.html', '*.css' }
-}
+test.inputs.dir('src/test/resources/input')
+test.inputs.dir('src/test/resources/validation')
+test.outputs.dir('src/test/resources/output')
 
 jar {
     manifest {
