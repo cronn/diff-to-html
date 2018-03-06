@@ -1,5 +1,5 @@
---- code1_1.java.example	2017-05-24 15:49:12.911317799 +0200
-+++ code1_2.java.example	2017-05-24 15:57:33.391295500 +0200
+--- data/test/input/code1_1.java.example	2018-02-26 16:05:51.341346222 +0100
++++ data/test/input/code1_2.java.example	2018-02-26 16:05:51.337346221 +0100
 @@ -4,9 +4,9 @@
   */
  package de.cronn.diff.util;

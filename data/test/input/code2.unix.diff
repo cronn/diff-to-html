@@ -1,5 +1,5 @@
---- code2_1.java.example	2017-05-24 15:52:01.707310278 +0200
-+++ code2_2.java.example	2017-05-24 15:52:01.399310292 +0200
+--- data/test/input/code2_1.java.example	2018-02-26 16:05:51.337346221 +0100
++++ data/test/input/code2_2.java.example	2018-02-26 16:05:51.333346221 +0100
 @@ -8,7 +8,6 @@
  import static de.cronn.diff.util.UnifiedDiffValues.BINARY_FILES_SUFFIX;
  import static de.cronn.diff.util.UnifiedDiffValues.BINARY_LINE_SPLIT_STR;

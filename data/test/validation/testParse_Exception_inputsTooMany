@@ -1,4 +1,4 @@
-Parsing failed. Reason: Too many arguments: src/test/resources/input/dir1_1, src/test/resources/input/code1_2.java.example, src/test/resources/input/dir1_1, fileOut
+Parsing failed. Reason: Too many arguments: data/test/input/dir1_1, data/test/input/code1_2.java.example, data/test/input/dir1_1, fileOut
 
 usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
        [-b] [-or] [-od] [-iu] [-de] [-u <arg>]

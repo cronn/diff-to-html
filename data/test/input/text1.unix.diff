@@ -1,5 +1,5 @@
---- src/test/resources/input/text1_1.example	2018-02-08 10:46:52.263140294 +0100
-+++ src/test/resources/input/text1_2.example	2018-02-08 10:46:52.263140294 +0100
+--- data/test/input/text1_1.example	2018-03-02 09:04:36.205132661 +0100
++++ data/test/input/text1_2.example	2018-02-26 16:05:51.333346221 +0100
 @@ -8,7 +8,7 @@
  
  Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental.

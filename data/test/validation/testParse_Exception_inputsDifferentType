@@ -1,4 +1,4 @@
-Parsing failed. Reason: Ambiguous option: 'Inputs must be either both regular files or both directories'  (could be: 'src/test/resources/input/dir1_1', 'src/test/resources/input/code1_2.java.example')
+Parsing failed. Reason: Ambiguous option: 'Inputs must be either both regular files or both directories'  (could be: 'data/test/input/dir1_1', 'data/test/input/code1_2.java.example')
 
 usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
        [-b] [-or] [-od] [-iu] [-de] [-u <arg>]

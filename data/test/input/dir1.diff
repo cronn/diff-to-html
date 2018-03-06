@@ -1,6 +1,6 @@
-diff -u -r src/test/resources/input/dir1_1/subdir1/ssubdir1/CronnDiffToHtml.java src/test/resources/input/dir1_2/subdir1/ssubdir1/CronnDiffToHtml.java
---- src/test/resources/input/dir1_1/subdir1/ssubdir1/CronnDiffToHtml.java	2018-02-08 10:46:52.247140228 +0100
-+++ src/test/resources/input/dir1_2/subdir1/ssubdir1/CronnDiffToHtml.java	2018-02-08 10:46:52.251140245 +0100
+diff -u -r data/test/input/dir1_1/subdir1/ssubdir1/CronnDiffToHtml.java data/test/input/dir1_2/subdir1/ssubdir1/CronnDiffToHtml.java
+--- data/test/input/dir1_1/subdir1/ssubdir1/CronnDiffToHtml.java	2018-02-26 16:05:51.353346222 +0100
++++ data/test/input/dir1_2/subdir1/ssubdir1/CronnDiffToHtml.java	2018-02-26 16:05:51.329346221 +0100
 @@ -14,17 +14,17 @@
  
  public class CronnDiffToHtml {
@@ -67,9 +67,9 @@ diff -u -r src/test/resources/input/dir1_1/subdir1/ssubdir1/CronnDiffToHtml.java
  	}
  
  	private void printResultMessage(int resultCode) {
-diff -u -r src/test/resources/input/dir1_1/subdir1/ssubdir3/HtmlBuilder.java src/test/resources/input/dir1_2/subdir1/ssubdir3/HtmlBuilder.java
---- src/test/resources/input/dir1_1/subdir1/ssubdir3/HtmlBuilder.java	2018-02-08 10:46:52.247140228 +0100
-+++ src/test/resources/input/dir1_2/subdir1/ssubdir3/HtmlBuilder.java	2018-02-08 10:46:52.255140261 +0100
+diff -u -r data/test/input/dir1_1/subdir1/ssubdir3/HtmlBuilder.java data/test/input/dir1_2/subdir1/ssubdir3/HtmlBuilder.java
+--- data/test/input/dir1_1/subdir1/ssubdir3/HtmlBuilder.java	2018-02-26 16:05:51.353346222 +0100
++++ data/test/input/dir1_2/subdir1/ssubdir3/HtmlBuilder.java	2018-02-26 16:05:51.329346221 +0100
 @@ -3,7 +3,6 @@
  import static j2html.TagCreator.html;
  import static j2html.TagCreator.link;
@@ -91,10 +91,10 @@ diff -u -r src/test/resources/input/dir1_1/subdir1/ssubdir3/HtmlBuilder.java src
  	}
  
  	@Override
-Binary files src/test/resources/input/dir1_1/subdir2/ssubdir1/sssubdir2/binary2 and src/test/resources/input/dir1_2/subdir2/ssubdir1/sssubdir2/binary2 differ
-diff -u -r src/test/resources/input/dir1_1/subdir3/ssubdir1/azAz123_2.txt src/test/resources/input/dir1_2/subdir3/ssubdir1/azAz123_2.txt
---- src/test/resources/input/dir1_1/subdir3/ssubdir1/azAz123_2.txt	2018-02-08 10:46:52.251140245 +0100
-+++ src/test/resources/input/dir1_2/subdir3/ssubdir1/azAz123_2.txt	2018-02-08 10:46:52.255140261 +0100
+Binary files data/test/input/dir1_1/subdir2/ssubdir1/sssubdir2/binary2 and data/test/input/dir1_2/subdir2/ssubdir1/sssubdir2/binary2 differ
+diff -u -r data/test/input/dir1_1/subdir3/ssubdir1/azAz123_2.txt data/test/input/dir1_2/subdir3/ssubdir1/azAz123_2.txt
+--- data/test/input/dir1_1/subdir3/ssubdir1/azAz123_2.txt	2018-02-26 16:05:51.357346222 +0100
++++ data/test/input/dir1_2/subdir3/ssubdir1/azAz123_2.txt	2018-02-26 16:05:51.333346221 +0100
 @@ -1,4 +1,4 @@
 -abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<>
 +abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRSdsdUV Wddfg!!XYZ ! "§ $%& /() =? * '<>
@@ -118,11 +118,11 @@ diff -u -r src/test/resources/input/dir1_1/subdir3/ssubdir1/azAz123_2.txt src/te
 \ No newline at end of file
 +|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<> |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz GHI JKL MNO PQRS TUV WXYZ ! "§ $%& /() =? * '<> |; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !
 \ No newline at end of file
-Only in src/test/resources/input/dir1_2/subdir3/ssubdir3: sssibdur2
-Only in src/test/resources/input/dir1_1/subdir3/ssubdir3: sssubdir2
-diff -u -r src/test/resources/input/dir1_1/subdir3/ssubdir3/sssubdir3/HelloWorldException.java src/test/resources/input/dir1_2/subdir3/ssubdir3/sssubdir3/HelloWorldException.java
---- src/test/resources/input/dir1_1/subdir3/ssubdir3/sssubdir3/HelloWorldException.java	2018-02-08 10:46:52.251140245 +0100
-+++ src/test/resources/input/dir1_2/subdir3/ssubdir3/sssubdir3/HelloWorldException.java	2018-02-08 10:46:52.255140261 +0100
+Only in data/test/input/dir1_2/subdir3/ssubdir3: sssibdur2
+Only in data/test/input/dir1_1/subdir3/ssubdir3: sssubdir2
+diff -u -r data/test/input/dir1_1/subdir3/ssubdir3/sssubdir3/HelloWorldException.java data/test/input/dir1_2/subdir3/ssubdir3/sssubdir3/HelloWorldException.java
+--- data/test/input/dir1_1/subdir3/ssubdir3/sssubdir3/HelloWorldException.java	2018-02-26 16:05:51.357346222 +0100
++++ data/test/input/dir1_2/subdir3/ssubdir3/sssubdir3/HelloWorldException.java	2018-02-26 16:05:51.333346221 +0100
 @@ -1,6 +1,6 @@
  public class HelloWorldException {
      public static void main (String[] args) throws Exception {
