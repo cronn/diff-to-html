@@ -50,16 +50,12 @@ sourceSets {
         java {
             srcDir 'src/test/java'
         }
-        resources {
-            srcDir 'src/test/resources'
-            exclude '**/*.java'         // workaround to keep eclipse happy
-        }
     }
 }
 
-test.inputs.dir('src/test/resources/input')
-test.inputs.dir('src/test/resources/validation')
-test.outputs.dir('src/test/resources/output')
+test.inputs.dir('data/test/input')
+test.inputs.dir('data/test/validation')
+test.outputs.dir('data/test/output')
 
 jar {
     manifest {

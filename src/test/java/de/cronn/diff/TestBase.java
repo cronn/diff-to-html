@@ -29,11 +29,11 @@ public class TestBase {
 
 	private static final String SYSTEM_LINE_SEPARATOR = System.lineSeparator();
 
-	public static final String TEST_DATA_VALIDATION_DIR = "src/test/resources/validation/";
+	public static final String TEST_DATA_VALIDATION_DIR = "data/test/validation/";
 
-	public static final String TEST_DATA_INPUT_DIR = "src/test/resources/input/";
+	public static final String TEST_DATA_INPUT_DIR = "data/test/input/";
 
-	public static final String TEST_DATA_OUTPUT_DIR = "src/test/resources/output/";
+	public static final String TEST_DATA_OUTPUT_DIR = "data/test/output/";
 
 	public static final String HTML_SUFFIX = ".html";
 
