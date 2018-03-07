@@ -12,8 +12,6 @@ import org.apache.commons.cli.AmbiguousOptionException;
 import org.apache.commons.cli.UnrecognizedOptionException;
 import org.junit.Test;
 
-import de.cronn.diff.util.OS;
-
 public class MainTest extends MainTestBase {
 
 	@Test
@@ -28,14 +26,6 @@ public class MainTest extends MainTestBase {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new SystemMessageAssertion());
 		Main.main(new String[] { "onlyOneArg" });
-	}
-
-	@Test
-	public void testMainNoArgsOnWindows_noOsDiffOption() throws Exception {
-		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
-		exit.checkAssertionAfterwards(new SystemMessageAssertion());
-		Main.os = OS.WINDOWS;
-		Main.main(new String[] {});
 	}
 
 	@Test

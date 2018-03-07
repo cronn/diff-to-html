@@ -11,7 +11,7 @@ import de.cronn.diff.util.FileHelper;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({FileHelper.class})
-public class MainTestNoOutput extends MainTestBase {
+public class MainNoOutputTest extends MainTestBase {
 
 	@Test
 	public void testMainJAVADiffDirsToHtml_noOutputProvided() throws Exception {
