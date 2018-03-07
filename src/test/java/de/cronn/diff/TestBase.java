@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -123,7 +124,7 @@ public class TestBase {
 	
 	private String normalizeWorkingDir(String s) {
 		String workingDir = FileHelper.getWorkingDir();
-		return s.replaceAll(workingDir, "[current/working/directory/]");
+		return StringUtils.replace(s, workingDir, "[current/working/directory/]");
 	}
 
 	private String readFileToString(String filePath) throws IOException {

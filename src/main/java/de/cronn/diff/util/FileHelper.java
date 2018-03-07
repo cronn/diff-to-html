@@ -32,7 +32,7 @@ public class FileHelper {
 			dirPath += File.separator;
 		}
 		String cssFileDestPath = dirPath + CSS_FILE;
-		InputStream resourceAsStream = Main.class.getResourceAsStream(File.separator + CSS_FILE);
+		InputStream resourceAsStream = Main.class.getResourceAsStream("/" + CSS_FILE);
 		FileUtils.copyInputStreamToFile(resourceAsStream, new File(cssFileDestPath));
 	}
 
