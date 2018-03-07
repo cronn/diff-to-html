@@ -78,8 +78,8 @@ public class MainTestBase extends TestBase {
 	}
 
 	private void assertSystemMessage() throws IOException {
-		String sysOutStr = sysOut.toString();
-		String sysErrorStr = sysErr.toString();
+		String sysOutStr = normalizeLineSeparators(sysOut.toString());
+		String sysErrorStr = normalizeLineSeparators(sysErr.toString());
 		assertNotNull(sysOutStr);
 		assertNotNull(sysErrorStr);
 		assertSysOutErrEqualToValidation(sysErrorStr + System.lineSeparator() + sysOutStr);

@@ -3,14 +3,11 @@ package de.cronn.diff;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,15 +16,12 @@ import org.junit.rules.TestName;
 
 import de.cronn.diff.html.HtmlBuilder;
 import de.cronn.diff.util.FileHelper;
-import de.cronn.diff.util.OS;
 
 public class TestBase {
 
-	private static final String LINUX_LINE_SEPARATOR = "\n";
+	private static final String UNIX_LINE_SEPARATOR = "\n";
 
 	private static final String WINDOWS_LINE_SEPARATOR = "\r\n";
-
-	private static final String SYSTEM_LINE_SEPARATOR = System.lineSeparator();
 
 	public static final String TEST_DATA_VALIDATION_DIR = "data/test/validation/";
 
@@ -46,8 +40,6 @@ public class TestBase {
 
 	@Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
-
-	OS osOrig;
 
 	@Before
 	public void setUp() throws IOException {
@@ -105,14 +97,8 @@ public class TestBase {
 		return testName.getMethodName();
 	}
 
-	private String normalizeLineSeparators(String s) {
-		if (SystemUtils.IS_OS_WINDOWS) {
-			return s.replace(WINDOWS_LINE_SEPARATOR, SYSTEM_LINE_SEPARATOR);
-		} else if (SystemUtils.IS_OS_UNIX) {
-			return s.replaceAll(LINUX_LINE_SEPARATOR, SYSTEM_LINE_SEPARATOR);
-		} else {
-			return s;
-		}
+	protected String normalizeLineSeparators(String s) {
+		return s.replace(WINDOWS_LINE_SEPARATOR, UNIX_LINE_SEPARATOR);
 	}
 
 	private String normalizeTimestamps(String s) {
@@ -162,28 +148,5 @@ public class TestBase {
 
 	private String getValidationSysOutFilePath() {
 		return TEST_DATA_VALIDATION_DIR + getTestMethodName() + SYS_OUT_SUFFIX;
-	}
-
-	protected void backupOrigOS() {
-		osOrig = SystemUtils.IS_OS_UNIX ? OS.UNIX : SystemUtils.IS_OS_WINDOWS ? 
-				OS.WINDOWS : SystemUtils.IS_OS_SUN_OS ? OS.SUN : null;
-	}
-
-	protected void resetOS() throws Exception {
-		setOS(osOrig);
-	}
-
-	protected void setOS(OS os) throws Exception {
-		setFinalStatic(SystemUtils.class.getField("IS_OS_UNIX"), os == OS.UNIX ? true : false);
-		setFinalStatic(SystemUtils.class.getField("IS_OS_WINDOWS"), os == OS.WINDOWS ? true : false);
-		setFinalStatic(SystemUtils.class.getField("IS_OS_SUN_OS"), os == OS.SUN ? true : false);
-	}
-
-	private void setFinalStatic(Field field, Object newValue) throws Exception {
-	    field.setAccessible(true);
-	    Field modifiersField = Field.class.getDeclaredField("modifiers");
-	    modifiersField.setAccessible(true);
-	    modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-	    field.set(null, newValue);
 	}
 }

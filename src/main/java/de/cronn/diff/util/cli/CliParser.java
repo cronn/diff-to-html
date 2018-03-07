@@ -39,9 +39,9 @@ public class CliParser {
 	private OS os;
 
 	public CliParser(OS operatingSystem) {
+		os = operatingSystem;
 		options = createOptions();
 		helpFormatter = createHelpFormatter();
-		os = operatingSystem;
 	}
 
 	private Options createOptions() {

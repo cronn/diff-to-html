@@ -8,29 +8,13 @@ import static de.cronn.diff.util.cli.CliParser.OPT_ONLY_REPORTS;
 import static de.cronn.diff.util.cli.CliParser.OPT_OS_DIFF;
 import static de.cronn.diff.util.cli.CliParser.OPT_UNIFIED_CONTEXT;
 
-import java.io.IOException;
-
 import org.apache.commons.cli.AmbiguousOptionException;
 import org.apache.commons.cli.UnrecognizedOptionException;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import de.cronn.diff.util.OS;
 
 public class MainTest extends MainTestBase {
-
-	@Override
-	@Before
-	public void setUp() throws IOException {
-		super.setUp();
-		backupOrigOS();
-	}
-	
-	@After
-	public void resetOrigOs() throws Exception {
-		resetOS();
-	}
 
 	@Test
 	public void testMainWrongNumberOfArgs1() throws Exception {
@@ -48,11 +32,10 @@ public class MainTest extends MainTestBase {
 
 	@Test
 	public void testMainNoArgsOnWindows_noOsDiffOption() throws Exception {
-		setOS(OS.WINDOWS);
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new SystemMessageAssertion());
+		Main.os = OS.WINDOWS;
 		Main.main(new String[] {});
-		resetOrigOs();
 	}
 
 	@Test
