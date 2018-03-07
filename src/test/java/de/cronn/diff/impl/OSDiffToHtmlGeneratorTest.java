@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import de.cronn.diff.TestBase;
 import de.cronn.diff.util.DiffToHtmlParameters;
+import de.cronn.diff.util.OS;
 
 public class OSDiffToHtmlGeneratorTest extends TestBase {
 

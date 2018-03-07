@@ -16,6 +16,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.cronn.diff.util.OS;
+
 public class MainTest extends MainTestBase {
 
 	@Override

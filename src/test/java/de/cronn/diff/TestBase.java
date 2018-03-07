@@ -19,10 +19,9 @@ import org.junit.rules.TestName;
 
 import de.cronn.diff.html.HtmlBuilder;
 import de.cronn.diff.util.FileHelper;
+import de.cronn.diff.util.OS;
 
 public class TestBase {
-
-	protected enum OS {UNIX, WINDOWS, SUN}
 
 	private static final String LINUX_LINE_SEPARATOR = "\n";
 
