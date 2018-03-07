@@ -67,11 +67,21 @@ public abstract class HtmlBuilder {
 			return "";
 		}
 		
-		String absolutePath = new File(path).getAbsolutePath();		
+		String absolutePath = new File(path).getAbsolutePath();
 		if (outputDirForRelativePaths != null) {
-			return Paths.get(outputDirForRelativePaths).relativize(Paths.get(absolutePath)).toString();
+			String relativePath = Paths.get(outputDirForRelativePaths).relativize(Paths.get(absolutePath)).toString();
+			return normalizeFileSeparators(relativePath);
 		}
+
 		return path;
+	}
+
+	/*
+	 * always use forward slash as file separator, because in HTML files both work,
+	 * but windows style file separators, i.e. backward slashes, will break tests
+	 */
+	private String normalizeFileSeparators(String path) {
+		return FilenameUtils.separatorsToUnix(path);
 	}
 
 	protected String newlineAllHtmlTags(String html) {

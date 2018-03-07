@@ -14,7 +14,6 @@ import static j2html.TagCreator.th;
 import static j2html.TagCreator.title;
 import static j2html.TagCreator.tr;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,8 +120,8 @@ public class FileDiffHtmlBuilder extends HtmlBuilder {
 
 	@Override
 	protected Tag createHead() {
-		String fileLeftSimpleName = StringUtils.substringAfterLast(fileLeftInfo.getPath(), File.separator);
-		String fileRightSimpleName = StringUtils.substringAfterLast(fileRightInfo.getPath(), File.separator);
+		String fileLeftSimpleName = StringUtils.substringAfterLast(fileLeftInfo.getPath(), "/");
+		String fileRightSimpleName = StringUtils.substringAfterLast(fileRightInfo.getPath(), "/");
 		String title = "diff " + fileLeftSimpleName + " " + fileRightSimpleName;
 
 		return head()

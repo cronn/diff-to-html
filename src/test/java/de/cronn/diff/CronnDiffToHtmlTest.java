@@ -4,7 +4,6 @@ import static org.junit.Assume.assumeTrue;
 
 import java.io.IOException;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,27 +71,6 @@ public class CronnDiffToHtmlTest extends TestBase {
 		assumeTrue(SystemUtils.IS_OS_UNIX);
 		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_1_1, INPUT_CODE_1_1, true));
 		assertOutputEqualToValidation();
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnWindowsCode1() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_WINDOWS);
-		// TODO: implement
-		throw new NotImplementedException("Support for windows file compare not implemented yet.");
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnWindowsCode2() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_WINDOWS);
-		// TODO: implement
-		throw new NotImplementedException("Support for windows file compare not implemented yet.");
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnWindowsText1() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_WINDOWS);
-		// TODO: implement
-		throw new NotImplementedException("Support for windows file compare not implemented yet.");
 	}
 
 	@Test

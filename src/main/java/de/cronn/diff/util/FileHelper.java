@@ -28,8 +28,8 @@ public class FileHelper {
 
 	public static void copyCssFileToDir(String dirPath) throws IOException {
 		ensureDirExists(dirPath);
-		if(!dirPath.endsWith(File.separator)) {
-			dirPath += File.separator;
+		if (!dirPath.endsWith("/")) {
+			dirPath += "/";
 		}
 		String cssFileDestPath = dirPath + CSS_FILE;
 		InputStream resourceAsStream = Main.class.getResourceAsStream("/" + CSS_FILE);

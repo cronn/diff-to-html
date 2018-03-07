@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -24,10 +25,13 @@ public class TestBase {
 	private static final String WINDOWS_LINE_SEPARATOR = "\r\n";
 
 	public static final String TEST_DATA_VALIDATION_DIR = "data/test/validation/";
+	public static final String TEST_DATA_VALIDATION_DIR_WIN = FilenameUtils.separatorsToWindows(TEST_DATA_VALIDATION_DIR);
 
 	public static final String TEST_DATA_INPUT_DIR = "data/test/input/";
+	public static final String TEST_DATA_INPUT_DIR_WIN = FilenameUtils.separatorsToWindows(TEST_DATA_INPUT_DIR);
 
 	public static final String TEST_DATA_OUTPUT_DIR = "data/test/output/";
+	public static final String TEST_DATA_OUTPUT_DIR_WIN = FilenameUtils.separatorsToWindows(TEST_DATA_OUTPUT_DIR);
 
 	public static final String HTML_SUFFIX = ".html";
 
@@ -76,7 +80,7 @@ public class TestBase {
 	}
 
 	protected void assertSysOutErrEqualToValidation(String actual) throws IOException {
-		actual = normalizeWorkingDir(actual);
+		actual = normalizeWorkingDir(normalizeTestDataDirs(actual));
 		writeToDisk(actual, getOutSysOutFilePath()); // for external comparison by developer
 		String expected = readFileToString(getValidationSysOutFilePath());
 
@@ -106,7 +110,14 @@ public class TestBase {
 		s = s.replaceAll("(\\[TIME\\] )(\\+[0-9]{4})", "$1 [ZONE]");
 		return s;
 	}
-	
+
+	private String normalizeTestDataDirs(String s) {
+		s = StringUtils.replace(s, TEST_DATA_INPUT_DIR_WIN, TEST_DATA_INPUT_DIR);
+		s = StringUtils.replace(s, TEST_DATA_OUTPUT_DIR_WIN, TEST_DATA_OUTPUT_DIR);
+		s = StringUtils.replace(s, TEST_DATA_VALIDATION_DIR_WIN, TEST_DATA_VALIDATION_DIR);
+		return s;
+	}
+
 	private String normalizeWorkingDir(String s) {
 		String workingDir = FileHelper.getWorkingDir();
 		return StringUtils.replace(s, workingDir, "[current/working/directory/]");

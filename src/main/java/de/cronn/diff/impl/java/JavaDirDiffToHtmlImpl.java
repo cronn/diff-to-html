@@ -47,7 +47,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 
 	private DirectoryDiffHtmlBuilder traverseLeftDirectory(DirectoryDiffHtmlBuilder dirDiffHtmlBuilder, ArrayList<File> filesAndDirs) throws IOException {
 		for (File fileLeft : filesAndDirs) {
-			String fileLeftPath = fileLeft.getPath();
+			String fileLeftPath = FilenameUtils.separatorsToUnix(fileLeft.getPath());
 			String fileRightPath = fileLeftPath.replace(params.getInputLeftPath(), params.getInputRightPath());
 			DiffToHtmlParameters fileDiffParams = createFileDiffParams(fileLeftPath, fileRightPath);
 
@@ -64,7 +64,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 
 	private DirectoryDiffHtmlBuilder traverseRightDirectory(DirectoryDiffHtmlBuilder dirDiffHtmlBuilder, ArrayList<File> filesAndDirs) throws IOException {
 		for (File fileRight : filesAndDirs) {
-			String fileRightPath = fileRight.getPath();
+			String fileRightPath = FilenameUtils.separatorsToUnix(fileRight.getPath());
 			String fileLeftPath = fileRightPath.replace(params.getInputRightPath(), params.getInputLeftPath());
 			DiffToHtmlParameters fileDiffParams = createFileDiffParams(fileLeftPath, fileRightPath);
 			if (!Files.exists(Paths.get(fileLeftPath))) {

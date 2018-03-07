@@ -12,7 +12,6 @@ import static j2html.TagCreator.rawHtml;
 import static j2html.TagCreator.script;
 import static j2html.TagCreator.title;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -209,7 +208,7 @@ public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 	private Tag createJSScripts() {
 		String script;
 		try {
-			InputStream resourceAsStream = getClass().getResourceAsStream(File.separator + JS_SCRIPTS_URI);
+			InputStream resourceAsStream = getClass().getResourceAsStream("/" + JS_SCRIPTS_URI);
 			script = IOUtils.toString(resourceAsStream, StandardCharsets.UTF_8);
 		} catch (NullPointerException | IOException e) {
 			throw new RuntimeException("The resource " + JS_SCRIPTS_URI + " could not be loaded.", e);

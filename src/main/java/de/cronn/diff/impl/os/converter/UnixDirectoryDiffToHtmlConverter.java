@@ -10,7 +10,6 @@ import static de.cronn.diff.util.UnifiedDiffValues.BLANK;
 import static de.cronn.diff.util.UnifiedDiffValues.UNIQUE_FILE_PREFIX;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -150,7 +149,7 @@ public class UnixDirectoryDiffToHtmlConverter {
 	}
 
 	protected String getUniqueFileNameFromCurrentDiffLine() {
-		return StringUtils.substringAfter(line, UNIQUE_FILE_PREFIX).replace(": ", File.separator).trim();
+		return StringUtils.substringAfter(line, UNIQUE_FILE_PREFIX).replace(": ", "/").trim();
 	}
 
 	private String getBinaryFileNameFromCurrentDiffLine() {
