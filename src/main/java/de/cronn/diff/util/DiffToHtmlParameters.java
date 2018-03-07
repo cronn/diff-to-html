@@ -21,11 +21,13 @@ public final class DiffToHtmlParameters {
 	private final boolean detectTextFileEncoding;
 	private final boolean onlyReports;
 	private final int unifiedContext;
+	private final OS os;
 
 
 	private DiffToHtmlParameters(DiffType diffType, String inputLeftPath, String inputRightPath, String outputPath,
 			String diffCommandLineAsString, boolean useOsDiffTool, boolean ignoreUniqueFiles, boolean ignoreWhiteSpaces,
-			boolean ignoreSpaceChange, boolean detectTextFileEncoding, boolean onlyReports, int unifiedContext) {
+			boolean ignoreSpaceChange, boolean detectTextFileEncoding, boolean onlyReports, int unifiedContext,
+			OS operatingSystem) {
 		this.diffType = diffType;
 		this.inputLeftPath = inputLeftPath;
 		this.inputRightPath = inputRightPath;
@@ -38,6 +40,7 @@ public final class DiffToHtmlParameters {
 		this.detectTextFileEncoding = detectTextFileEncoding;
 		this.onlyReports = onlyReports;
 		this.unifiedContext = unifiedContext;
+		this.os = operatingSystem;
 	}
 
 	public static class Builder {
@@ -53,6 +56,7 @@ public final class DiffToHtmlParameters {
 		private boolean detectTextFileEncoding = false;
 		private boolean onlyReports = false;
 		private int unifiedContext = 3;
+		private OS os = OS.UNIX;
 
 		private Builder() {
 		}
@@ -70,6 +74,7 @@ public final class DiffToHtmlParameters {
 			this.detectTextFileEncoding = other.isDetectTextFileEncoding();
 			this.onlyReports = other.isOnlyReports();
 			this.unifiedContext = other.unifiedContext;
+			this.os = other.os;
 		}
 
 		public Builder withDiffType(DiffType diffType) {
@@ -131,10 +136,15 @@ public final class DiffToHtmlParameters {
 			this.unifiedContext = unifiedContext;
 			return this;
 		}
+		
+		public Builder withOperatingSystem(OS os) {
+			this.os = os;
+			return this;
+		}
 
 		public DiffToHtmlParameters build() {
 			return new DiffToHtmlParameters(diffType, inputLeftPath, inputRightPath, outputPath, diffCommandLineAsString, useOsDiffTool,
-					ignoreUniqueFiles, ignoreWhiteSpaces, ignoreSpaceChange, detectTextFileEncoding, onlyReports, unifiedContext);
+					ignoreUniqueFiles, ignoreWhiteSpaces, ignoreSpaceChange, detectTextFileEncoding, onlyReports, unifiedContext, os);
 		}
 	}
 
@@ -192,5 +202,9 @@ public final class DiffToHtmlParameters {
 
 	public int getUnifiedContext() {
 		return unifiedContext;
+	}
+	
+	public OS getOperatingSystem() {
+		return os;
 	}
 }

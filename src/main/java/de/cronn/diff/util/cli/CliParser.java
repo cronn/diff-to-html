@@ -8,9 +8,9 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.lang3.SystemUtils;
 
 import de.cronn.diff.Main;
+import de.cronn.diff.util.OS;
 
 public class CliParser {
 
@@ -35,10 +35,13 @@ public class CliParser {
 	private Options options;
 
 	private HelpFormatter helpFormatter;
+	
+	private OS os;
 
-	public CliParser() {
+	public CliParser(OS operatingSystem) {
 		options = createOptions();
 		helpFormatter = createHelpFormatter();
+		os = operatingSystem;
 	}
 
 	private Options createOptions() {
@@ -46,7 +49,7 @@ public class CliParser {
 		options.addOption(new Option(OPT_IGNORE_WHITESPACES, "ignorewhitespaces", false, "ignore all white spaces"));
 		options.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignorespacechange", false, "ignore changes in the amount of white space"));
 		options.addOption(new Option(OPT_ONLY_REPORTS, "onlyreports", false, "always exits with zero"));
-		if(!SystemUtils.IS_OS_WINDOWS) {
+		if(os != OS.WINDOWS) {
 			options.addOption(new Option(OPT_OS_DIFF, "osdiff", false, "uses operating system's diff instead of Java implementation and parses the output. Might slightly improve performance, depending on your machine. Try for large diffs in time-critial situations. Windows not supported currently"));
 		}
 		options.addOption(new Option(OPT_IGNORE_UNIQUE_FILES, "ignoreunique", false, "ignore unique files"));
