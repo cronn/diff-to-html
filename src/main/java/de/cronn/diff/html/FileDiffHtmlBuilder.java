@@ -17,6 +17,7 @@ import static j2html.TagCreator.tr;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import de.cronn.diff.util.DiffToHtmlParameters;
@@ -89,7 +90,7 @@ public class FileDiffHtmlBuilder extends HtmlBuilder {
 	}
 
 	public void appendTextFile(String textFile) {
-		String[] textFileLines = textFile.split(System.lineSeparator());
+		String[] textFileLines = textFile.split(StringUtils.LF);
 		for(int i = 0; i < textFileLines.length; i++) {
 			int line = i+1;
 			appendLine(textFileLines[i], Integer.toString(line), " ", CSS_CLASS_CONTEXT);

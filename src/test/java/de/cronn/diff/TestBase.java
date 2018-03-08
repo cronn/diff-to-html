@@ -18,11 +18,11 @@ import org.junit.rules.TestName;
 import de.cronn.diff.html.HtmlBuilder;
 import de.cronn.diff.util.FileHelper;
 
+import static org.apache.commons.lang3.StringUtils.CR;
+import static org.apache.commons.lang3.StringUtils.LF;;
+
+
 public class TestBase {
-
-	private static final String UNIX_LINE_SEPARATOR = "\n";
-
-	private static final String WINDOWS_LINE_SEPARATOR = "\r\n";
 
 	public static final String TEST_DATA_VALIDATION_DIR = "data/test/validation/";
 	public static final String TEST_DATA_VALIDATION_DIR_WIN = FilenameUtils.separatorsToWindows(TEST_DATA_VALIDATION_DIR);
@@ -59,6 +59,7 @@ public class TestBase {
 	protected void assertHtmlResultEqualToValidation(String actualHtml) throws IOException {
 		writeToDisk(actualHtml, getOutHtmlFilePath()); // for external comparison by developer
 		String expectedHtml = readFileToString(getValidationHtmlFilePath());
+		actualHtml = normalizeLineSeparators(actualHtml);
 		assertEquals(expectedHtml, actualHtml);
 	}
 
@@ -67,7 +68,6 @@ public class TestBase {
 		writeToDisk(actualString, getOutFilePath()); // for external comparison by developer
 		String expectedString = readFileToString(getValidationFilePath());
 		actualString = normalizeLineSeparators(actualString);
-		expectedString = normalizeLineSeparators(expectedString);
 		assertEquals(expectedString, actualString);
 	}
 
@@ -75,6 +75,7 @@ public class TestBase {
 		String expected = readFileToString(getValidationHtmlFilePath());
 		String actual = readFileToString(getOutHtmlFilePath());
 		actual = normalizeTimestamps(actual);
+		actual = normalizeLineSeparators(actual);
 		writeToDisk(actual, getOutHtmlFilePath());
 		assertEquals(expected, actual);
 	}
@@ -102,7 +103,7 @@ public class TestBase {
 	}
 
 	protected String normalizeLineSeparators(String s) {
-		return s.replace(WINDOWS_LINE_SEPARATOR, UNIX_LINE_SEPARATOR);
+		return s.replaceAll(CR+LF, LF);
 	}
 
 	private String normalizeTimestamps(String s) {

@@ -3,10 +3,12 @@ package de.cronn.diff.impl.java.wrapper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeFalse;
 
 import java.io.IOException;
 import java.nio.charset.MalformedInputException;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 
 import de.cronn.diff.TestBase;
@@ -25,6 +27,8 @@ public class JavaDiffUtils2HtmlWrapperTest {
 
 	@Test
 	public void testAppendDiffToBuilder_Exception_ISO_8859_1() throws Exception {
+		//on windows the default charset is windows-1252 which is close to ISO 8859
+		assumeFalse(SystemUtils.IS_OS_WINDOWS);
 		try {
 			DiffToHtmlParameters paramWithDetectEncoding = DiffToHtmlParameters.builder()
 					.withInputLeftPath(ISO_8859_FILE)
