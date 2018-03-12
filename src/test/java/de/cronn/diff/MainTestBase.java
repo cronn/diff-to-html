@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.contrib.java.lang.system.Assertion;
 
+import de.cronn.diff.util.FileHelper;
 import de.cronn.diff.util.OS;
 
 public class MainTestBase extends TestBase {
@@ -84,8 +85,8 @@ public class MainTestBase extends TestBase {
 	}
 
 	private void assertSystemMessage() throws IOException {
-		String sysOutStr = normalizeLineSeparators(sysOut.toString());
-		String sysErrorStr = normalizeLineSeparators(sysErr.toString());
+		String sysOutStr = FileHelper.normalizeLineSeparators(sysOut.toString());
+		String sysErrorStr = FileHelper.normalizeLineSeparators(sysErr.toString());
 		assertNotNull(sysOutStr);
 		assertNotNull(sysErrorStr);
 		assertSysOutErrEqualToValidation(sysErrorStr + System.lineSeparator() + sysOutStr);

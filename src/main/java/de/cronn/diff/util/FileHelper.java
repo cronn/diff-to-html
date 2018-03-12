@@ -1,5 +1,8 @@
 package de.cronn.diff.util;
 
+import static org.apache.commons.lang3.StringUtils.CR;
+import static org.apache.commons.lang3.StringUtils.LF;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -129,5 +132,9 @@ public class FileHelper {
 	
 	public static String getWorkingDir() {
 		return new File("").getAbsolutePath() + File.separator;
+	}
+
+	public static String normalizeLineSeparators(String s) {
+		return s.replaceAll(CR + LF, LF);
 	}
 }

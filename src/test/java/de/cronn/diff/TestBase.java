@@ -16,10 +16,7 @@ import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.rules.TestName;
 
 import de.cronn.diff.html.HtmlBuilder;
-import de.cronn.diff.util.FileHelper;
-
-import static org.apache.commons.lang3.StringUtils.CR;
-import static org.apache.commons.lang3.StringUtils.LF;;
+import de.cronn.diff.util.FileHelper;;
 
 
 public class TestBase {
@@ -57,25 +54,26 @@ public class TestBase {
 	}
 
 	protected void assertHtmlResultEqualToValidation(String actualHtml) throws IOException {
+		actualHtml = FileHelper.normalizeLineSeparators(actualHtml);
 		writeToDisk(actualHtml, getOutHtmlFilePath()); // for external comparison by developer
 		String expectedHtml = readFileToString(getValidationHtmlFilePath());
-		actualHtml = normalizeLineSeparators(actualHtml);
+		expectedHtml = FileHelper.normalizeLineSeparators(expectedHtml);
 		assertEquals(expectedHtml, actualHtml);
 	}
 
-	protected void assertStringResultEqualToValidation(String actualString) throws IOException {
-		actualString = normalizeWorkingDir(actualString);
-		writeToDisk(actualString, getOutFilePath()); // for external comparison by developer
-		String expectedString = readFileToString(getValidationFilePath());
-		actualString = normalizeLineSeparators(actualString);
-		assertEquals(expectedString, actualString);
+	protected void assertStringResultEqualToValidation(String actual) throws IOException {
+		actual = FileHelper.normalizeLineSeparators(normalizeWorkingDir(actual));
+		writeToDisk(actual, getOutFilePath()); // for external comparison by developer
+		String expected = readFileToString(getValidationFilePath());
+		expected = FileHelper.normalizeLineSeparators(expected);
+		assertEquals(expected, actual);
 	}
 
 	protected void assertOutputEqualToValidation() throws IOException {
 		String expected = readFileToString(getValidationHtmlFilePath());
+		expected = FileHelper.normalizeLineSeparators(expected);
 		String actual = readFileToString(getOutHtmlFilePath());
-		actual = normalizeTimestamps(actual);
-		actual = normalizeLineSeparators(actual);
+		actual = FileHelper.normalizeLineSeparators(normalizeTimestamps(actual));
 		writeToDisk(actual, getOutHtmlFilePath());
 		assertEquals(expected, actual);
 	}
@@ -85,8 +83,8 @@ public class TestBase {
 		writeToDisk(actual, getOutSysOutFilePath()); // for external comparison by developer
 		String expected = readFileToString(getValidationSysOutFilePath());
 
-		String expectedNorm = normalizeLineSeparators(expected);
-		String actualNorm = normalizeLineSeparators(actual);
+		String expectedNorm = FileHelper.normalizeLineSeparators(expected);
+		String actualNorm = FileHelper.normalizeLineSeparators(actual);
 		assertEquals(expectedNorm, actualNorm);
 	}
 
@@ -100,10 +98,6 @@ public class TestBase {
 
 	protected String getTestMethodName() {
 		return testName.getMethodName();
-	}
-
-	protected String normalizeLineSeparators(String s) {
-		return s.replaceAll(CR+LF, LF);
 	}
 
 	private String normalizeTimestamps(String s) {
