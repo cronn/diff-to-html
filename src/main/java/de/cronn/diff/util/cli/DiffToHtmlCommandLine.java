@@ -13,8 +13,6 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.UnrecognizedOptionException;
 import org.apache.commons.io.FilenameUtils;
 
-import de.cronn.diff.util.FileHelper;
-
 public class DiffToHtmlCommandLine extends CommandLine {
 
 	private static final long serialVersionUID = 1L;
@@ -26,14 +24,19 @@ public class DiffToHtmlCommandLine extends CommandLine {
 	private String output;
 
 	private boolean inputsAreFiles;
+	
+	private String workingDir;
 
-	public DiffToHtmlCommandLine(CommandLine cli) throws ParseException {
+	public DiffToHtmlCommandLine(CommandLine cli, String workingDir) throws ParseException {
 		for(Option opt : cli.getOptions()) {
 			this.addOption(opt);
 		}
 		for(String arg : cli.getArgs()) {
 			this.addArg(arg);
 		}
+		
+		this.workingDir = workingDir;
+		
 		checkCliArguments();
 		setupInputs();
 		setupOutput();
@@ -81,7 +84,7 @@ public class DiffToHtmlCommandLine extends CommandLine {
 	}
 	
 	private String createOutputHtmlPath() {
-		return FileHelper.getWorkingDir() + "diff_" + getShortFileName(inputLeft) + "_" + getShortFileName(inputRight) + ".html";
+		return workingDir + "diff_" + getShortFileName(inputLeft) + "_" + getShortFileName(inputRight) + ".html";
 	}
 
 	private String getShortFileName(String f) {

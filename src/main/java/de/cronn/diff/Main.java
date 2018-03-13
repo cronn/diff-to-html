@@ -13,6 +13,7 @@ import org.apache.commons.lang3.SystemUtils;
 
 import de.cronn.diff.util.DiffToHtmlParameters;
 import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
+import de.cronn.diff.util.FileHelper;
 import de.cronn.diff.util.OS;
 import de.cronn.diff.util.cli.CliParser;
 import de.cronn.diff.util.cli.DiffToHtmlCommandLine;
@@ -28,6 +29,8 @@ public final class Main {
 	public static final String PROGRAM_NAME = "cronn-diff-to-html";
 
 	public static OS os = getOperatingSystem();
+	
+	public static String workingDir = FileHelper.getWorkingDir();
 
 	private Main() {}
 	
@@ -35,7 +38,7 @@ public final class Main {
 		
 		DiffToHtmlCommandLine cli;
 		try {
-			cli = new CliParser(os).parse(args);
+			cli = new CliParser(os, workingDir).parse(args);
 			DiffToHtmlParameters parameters = DiffToHtmlParameters.builder()
 					.withDiffType(cli.isInputsFiles() ? DiffType.FILES : DiffType.DIRECTORIES)
 					.withInputLeftPath(cli.getInputLeft())

@@ -37,9 +37,12 @@ public class CliParser {
 	private HelpFormatter helpFormatter;
 	
 	private OS os;
+	
+	private String workingDir;
 
-	public CliParser(OS operatingSystem) {
-		os = operatingSystem;
+	public CliParser(OS operatingSystem, String workingDir) {
+		this.os = operatingSystem;
+		this.workingDir = workingDir;
 		options = createOptions();
 		helpFormatter = createHelpFormatter();
 	}
@@ -73,7 +76,7 @@ public class CliParser {
 	public DiffToHtmlCommandLine parse(String[] args) throws ParseException {
 		try {
 			CommandLine cli = new DefaultParser().parse(options, args);
-			return new DiffToHtmlCommandLine(cli);
+			return new DiffToHtmlCommandLine(cli, workingDir);
 		} catch (ParseException e) {
 			helpFormatter.printHelp(Main.PROGRAM_NAME + " <input_left> <input_right> [<output_html>] ", options, true);
 			System.err.println("Parsing failed. Reason: " + e.getMessage());
