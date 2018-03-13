@@ -23,7 +23,7 @@ public class UnixDiffToHtmlImpl {
 
 	private static final String UNIX_DIFF_ARG_SHOW_IDENTICAL = "-s";
 
-	private static final String UNIX_DIFF_ARG_UNIFIED_CONTEXT = "-u";
+	private static final String UNIX_DIFF_ARG_UNIFIED_CONTEXT = "-U";
 
 	private static final String UNIX_DIFF_ARG_IGNORE_WHITESPACE = "-w";
 
@@ -79,7 +79,8 @@ public class UnixDiffToHtmlImpl {
 
 	private List<String> createCommandLineArguments() {
 		List<String> argumentList = new ArrayList<>();
-		argumentList.add(UNIX_DIFF_ARG_UNIFIED_CONTEXT + Integer.toString(params.getUnifiedContext()));
+		argumentList.add(UNIX_DIFF_ARG_UNIFIED_CONTEXT);
+		argumentList.add(Integer.toString(params.getUnifiedContext()));
 		argumentList.add(params.getDiffType() == DiffType.FILES ? UNIX_DIFF_ARG_SHOW_IDENTICAL : UNIX_DIFF_ARG_RECURSIVE);
 		if(params.isIgnoreWhiteSpaces()) {
 			argumentList.add(UNIX_DIFF_ARG_IGNORE_WHITESPACE);
