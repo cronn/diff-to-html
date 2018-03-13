@@ -1,11 +1,11 @@
 
 <html>
 <head charset="UTF-8">
-<title>Diff directories data/test/input/dirWithSpaces1 and data/test/input/dirWithSpaces2</title>
+<title>Diff directories data/test/input/dirWithSpaces1 and data/test/input/dirWithoutSpaces</title>
 <link rel="stylesheet" type="text/css" href="diffToHtml.css"></head>
 <body id="wrapper2">
 <div>
-<h1>Diff directories data/test/input/dirWithSpaces1 and data/test/input/dirWithSpaces2</h1>
+<h1>Diff directories data/test/input/dirWithSpaces1 and data/test/input/dirWithoutSpaces</h1>
 <a class="expand-all-link" href="javascript:showElements([&#x27;diffText0&#x27;, &#x27;diffText1&#x27;])">[expand/collapse all]</a>
 <br>
 <br></div>
@@ -21,10 +21,10 @@
 <tr>
 <th colspan="3">
 <a href="../input/dirWithSpaces1/dir/AnotherTextFile">
-<b>../input/dirWithSpaces1/dir/AnotherTextFile</b></a> [DATE]T[TIME]Z
+<b>../input/dirWithSpaces1/dir/AnotherTextFile</b></a> [DATE] [TIME]  [ZONE]
 <br>
-<a href="../input/dirWithSpaces2/dir/AnotherTextFile">
-<b>../input/dirWithSpaces2/dir/AnotherTextFile</b></a> [DATE]T[TIME]Z</th></tr>
+<a href="../input/dirWithoutSpaces/dir/AnotherTextFile">
+<b>../input/dirWithoutSpaces/dir/AnotherTextFile</b></a> [DATE] [TIME]  [ZONE]</th></tr>
 <tr height="16">
 <td></td>
 <td></td>
@@ -33,17 +33,27 @@
 <td class="line-number">--</td>
 <td class="line-number">--</td>
 <td class="info">
-<pre>@@ -1,1 +1,1 @@</pre></td></tr>
+<pre>@@ -1 +1 @@</pre></td></tr>
 <tr>
-<td class="line-number">1</td>
-<td class="line-number">1</td>
+<td class="line-number">-1</td>
+<td class="line-number">-1</td>
 <td class="delete">
 <pre>-here for you some text </pre></td></tr>
 <tr>
-<td class="line-number">2</td>
-<td class="line-number">1</td>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>\ No newline at end of file</pre></td></tr>
+<tr>
+<td class="line-number">0</td>
+<td class="line-number">-1</td>
 <td class="insert">
-<pre>+here  for  you  some       text </pre></td></tr></table>
+<pre>+hereforyousometext</pre></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>\ No newline at end of file</pre></td></tr></table>
 <br>
 <br></div>
 <a href="javascript:showElement(&#x27;diffText1&#x27;)">
@@ -53,10 +63,10 @@
 <tr>
 <th colspan="3">
 <a href="../input/dirWithSpaces1/textFile">
-<b>../input/dirWithSpaces1/textFile</b></a> [DATE]T[TIME]Z
+<b>../input/dirWithSpaces1/textFile</b></a> [DATE] [TIME]  [ZONE]
 <br>
-<a href="../input/dirWithSpaces2/textFile">
-<b>../input/dirWithSpaces2/textFile</b></a> [DATE]T[TIME]Z</th></tr>
+<a href="../input/dirWithoutSpaces/textFile">
+<b>../input/dirWithoutSpaces/textFile</b></a> [DATE] [TIME]  [ZONE]</th></tr>
 <tr height="16">
 <td></td>
 <td></td>
@@ -77,15 +87,25 @@
 <td class="delete">
 <pre>-A text   t h i s is.</pre></td></tr>
 <tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>\ No newline at end of file</pre></td></tr>
+<tr>
 <td class="line-number">3</td>
 <td class="line-number">1</td>
 <td class="insert">
-<pre>+This      is a text     .</pre></td></tr>
+<pre>+Thisisatext.</pre></td></tr>
 <tr>
 <td class="line-number">3</td>
 <td class="line-number">2</td>
 <td class="insert">
-<pre>+A text t h i s is.</pre></td></tr></table>
+<pre>+Atextthisis.</pre></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>\ No newline at end of file</pre></td></tr></table>
 <br>
 <br></div>
 <br></div></div>

@@ -22,14 +22,12 @@ public class MainTestBase extends TestBase {
 	protected static final String INPUT_DIR_3 = TEST_DATA_INPUT_DIR + "dir1_3";
 	protected static final String INPUT_CODE_3_1 = TEST_DATA_INPUT_DIR + "code3_1.java.example";
 	protected static final String INPUT_CODE_3_2 = TEST_DATA_INPUT_DIR + "code3_2.java.example";
-	protected static final String INPUT_TEXT_LINUX_EOL = TEST_DATA_INPUT_DIR + "textWith.linuxEOL";
-	protected static final String INPUT_TEXT_MIXED_EOL = TEST_DATA_INPUT_DIR + "textWith.mixedEOL";
-	protected static final String INPUT_DIR_LINUX_EOL = TEST_DATA_INPUT_DIR + "dirLinuxEOL";
-	protected static final String INPUT_DIR_MIXED_EOL = TEST_DATA_INPUT_DIR + "dirMixedEOL";
-	protected static final String INPUT_TEXT_SPACES_1 = TEST_DATA_INPUT_DIR + "textWithSpaces1";
-	protected static final String INPUT_TEXT_SPACES_2 = TEST_DATA_INPUT_DIR + "textWithSpaces2";
-	protected static final String INPUT_DIR_SPACES_1 = TEST_DATA_INPUT_DIR + "dirWithSpaces1";
-	protected static final String INPUT_DIR_SPACES_2 = TEST_DATA_INPUT_DIR + "dirWithSpaces2";
+	protected static final String INPUT_TEXT_WITH_SPACES_1 = TEST_DATA_INPUT_DIR + "textWithSpaces1";
+	protected static final String INPUT_TEXT_WITH_SPACES_2 = TEST_DATA_INPUT_DIR + "textWithSpaces2";
+	protected static final String INPUT_TEXT_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "textWithoutSpaces";
+	protected static final String INPUT_DIR_WITH_SPACES_1 = TEST_DATA_INPUT_DIR + "dirWithSpaces1";
+	protected static final String INPUT_DIR_WITH_SPACES_2 = TEST_DATA_INPUT_DIR + "dirWithSpaces2";
+	protected static final String INPUT_DIR_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "dirWithoutSpaces";
 	protected static final String INPUT_TEXT_1_1 = TEST_DATA_INPUT_DIR + "text1_1.example";
 	protected static final String INPUT_TEXT_1_2 = TEST_DATA_INPUT_DIR + "text1_2.example";
 	

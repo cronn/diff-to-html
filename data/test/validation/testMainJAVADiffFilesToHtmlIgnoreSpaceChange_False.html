@@ -1,15 +1,44 @@
 
 <html>
 <head charset="UTF-8">
-<title>diff textWith.linuxEOL textWith.mixedEOL</title>
+<title>diff textWithSpaces1 textWithSpaces2</title>
 <link rel="stylesheet" type="text/css" href="diffToHtml.css"></head>
 <body>
 <div id="wrapper">
 <table>
 <tr>
 <th colspan="3">
-<a href="../input/textWith.linuxEOL">
-<b>../input/textWith.linuxEOL</b></a> [DATE]T[TIME]Z
+<a href="../input/textWithSpaces1">
+<b>../input/textWithSpaces1</b></a> [DATE]T[TIME]Z
 <br>
-<a href="../input/textWith.mixedEOL">
-<b>../input/textWith.mixedEOL</b></a> [DATE]T[TIME]Z</th></tr></table></div></body></html>
+<a href="../input/textWithSpaces2">
+<b>../input/textWithSpaces2</b></a> [DATE]T[TIME]Z</th></tr>
+<tr height="16">
+<td></td>
+<td></td>
+<td></td></tr>
+<tr>
+<td class="line-number">--</td>
+<td class="line-number">--</td>
+<td class="info">
+<pre>@@ -1,2 +1,2 @@</pre></td></tr>
+<tr>
+<td class="line-number">1</td>
+<td class="line-number">1</td>
+<td class="delete">
+<pre>-This is a text .</pre></td></tr>
+<tr>
+<td class="line-number">2</td>
+<td class="line-number">1</td>
+<td class="delete">
+<pre>-A text   t h i s is.</pre></td></tr>
+<tr>
+<td class="line-number">3</td>
+<td class="line-number">1</td>
+<td class="insert">
+<pre>+This is   a   text .</pre></td></tr>
+<tr>
+<td class="line-number">3</td>
+<td class="line-number">2</td>
+<td class="insert">
+<pre>+A text t h i s is.</pre></td></tr></table></div></body></html>

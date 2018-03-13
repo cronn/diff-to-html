@@ -1,6 +1,5 @@
 package de.cronn.diff;
 
-import static de.cronn.diff.util.cli.CliParser.OPT_DETECT_ENCODING;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_SPACE_CHANGE;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_WHITESPACES;
 import static de.cronn.diff.util.cli.CliParser.OPT_ONLY_REPORTS;
@@ -44,7 +43,7 @@ public class MainOsDiffTest extends MainTestBase {
 	public void testMainOSDiffFilesToHtmlIgnoreSpaceChange_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_TEXT_LINUX_EOL, INPUT_TEXT_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITH_SPACES_2, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
 				"-" + OPT_IGNORE_SPACE_CHANGE });
 	}
 
@@ -52,16 +51,22 @@ public class MainOsDiffTest extends MainTestBase {
 	public void testMainOSDiffFilesToHtmlIgnoreSpaceChange_False() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_TEXT_LINUX_EOL, INPUT_TEXT_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
-				"-" + OPT_DETECT_ENCODING });
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITH_SPACES_2, getOutHtmlFilePath(), "-" + OPT_OS_DIFF });
 	}
-
+	
 	@Test
 	public void testMainOSDiffFilesToHtmlIgnoreWhiteSpaces_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_TEXT_SPACES_1, INPUT_TEXT_SPACES_2, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITHOUT_SPACES, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
 				"-" + OPT_IGNORE_WHITESPACES });
+	}
+
+	@Test
+	public void testMainOSDiffFilesToHtmlIgnoreWhiteSpaces_False() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITHOUT_SPACES, getOutHtmlFilePath(), "-" + OPT_OS_DIFF  });
 	}
 
 	@Test
@@ -98,7 +103,7 @@ public class MainOsDiffTest extends MainTestBase {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_DIR_LINUX_EOL, INPUT_DIR_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITH_SPACES_2, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
 				"-" + OPT_IGNORE_SPACE_CHANGE });
 	}
 
@@ -106,16 +111,22 @@ public class MainOsDiffTest extends MainTestBase {
 	public void testMainOSDiffDirsToHtmlIgnoreSpaceChange_False() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_DIR_LINUX_EOL, INPUT_DIR_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
-				"-" + OPT_DETECT_ENCODING });
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITH_SPACES_2, getOutHtmlFilePath(), "-" + OPT_OS_DIFF });
 	}
-
+	
 	@Test
 	public void testMainOSDiffDirsToHtmlIgnoreWhiteSpaces_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_DIR_SPACES_1, INPUT_DIR_SPACES_2, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITHOUT_SPACES, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
 				"-" + OPT_IGNORE_WHITESPACES });
+	}
+
+	@Test
+	public void testMainOSDiffDirsToHtmlIgnoreWhiteSpaces_False() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITHOUT_SPACES, getOutHtmlFilePath(), "-" + OPT_OS_DIFF });
 	}
 
 }

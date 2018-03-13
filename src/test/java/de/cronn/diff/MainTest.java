@@ -1,6 +1,5 @@
 package de.cronn.diff;
 
-import static de.cronn.diff.util.cli.CliParser.OPT_DETECT_ENCODING;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_SPACE_CHANGE;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_UNIQUE_FILES;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_WHITESPACES;
@@ -78,21 +77,28 @@ public class MainTest extends MainTestBase {
 	public void testMainJAVADiffFilesToHtmlIgnoreSpaceChange_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_TEXT_LINUX_EOL, INPUT_TEXT_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_IGNORE_SPACE_CHANGE });
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITH_SPACES_2, getOutHtmlFilePath(), "-" + OPT_IGNORE_SPACE_CHANGE });
 	}
 
 	@Test
 	public void testMainJAVADiffFilesToHtmlIgnoreSpaceChange_False() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_TEXT_LINUX_EOL, INPUT_TEXT_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_DETECT_ENCODING });
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITH_SPACES_2, getOutHtmlFilePath() });
 	}
-
+	
 	@Test
 	public void testMainJAVADiffFilesToHtmlIgnoreWhiteSpaces_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_TEXT_SPACES_1, INPUT_TEXT_SPACES_2, getOutHtmlFilePath(), "-" + OPT_IGNORE_WHITESPACES });
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITHOUT_SPACES, getOutHtmlFilePath(), "-" + OPT_IGNORE_WHITESPACES });
+	}
+
+	@Test
+	public void testMainJAVADiffFilesToHtmlIgnoreWhiteSpaces_False() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITHOUT_SPACES, getOutHtmlFilePath() });
 	}
 
 	@Test
@@ -135,21 +141,28 @@ public class MainTest extends MainTestBase {
 	public void testMainJAVADiffDirsToHtmlIgnoreSpaceChange_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_DIR_LINUX_EOL, INPUT_DIR_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_IGNORE_SPACE_CHANGE });
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITH_SPACES_2, getOutHtmlFilePath(), "-" + OPT_IGNORE_SPACE_CHANGE });
 	}
 
 	@Test
 	public void testMainJAVADiffDirsToHtmlIgnoreSpaceChange_False() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_DIR_LINUX_EOL, INPUT_DIR_MIXED_EOL, getOutHtmlFilePath(), "-" + OPT_DETECT_ENCODING });
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITH_SPACES_2, getOutHtmlFilePath() });
 	}
-
+	
 	@Test
 	public void testMainJAVADiffDirsToHtmlIgnoreWhiteSpaces_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_DIR_SPACES_1, INPUT_DIR_SPACES_2, getOutHtmlFilePath(), "-" + OPT_IGNORE_WHITESPACES });
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITHOUT_SPACES, getOutHtmlFilePath(), "-" + OPT_IGNORE_WHITESPACES });
+	}
+
+	@Test
+	public void testMainJAVADiffDirsToHtmlIgnoreWhiteSpaces_False() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITHOUT_SPACES, getOutHtmlFilePath() });
 	}
 
 }
