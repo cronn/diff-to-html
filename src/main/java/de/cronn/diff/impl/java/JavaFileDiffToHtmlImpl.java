@@ -6,6 +6,7 @@ import static de.cronn.diff.util.UnifiedDiffValues.BINARY_LINE_SPLIT_STR;
 import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_PREFIX;
 import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_SUFFIX;
 import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_LINE_SPLIT_STR;
+import static org.apache.commons.lang3.StringUtils.CR;
 
 import java.io.File;
 import java.io.IOException;
@@ -100,6 +101,10 @@ public class JavaFileDiffToHtmlImpl {
 				String replacement = params.isIgnoreWhiteSpaces() ? "" : " ";
 				text1 = text1.replaceAll("\\s+", replacement);
 				text2 = text2.replaceAll("\\s+", replacement);
+			}
+			if(params.isIgnoreLineEndings()) {
+				text1 = text1.replace(CR, "");
+				text2 = text2.replace(CR, "");
 			}
 			return text1.equals(text2);
 		} else {

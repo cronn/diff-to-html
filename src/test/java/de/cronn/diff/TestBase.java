@@ -11,12 +11,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.rules.TestName;
 
 import de.cronn.diff.html.HtmlBuilder;
-import de.cronn.diff.util.FileHelper;;
+import de.cronn.diff.util.FileHelper;
 
 
 public class TestBase {
@@ -29,12 +30,12 @@ public class TestBase {
 
 	public static final String TEST_DATA_OUTPUT_DIR = "data/test/output/";
 	public static final String TEST_DATA_OUTPUT_DIR_WIN = FilenameUtils.separatorsToWindows(TEST_DATA_OUTPUT_DIR);
-
+	
 	public static final String HTML_SUFFIX = ".html";
 
 	private static final String SYS_OUT_SUFFIX = ".sysouterr";
 
-	private boolean outputDirChecked = false;
+	private static boolean outputDirChecked = false;
 
 	@Rule
 	public TestName testName = new TestName();
@@ -42,9 +43,13 @@ public class TestBase {
 	@Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
+	@BeforeClass
+	public static void assureTestOutputDir() throws IOException {
+		createOutputDirIfNotExists();
+	}
+	
 	@Before
 	public void setUp() throws IOException {
-		createOutputDirIfNotExists();
 		HtmlBuilder.useSimpleFormatOnHtmls = true;
 	}
 
@@ -99,7 +104,7 @@ public class TestBase {
 	protected String getTestMethodName() {
 		return testName.getMethodName();
 	}
-
+	
 	private String normalizeTimestamps(String s) {
 		s = s.replaceAll("([0-9]{4}-[0-9]{2}-[0-9]{2})(.*?)([0-9]{2}:[0-9]{2}:[0-9]{2}[\\.]*[0-9]*)", "[DATE]$2[TIME]");
 		s = s.replaceAll("(\\[TIME\\] )(\\+[0-9]{4})", "$1 [ZONE]");
@@ -122,7 +127,7 @@ public class TestBase {
 		return new String(Files.readAllBytes(Paths.get(filePath)));
 	}
 
-	private void createOutputDirIfNotExists() throws IOException {
+	private static void createOutputDirIfNotExists() throws IOException {
 		if(!outputDirChecked) {
 			Path outputDirPath = Paths.get(TEST_DATA_OUTPUT_DIR);
 			if(Files.notExists(outputDirPath)){

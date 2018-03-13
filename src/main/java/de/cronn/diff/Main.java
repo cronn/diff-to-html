@@ -1,6 +1,7 @@
 package de.cronn.diff;
 
 import static de.cronn.diff.util.cli.CliParser.OPT_DETECT_ENCODING;
+import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_LINE_ENDINGS;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_SPACE_CHANGE;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_UNIQUE_FILES;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_WHITESPACES;
@@ -48,6 +49,7 @@ public final class Main {
 					.withIgnoreUniqueFiles(cli.hasOption(OPT_IGNORE_UNIQUE_FILES))
 					.withIgnoreWhiteSpaces(cli.hasOption(OPT_IGNORE_WHITESPACES))
 					.withIgnoreSpaceChange(cli.hasOption(OPT_IGNORE_SPACE_CHANGE))
+					.withIgnoreLineEndings(cli.hasOption(OPT_IGNORE_LINE_ENDINGS))
 					.withDetectTextFileEncoding(cli.hasOption(OPT_DETECT_ENCODING))
 					.withOnlyReports(cli.hasOption(OPT_ONLY_REPORTS))
 					.withUnifiedContext(Integer.parseInt(cli.getOptionValue(OPT_UNIFIED_CONTEXT,

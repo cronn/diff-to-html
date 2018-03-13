@@ -29,6 +29,8 @@ public class CliParser {
 	public static final String OPT_IGNORE_WHITESPACES = "w";
 
 	public static final String OPT_IGNORE_SPACE_CHANGE = "b";
+	
+	public static final String OPT_IGNORE_LINE_ENDINGS = "crlf";
 
 	public static final String OPT_UNIFIED_CONTEXT = "u";
 
@@ -51,6 +53,7 @@ public class CliParser {
 		Options options = new Options();
 		options.addOption(new Option(OPT_IGNORE_WHITESPACES, "ignorewhitespaces", false, "ignore all white spaces"));
 		options.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignorespacechange", false, "ignore changes in the amount of white space"));
+		options.addOption(new Option(OPT_IGNORE_LINE_ENDINGS, "ignorelineendings", false, "ignore line endings, i.e. normalize CRLF / LF while comparing files"));
 		options.addOption(new Option(OPT_ONLY_REPORTS, "onlyreports", false, "always exits with zero"));
 		if(os != OS.WINDOWS) {
 			options.addOption(new Option(OPT_OS_DIFF, "osdiff", false, "uses operating system's diff instead of Java implementation and parses the output. Might slightly improve performance, depending on your machine. Try for large diffs in time-critial situations. Windows not supported currently"));

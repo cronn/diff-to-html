@@ -28,6 +28,8 @@ public class UnixDiffToHtmlImpl {
 	private static final String UNIX_DIFF_ARG_IGNORE_WHITESPACE = "-w";
 
 	private static final String UNIX_DIFF_ARG_IGNORE_SPACE_CHANGE = "-b";
+	
+	private static final String UNIX_DIFF_ARG_STRIP_TRAILING_CR = "--strip-trailing-cr";
 
 	private static final String UNIX_DIFF_COMMAND = "diff";
 
@@ -87,6 +89,9 @@ public class UnixDiffToHtmlImpl {
 		}
 		if(params.isIgnoreSpaceChange()) {
 			argumentList.add(UNIX_DIFF_ARG_IGNORE_SPACE_CHANGE);
+		}
+		if(params.isIgnoreLineEndings()){
+			argumentList.add(UNIX_DIFF_ARG_STRIP_TRAILING_CR);
 		}
 		return argumentList;
 	}

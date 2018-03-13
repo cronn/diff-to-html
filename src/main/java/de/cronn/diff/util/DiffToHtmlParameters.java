@@ -18,6 +18,7 @@ public final class DiffToHtmlParameters {
 	private final boolean ignoreUniqueFiles;
 	private final boolean ignoreWhiteSpaces;
 	private final boolean ignoreSpaceChange;
+	private final boolean ignoreLineEndings;
 	private final boolean detectTextFileEncoding;
 	private final boolean onlyReports;
 	private final int unifiedContext;
@@ -26,7 +27,7 @@ public final class DiffToHtmlParameters {
 
 	private DiffToHtmlParameters(DiffType diffType, String inputLeftPath, String inputRightPath, String outputPath,
 			String diffCommandLineAsString, boolean useOsDiffTool, boolean ignoreUniqueFiles, boolean ignoreWhiteSpaces,
-			boolean ignoreSpaceChange, boolean detectTextFileEncoding, boolean onlyReports, int unifiedContext,
+			boolean ignoreSpaceChange, boolean ignoreLineEndings, boolean detectTextFileEncoding, boolean onlyReports, int unifiedContext,
 			OS operatingSystem) {
 		this.diffType = diffType;
 		this.inputLeftPath = inputLeftPath;
@@ -37,6 +38,7 @@ public final class DiffToHtmlParameters {
 		this.ignoreUniqueFiles = ignoreUniqueFiles;
 		this.ignoreWhiteSpaces = ignoreWhiteSpaces;
 		this.ignoreSpaceChange = ignoreSpaceChange;
+		this.ignoreLineEndings = ignoreLineEndings;
 		this.detectTextFileEncoding = detectTextFileEncoding;
 		this.onlyReports = onlyReports;
 		this.unifiedContext = unifiedContext;
@@ -53,6 +55,7 @@ public final class DiffToHtmlParameters {
 		private boolean ignoreUniqueFiles = false;
 		private boolean ignoreWhiteSpaces = false;
 		private boolean ignoreSpaceChange = false;
+		private boolean ignoreLineEndings = false;
 		private boolean detectTextFileEncoding = false;
 		private boolean onlyReports = false;
 		private int unifiedContext = 3;
@@ -71,6 +74,7 @@ public final class DiffToHtmlParameters {
 			this.ignoreUniqueFiles = other.isIgnoreUniqueFiles();
 			this.ignoreWhiteSpaces = other.isIgnoreWhiteSpaces();
 			this.ignoreSpaceChange = other.isIgnoreSpaceChange();
+			this.ignoreLineEndings = other.isIgnoreLineEndings();
 			this.detectTextFileEncoding = other.isDetectTextFileEncoding();
 			this.onlyReports = other.isOnlyReports();
 			this.unifiedContext = other.unifiedContext;
@@ -111,9 +115,14 @@ public final class DiffToHtmlParameters {
 			this.detectTextFileEncoding = detectTextFileEncoding;
 			return this;
 		}
-
+		
 		public Builder withIgnoreWhiteSpaces(boolean ignoreWhiteSpaces) {
 			this.ignoreWhiteSpaces = ignoreWhiteSpaces;
+			return this;
+		}
+
+		public Builder withIgnoreLineEndings(boolean ignoreLineEndings) {
+			this.ignoreLineEndings = ignoreLineEndings;
 			return this;
 		}
 
@@ -144,7 +153,7 @@ public final class DiffToHtmlParameters {
 
 		public DiffToHtmlParameters build() {
 			return new DiffToHtmlParameters(diffType, inputLeftPath, inputRightPath, outputPath, diffCommandLineAsString, useOsDiffTool,
-					ignoreUniqueFiles, ignoreWhiteSpaces, ignoreSpaceChange, detectTextFileEncoding, onlyReports, unifiedContext, os);
+					ignoreUniqueFiles, ignoreWhiteSpaces, ignoreSpaceChange, ignoreLineEndings, detectTextFileEncoding, onlyReports, unifiedContext, os);
 		}
 	}
 
@@ -194,6 +203,10 @@ public final class DiffToHtmlParameters {
 
 	public boolean isIgnoreSpaceChange() {
 		return ignoreSpaceChange;
+	}
+
+	public boolean isIgnoreLineEndings() {
+		return ignoreLineEndings;
 	}
 
 	public boolean isOnlyReports() {
