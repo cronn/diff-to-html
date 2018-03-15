@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/cronn-de/diff-to-html.svg?branch=master)](https://travis-ci.org/cronn-de/diff-to-html)
-[![Apache 2.0](https://img.shields.io/github/license/cronn-de/reflection-util.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.cronn/diff-to-html/badge.svg)](http://maven-badges.herokuapp.com/maven-central/de.cronn/diff-to-html)
+[![Apache 2.0](https://img.shields.io/github/license/cronn-de/diff-to-html.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 
 # diff-to-html #
@@ -25,7 +26,7 @@ $ ./gradlew installDist
 To compare two directories (or files), e.g. dir1 and dir2, use the fat jar
 
 ```
-$ java -jar build/libs/diff-to-html-1.0.jar dir1 dir2
+$ java -jar build/libs/diff-to-html-1.1.jar dir1 dir2
 ```
 or the start script
 ```
@@ -39,26 +40,31 @@ Directories differ!
 ```
 Call without arguments for help
 ```
-$ java -jar build/libs/cronn-diff-to-html-1.0.jar 
+$ java -jar build/libs/cronn-diff-to-html-1.1.jar 
 usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
-       [-b] [-or] [-od] [-iu] [-de] [-u <arg>]
- -w,--ignorewhitespaces   ignore all white spaces
- -b,--ignorespacechange   ignore changes in the amount of white space
- -or,--onlyreports        gives back zero code always
- -od,--osdiff             uses operating system's diff instead of Java
-                          implementation and parses the output. Windows
-                          not supported currently
- -iu,--ignoreunique       ignore unique files
- -de,--detectencoding     tries to determine encoding type
- -u,--unified <arg>       output <arg> (default 3) lines of unified
-                          context
+       [-b] [-crlf] [-or] [-od] [-iu] [-de] [-u <arg>]
+ -w,--ignorewhitespaces      ignore all white spaces
+ -b,--ignorespacechange      ignore changes in the amount of white space
+ -crlf,--ignorelineendings   ignore line endings, i.e. normalize CRLF / LF
+                             while comparing files
+ -or,--onlyreports           always exits with zero
+ -od,--osdiff                uses operating system's diff instead of Java
+                             implementation and parses the output. Might
+                             slightly improve performance, depending on
+                             your machine. Try for large diffs in
+                             time-critial situations. Windows not
+                             supported currently
+ -iu,--ignoreunique          ignore unique files
+ -de,--detectencoding        tries to determine encoding type
+ -u,--unified <arg>          output <arg> (default 3) lines of unified
+                             context
 Parsing failed. Reason: Input arguments are missing
 ```
 Generate your tar (or zip) to take wherever you want
 ```
 $ ./gradlew distTar distZip
 $ ls build/distributions/
-diff-to-html-1.0.tar  diff-to-html-1.0.zip
+diff-to-html-1.1.tar  diff-to-html-1.1.zip
 ``` 
 
 ### Prerequisites 
