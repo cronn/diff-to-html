@@ -1,20 +1,24 @@
 package de.cronn.diff.html;
 
 import static j2html.TagCreator.html;
-import static j2html.TagCreator.link;
+import static j2html.TagCreator.style;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FilenameUtils;
 
+import de.cronn.diff.Main;
 import de.cronn.diff.util.DiffToHtmlParameters;
-import de.cronn.diff.util.FileHelper;
-import j2html.tags.EmptyTag;
+import j2html.tags.ContainerTag;
 import j2html.tags.Tag;
 
 public abstract class HtmlBuilder {
+
+	private static final String CSS_FILE = "diffToHtml.css";
 
 	protected static final String EMPTY_LINE_HEIGHT = "16";
 
@@ -88,8 +92,15 @@ public abstract class HtmlBuilder {
 		return html.replaceAll("(<[^/].*?>)", System.lineSeparator() + "$1");
 	}
 
-	protected EmptyTag createStyleTag() {
-		return link().withRel("stylesheet").withType("text/css").withHref(FileHelper.CSS_FILE);
+	protected ContainerTag createStyleTag() {
+		String cssFileSourcePath = Main.class.getResource(File.separator + CSS_FILE).getPath();
+		String styleSheet;
+		try {
+			styleSheet = new String(Files.readAllBytes(Paths.get(cssFileSourcePath)));
+		} catch (IOException e) {
+			styleSheet = "<!-- stylesheet " + CSS_FILE + " could not be loaded -->";
+		}
+		return style().withText(styleSheet);
 	}
 
 

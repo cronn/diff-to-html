@@ -4,15 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.apache.commons.io.FilenameUtils;
-
 import de.cronn.diff.impl.DiffToHtmlGenerator;
 import de.cronn.diff.impl.DiffToHtmlResult;
 import de.cronn.diff.impl.JavaDiffToHtmlGenerator;
 import de.cronn.diff.impl.OSDiffToHtmlGenerator;
 import de.cronn.diff.util.DiffToHtmlParameters;
 import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
-import de.cronn.diff.util.FileHelper;
 
 public class CronnDiffToHtml {
 
@@ -32,8 +29,6 @@ public class CronnDiffToHtml {
 
 	public int generateDiffToHtmlReport(DiffToHtmlParameters params) throws IOException {
 		this.params = params;
-		String outputDirPath = FilenameUtils.getFullPath(params.getOutputPath());
-		FileHelper.copyCssFileToDir(outputDirPath);
 		int status = generateDiffToHtml();
 		return params.isOnlyReports() ? Main.EXIT_CODE_OK : status;
 	}

@@ -6,7 +6,6 @@ import static org.apache.commons.lang3.StringUtils.LF;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.MalformedInputException;
@@ -16,28 +15,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.mozilla.universalchardet.Constants;
 import org.mozilla.universalchardet.UniversalDetector;
-
-import de.cronn.diff.Main;
 
 public class FileHelper {
 
 	private static final int BYTE_BUFFER_SIZE_DETECT_BINARY = 16000;
 	private static final int BYTE_BUFFER_SIZE_DETECT_ENCODING = 4096;
 	public static final String CSS_FILE = "diffToHtml.css";
-
-	public static void copyCssFileToDir(String dirPath) throws IOException {
-		ensureDirExists(dirPath);
-		if (!dirPath.endsWith("/")) {
-			dirPath += "/";
-		}
-		String cssFileDestPath = dirPath + CSS_FILE;
-		InputStream resourceAsStream = Main.class.getResourceAsStream("/" + CSS_FILE);
-		FileUtils.copyInputStreamToFile(resourceAsStream, new File(cssFileDestPath));
-	}
 
 	public static void ensureDirExists(String dirPath) throws IOException {
 		if(!Files.exists(Paths.get(dirPath))) {
