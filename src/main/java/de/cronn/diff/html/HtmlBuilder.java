@@ -5,11 +5,13 @@ import static j2html.TagCreator.style;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 
 import de.cronn.diff.Main;
 import de.cronn.diff.util.DiffToHtmlParameters;
@@ -93,14 +95,13 @@ public abstract class HtmlBuilder {
 	}
 
 	protected ContainerTag createStyleTag() {
-		String cssFileSourcePath = Main.class.getResource(File.separator + CSS_FILE).getPath();
 		String styleSheet;
-		try {
-			styleSheet = new String(Files.readAllBytes(Paths.get(cssFileSourcePath)));
+		try(InputStream cssInputStream =  Main.class.getResourceAsStream(File.separator + CSS_FILE)) {
+			styleSheet = IOUtils.toString(cssInputStream, Charset.forName("UTF-8"));
 		} catch (IOException e) {
 			styleSheet = "<!-- stylesheet " + CSS_FILE + " could not be loaded -->";
 		}
-		return style().withText(styleSheet);
+		return style(styleSheet);
 	}
 
 
