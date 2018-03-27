@@ -96,7 +96,7 @@ public abstract class HtmlBuilder {
 
 	protected ContainerTag createStyleTag() {
 		String styleSheet;
-		try(InputStream cssInputStream =  Main.class.getResourceAsStream(File.separator + CSS_FILE)) {
+		try(InputStream cssInputStream =  Main.class.getResourceAsStream("/" + CSS_FILE)) {
 			styleSheet = IOUtils.toString(cssInputStream, Charset.forName("UTF-8"));
 		} catch (IOException e) {
 			styleSheet = "<!-- stylesheet " + CSS_FILE + " could not be loaded -->";
