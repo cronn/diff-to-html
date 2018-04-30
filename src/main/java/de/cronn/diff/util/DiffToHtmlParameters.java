@@ -1,5 +1,7 @@
 package de.cronn.diff.util;
 
+import org.apache.commons.io.FilenameUtils;
+
 public final class DiffToHtmlParameters {
 	public enum DiffType {
 		FILES, DIRECTORIES;
@@ -87,12 +89,12 @@ public final class DiffToHtmlParameters {
 		}
 
 		public Builder withInputLeftPath(String inputLeftPath) {
-			this.inputLeftPath = inputLeftPath;
+			this.inputLeftPath = FilenameUtils.normalize(inputLeftPath);
 			return this;
 		}
 
 		public Builder withInputRightPath(String inputRightPath) {
-			this.inputRightPath = inputRightPath;
+			this.inputRightPath = FilenameUtils.normalize(inputRightPath);
 			return this;
 		}
 
@@ -115,7 +117,7 @@ public final class DiffToHtmlParameters {
 			this.detectTextFileEncoding = detectTextFileEncoding;
 			return this;
 		}
-		
+
 		public Builder withIgnoreWhiteSpaces(boolean ignoreWhiteSpaces) {
 			this.ignoreWhiteSpaces = ignoreWhiteSpaces;
 			return this;
@@ -145,7 +147,7 @@ public final class DiffToHtmlParameters {
 			this.unifiedContext = unifiedContext;
 			return this;
 		}
-		
+
 		public Builder withOperatingSystem(OS os) {
 			this.os = os;
 			return this;
@@ -216,7 +218,7 @@ public final class DiffToHtmlParameters {
 	public int getUnifiedContext() {
 		return unifiedContext;
 	}
-	
+
 	public OS getOperatingSystem() {
 		return os;
 	}

@@ -86,7 +86,7 @@ public class MainTest extends MainTestBase {
 		exit.checkAssertionAfterwards(new DefaultAssertion());
 		Main.main(new String[] { INPUT_TEXT_WITH_SPACES_1, INPUT_TEXT_WITH_SPACES_2, getOutHtmlFilePath() });
 	}
-	
+
 	@Test
 	public void testMainJAVADiffFilesToHtmlIgnoreWhiteSpaces_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
@@ -106,6 +106,13 @@ public class MainTest extends MainTestBase {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
 		Main.main(new String[] { INPUT_CODE_3_1, INPUT_CODE_3_2, getOutHtmlFilePath(), "-" + OPT_ONLY_REPORTS });
+	}
+	
+	@Test
+	public void testMainJAVADiffFilesToHtml_pathWithMultipleSlashes() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.main(new String[] { INPUT_CODE_3_1, INPUT_CODE_3_2, getOutHtmlFilePath() });
 	}
 
 	@Test
@@ -150,7 +157,7 @@ public class MainTest extends MainTestBase {
 		exit.checkAssertionAfterwards(new DefaultAssertion());
 		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITH_SPACES_2, getOutHtmlFilePath() });
 	}
-	
+
 	@Test
 	public void testMainJAVADiffDirsToHtmlIgnoreWhiteSpaces_True() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
@@ -163,6 +170,13 @@ public class MainTest extends MainTestBase {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
 		Main.main(new String[] { INPUT_DIR_WITH_SPACES_1, INPUT_DIR_WITHOUT_SPACES, getOutHtmlFilePath() });
+	}
+
+	@Test
+	public void testMainJAVADiffDirsToHtml_pathWithMultipleSlashes() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.main(new String[] { INPUT_DIR_1_DOUBLE_SLASH, INPUT_DIR_3_TRIPPLE_SLASH, getOutHtmlFilePath() });
 	}
 
 }

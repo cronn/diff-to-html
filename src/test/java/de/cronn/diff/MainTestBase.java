@@ -20,6 +20,8 @@ public class MainTestBase extends TestBase {
 
 	protected static final String INPUT_DIR_1 = TEST_DATA_INPUT_DIR + "dir1_1";
 	protected static final String INPUT_DIR_3 = TEST_DATA_INPUT_DIR + "dir1_3";
+	protected static final String INPUT_DIR_1_DOUBLE_SLASH = TEST_DATA_INPUT_DIR + "/dir1_1";
+	protected static final String INPUT_DIR_3_TRIPPLE_SLASH = TEST_DATA_INPUT_DIR + "//dir1_3";
 	protected static final String INPUT_CODE_3_1 = TEST_DATA_INPUT_DIR + "code3_1.java.example";
 	protected static final String INPUT_CODE_3_2 = TEST_DATA_INPUT_DIR + "code3_2.java.example";
 	protected static final String INPUT_TEXT_WITH_SPACES_1 = TEST_DATA_INPUT_DIR + "textWithSpaces1";
@@ -30,10 +32,10 @@ public class MainTestBase extends TestBase {
 	protected static final String INPUT_DIR_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "dirWithoutSpaces";
 	protected static final String INPUT_TEXT_1_1 = TEST_DATA_INPUT_DIR + "text1_1.example";
 	protected static final String INPUT_TEXT_1_2 = TEST_DATA_INPUT_DIR + "text1_2.example";
-	
+
 	private final ByteArrayOutputStream sysErr = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream sysOut = new ByteArrayOutputStream();
-	
+
 	private OS osBackup;
 
 	@Override
@@ -52,12 +54,12 @@ public class MainTestBase extends TestBase {
 		resetOutAndErrorStream();
 		Main.os = osBackup;
 	}
-	
+
 	private void resetOutAndErrorStream() {
 		System.setErr(new PrintStream(new FileOutputStream(FileDescriptor.err)));
 		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 	}
-	
+
 	protected class DefaultAssertion implements Assertion {
 		@Override
 		public void checkAssertion() throws Exception {
@@ -65,14 +67,14 @@ public class MainTestBase extends TestBase {
 			assertOutputEqualToValidation();
 		}
 	}
-	
+
 	protected class SystemMessageAssertion implements Assertion {
 		@Override
 		public void checkAssertion() throws Exception {
 			assertSystemMessage();
 		}
 	}
-	
+
 	protected void assertExceptionAndSystemMessage(String[] args, Class<?> clazz) throws IOException {
 		try {
 			Main.main(args);
