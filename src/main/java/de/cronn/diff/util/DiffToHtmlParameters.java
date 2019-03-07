@@ -4,7 +4,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public final class DiffToHtmlParameters {
 	public enum DiffType {
-		FILES, DIRECTORIES;
+		FILES, DIRECTORIES
 	}
 
 	public enum DiffSide {
@@ -23,11 +23,13 @@ public final class DiffToHtmlParameters {
 	private final boolean detectTextFileEncoding;
 	private final boolean onlyReports;
 	private final int unifiedContext;
+	private  final long maxAllowedDifferenceInByte;
 
 
 	private DiffToHtmlParameters(DiffType diffType, String inputLeftPath, String inputRightPath, String outputPath,
 			String diffCommandLineAsString, boolean ignoreUniqueFiles, boolean ignoreWhiteSpaces,
-			boolean ignoreSpaceChange, boolean ignoreLineEndings, boolean detectTextFileEncoding, boolean onlyReports, int unifiedContext) {
+			boolean ignoreSpaceChange, boolean ignoreLineEndings, boolean detectTextFileEncoding, boolean onlyReports, int unifiedContext,
+			long maxAllowedDifferenceInByte) {
 		this.diffType = diffType;
 		this.inputLeftPath = inputLeftPath;
 		this.inputRightPath = inputRightPath;
@@ -40,6 +42,7 @@ public final class DiffToHtmlParameters {
 		this.detectTextFileEncoding = detectTextFileEncoding;
 		this.onlyReports = onlyReports;
 		this.unifiedContext = unifiedContext;
+		this.maxAllowedDifferenceInByte = maxAllowedDifferenceInByte;
 	}
 
 	public static class Builder {
@@ -55,6 +58,7 @@ public final class DiffToHtmlParameters {
 		private boolean detectTextFileEncoding = false;
 		private boolean onlyReports = false;
 		private int unifiedContext = 3;
+		private long maxAllowedDifferenceInByte = 5000000;
 
 		private Builder() {
 		}
@@ -72,6 +76,7 @@ public final class DiffToHtmlParameters {
 			this.detectTextFileEncoding = other.isDetectTextFileEncoding();
 			this.onlyReports = other.isOnlyReports();
 			this.unifiedContext = other.unifiedContext;
+			this.maxAllowedDifferenceInByte = maxAllowedDifferenceInByte;
 		}
 
 		public Builder withDiffType(DiffType diffType) {
@@ -134,9 +139,14 @@ public final class DiffToHtmlParameters {
 			return this;
 		}
 
+		public Builder withMaxAllowedDifferenceInByte(long maxAllowedDifferenceInByte) {
+			this.maxAllowedDifferenceInByte = maxAllowedDifferenceInByte;
+			return this;
+		}
+
 		public DiffToHtmlParameters build() {
 			return new DiffToHtmlParameters(diffType, inputLeftPath, inputRightPath, outputPath, diffCommandLineAsString,
-					ignoreUniqueFiles, ignoreWhiteSpaces, ignoreSpaceChange, ignoreLineEndings, detectTextFileEncoding, onlyReports, unifiedContext);
+					ignoreUniqueFiles, ignoreWhiteSpaces, ignoreSpaceChange, ignoreLineEndings, detectTextFileEncoding, onlyReports, unifiedContext, maxAllowedDifferenceInByte);
 		}
 	}
 
@@ -195,4 +205,6 @@ public final class DiffToHtmlParameters {
 	public int getUnifiedContext() {
 		return unifiedContext;
 	}
+
+	public long getMaxAllowedDifferenceInByte() { return maxAllowedDifferenceInByte; }
 }

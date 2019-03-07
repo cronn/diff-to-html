@@ -45,6 +45,15 @@ public class FileHelperTest extends TestBase {
 				.isThrownBy(() -> FileHelper.readLinesWithEncoding("", "this is an illegal charset name"))
 				.withCauseExactlyInstanceOf(IllegalCharsetNameException.class);
 	}
-	
-	
+
+    @Test
+    public void testIsFileSizeDifferenceTooBig_true() {
+		boolean isTooBig = FileHelper.isFileSizeDifferenceTooBig(TEST_DATA_INPUT_DIR + "smallfile", TEST_DATA_INPUT_DIR + "bigfile", 5l);
+		assertThat(isTooBig).isTrue();
+	}
+	@Test
+	public void testIsFileSizeDifferenceTooBig_false() {
+		boolean isTooBig = FileHelper.isFileSizeDifferenceTooBig(TEST_DATA_INPUT_DIR + "smallfile", TEST_DATA_INPUT_DIR + "bigfile", 5l);
+		assertThat(!isTooBig).isFalse();
+	}
 }

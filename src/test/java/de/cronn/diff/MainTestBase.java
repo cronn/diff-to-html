@@ -30,6 +30,8 @@ public class MainTestBase extends TestBase {
 	protected static final String INPUT_DIR_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "dirWithoutSpaces";
 	protected static final String INPUT_TEXT_1_1 = TEST_DATA_INPUT_DIR + "text1_1.example";
 	protected static final String INPUT_TEXT_1_2 = TEST_DATA_INPUT_DIR + "text1_2.example";
+	protected static final String SMALL_FILE = TEST_DATA_INPUT_DIR + "smallfile";
+	protected static final String BIG_FILE = TEST_DATA_INPUT_DIR + "bigfile";
 
 	private final ByteArrayOutputStream sysErr = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream sysOut = new ByteArrayOutputStream();

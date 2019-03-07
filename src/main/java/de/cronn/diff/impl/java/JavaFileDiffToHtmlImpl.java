@@ -54,9 +54,18 @@ public class JavaFileDiffToHtmlImpl {
 		} else if (FileHelper.isFileBinary(params.getInputLeftPath())) {
 			return appendBinaryFilesDiffToBuilder(htmlBuilder, params);
 
-		} else {
+		} else if (FileHelper.isFileSizeDifferenceTooBig(params.getInputLeftPath(),params.getInputRightPath(),params.getMaxAllowedDifferenceInByte())) {
+			return appendFileSizeTooBigToBuilder(htmlBuilder, params);
+		}
+		else {
 			return appendTextFilesDiffToBuilder(htmlBuilder, params);
 		}
+	}
+
+	private FileDiffHtmlBuilder appendFileSizeTooBigToBuilder(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params) {
+		htmlBuilder.appendAttentionLine("Files differ but filesize difference too big to parse.");
+		resultCode = Main.EXIT_CODE_ERROR;
+		return  htmlBuilder;
 	}
 
 	private FileDiffHtmlBuilder appendIdenticalFilesToBuilder(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params) {

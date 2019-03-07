@@ -123,4 +123,12 @@ public class FileHelper {
 	public static String normalizeLineSeparators(String s) {
 		return s.replaceAll(CR + LF, LF);
 	}
+
+	public static boolean isFileSizeDifferenceTooBig(String inputLeftPath, String inputRightPath, long maxAllowedDifferenceInByte) {
+        long fileSizeLeft = new File (inputLeftPath).length();
+        long fileSizeRight = new File(inputRightPath).length();
+		long difference = Math.abs(fileSizeLeft-fileSizeRight);
+
+		return difference > maxAllowedDifferenceInByte;
+	}
 }
