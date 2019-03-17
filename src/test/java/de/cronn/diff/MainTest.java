@@ -7,31 +7,22 @@ import static de.cronn.diff.util.cli.CliParser.OPT_ONLY_REPORTS;
 import static de.cronn.diff.util.cli.CliParser.OPT_UNIFIED_CONTEXT;
 
 import org.apache.commons.cli.AmbiguousOptionException;
+import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.UnrecognizedOptionException;
-import org.junit.Before;
 import org.junit.Test;
-
-import de.cronn.diff.util.OS;
 
 public class MainTest extends MainTestBase {
 
-	@Before
-	public void setOsToUnix() {
-		Main.os = OS.UNIX;
-	}
-
 	@Test
 	public void testMainWrongNumberOfArgs1() throws Exception {
-		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new SystemMessageAssertion());
-		Main.main(new String[] {});
+		assertExceptionAndSystemMessage(new String[] {}, MissingArgumentException.class);
 	}
 
 	@Test
 	public void testMainWrongNumberOfArgs2() throws Exception {
-		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new SystemMessageAssertion());
-		Main.main(new String[] { "onlyOneArg" });
+		assertExceptionAndSystemMessage(new String[] { "onlyOneArg" }, MissingArgumentException.class);
 	}
 
 	@Test

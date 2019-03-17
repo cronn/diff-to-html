@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.contrib.java.lang.system.Assertion;
 
 import de.cronn.diff.util.FileHelper;
-import de.cronn.diff.util.OS;
 
 public class MainTestBase extends TestBase {
 
@@ -36,15 +35,12 @@ public class MainTestBase extends TestBase {
 	private final ByteArrayOutputStream sysErr = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream sysOut = new ByteArrayOutputStream();
 
-	private OS osBackup;
-
 	@Override
 	@Before
 	public void setUp() throws IOException {
 		super.setUp();
 		System.setErr(new PrintStream(sysErr));
 		System.setOut(new PrintStream(sysOut));
-		osBackup = Main.os;
 	}
 
 	@Override
@@ -52,7 +48,6 @@ public class MainTestBase extends TestBase {
 	public void tearDown() {
 		super.tearDown();
 		resetOutAndErrorStream();
-		Main.os = osBackup;
 	}
 
 	private void resetOutAndErrorStream() {

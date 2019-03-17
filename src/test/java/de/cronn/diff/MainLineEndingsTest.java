@@ -1,16 +1,13 @@
 package de.cronn.diff;
 
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_LINE_ENDINGS;
-import static de.cronn.diff.util.cli.CliParser.OPT_OS_DIFF;
 import static org.apache.commons.lang3.StringUtils.CR;
 import static org.apache.commons.lang3.StringUtils.LF;
-import static org.junit.Assume.assumeFalse;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -37,23 +34,6 @@ public class MainLineEndingsTest extends MainTestBase {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new DefaultAssertion());
 		Main.main(new String[] { TEXT_LINE_ENDINGS_LF, TEXT_LINE_ENDINGS_CRLF, getOutHtmlFilePath() });
-	}
-
-	@Test
-	public void testMainOSDiffDirsToHtmlIgnoreLineEndings_True() throws Exception {
-		assumeFalse(SystemUtils.IS_OS_WINDOWS);
-		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
-		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { TEXT_LINE_ENDINGS_LF, TEXT_LINE_ENDINGS_CRLF, getOutHtmlFilePath(), "-" + OPT_OS_DIFF,
-				"-" + OPT_IGNORE_LINE_ENDINGS });
-	}
-
-	@Test
-	public void testMainOSDiffDirsToHtmlIgnoreLineEndings_False() throws Exception {
-		assumeFalse(SystemUtils.IS_OS_WINDOWS);
-		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
-		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { TEXT_LINE_ENDINGS_LF, TEXT_LINE_ENDINGS_CRLF, getOutHtmlFilePath(), "-" + OPT_OS_DIFF });
 	}
 
 	protected static void createFileWithLineEndings(String lineEndings, String pathToFile) throws IOException {

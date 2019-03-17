@@ -32,90 +32,47 @@ public class CronnDiffToHtmlTest extends TestBase {
 	}
 
 	@Test
-	public void testGenerateDiffToHtmlReportOnUnixCode1() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_UNIX);
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_1_1, INPUT_CODE_1_2, true));
-		assertOutputEqualToValidation();
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnUnixCode2() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_UNIX);
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_2_1, INPUT_CODE_2_2, true));
-		assertOutputEqualToValidation();
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnUnixText1() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_UNIX);
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_TEXT_1_1, INPUT_TEXT_1_2, true));
-		assertOutputEqualToValidation();
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnUnixBinary1() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_UNIX);
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_BINARY_1_1, INPUT_BINARY_1_2, true));
-		assertOutputEqualToValidation();
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnUnixBinary2Identical() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_UNIX);
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_BINARY_1_1, INPUT_BINARY_1_1, true));
-		assertOutputEqualToValidation();
-	}
-
-	@Test
-	public void testGenerateDiffToHtmlReportOnUnixCodeIdentical() throws Exception {
-		assumeTrue(SystemUtils.IS_OS_UNIX);
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_1_1, INPUT_CODE_1_1, true));
-		assertOutputEqualToValidation();
-	}
-
-	@Test
 	public void testGenerateDiffToHtmlReportJavaBasedCode1() throws Exception {
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_1_1, INPUT_CODE_1_2, false));
+		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_1_1, INPUT_CODE_1_2));
 		assertOutputEqualToValidation();
 	}
 
 	@Test
 	public void testGenerateDiffToHtmlReportJavaBasedCode2() throws Exception {
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_2_1, INPUT_CODE_2_2, false));
+		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_2_1, INPUT_CODE_2_2));
 		assertOutputEqualToValidation();
 	}
 
 	@Test
 	public void testGenerateDiffToHtmlReportJavaBasedText1() throws Exception {
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_TEXT_1_1, INPUT_TEXT_1_2, false));
+		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_TEXT_1_1, INPUT_TEXT_1_2));
 		assertOutputEqualToValidation();
 	}
 
 	@Test
 	public void testGenerateDiffToHtmlReportJavaBasedBinary1() throws Exception {
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_BINARY_1_1, INPUT_BINARY_1_2, false));
+		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_BINARY_1_1, INPUT_BINARY_1_2));
 		assertOutputEqualToValidation();
 	}
 
 	@Test
 	public void testGenerateDiffToHtmlReportJavaBasedBinary2Identical() throws Exception {
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_BINARY_1_2, INPUT_BINARY_1_2, false));
+		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_BINARY_1_2, INPUT_BINARY_1_2));
 		assertOutputEqualToValidation();
 	}
 
 	@Test
 	public void testGenerateDiffToHtmlReportJavaBasedCodeIdentical() throws Exception {
-		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_1_1, INPUT_CODE_1_1, false));
+		diffToHtml.generateDiffToHtmlReport(createParameters(INPUT_CODE_1_1, INPUT_CODE_1_1));
 		assertOutputEqualToValidation();
 	}
 
-	private DiffToHtmlParameters createParameters(String inputFileLeft, String inputFileRight, boolean useOsDiffTool) {
+	private DiffToHtmlParameters createParameters(String inputFileLeft, String inputFileRight) {
 		return DiffToHtmlParameters.builder()
 				.withDiffType(DiffType.FILES)
 				.withInputLeftPath(inputFileLeft)
 				.withInputRightPath(inputFileRight)
 				.withOutputPath(getOutHtmlFilePath())
-				.withUseOsDiffTool(useOsDiffTool)
 				.build();
 	}
 }

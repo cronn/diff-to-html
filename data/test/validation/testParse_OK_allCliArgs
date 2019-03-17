@@ -12,11 +12,6 @@ onlyreports
 String
 always exits with zero
 
-od
-osdiff
-String
-uses operating system's diff instead of Java implementation and parses the output. Might slightly improve performance, depending on your machine. Try for large diffs in time-critial situations. Windows not supported currently
-
 iu
 ignoreunique
 String

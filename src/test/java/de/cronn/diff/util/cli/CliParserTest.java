@@ -19,7 +19,6 @@ import org.junit.Test;
 
 import de.cronn.diff.TestBase;
 import de.cronn.diff.util.FileHelper;
-import de.cronn.diff.util.OS;
 
 public class CliParserTest extends TestBase {
 	private static final String WORKING_DIR = FileHelper.getWorkingDir();
@@ -44,23 +43,21 @@ public class CliParserTest extends TestBase {
 
 	@Test
 	public void testParse_OK_inputsAreFiles() throws Exception {
-		DiffToHtmlCommandLine cliArgs = new CliParser(OS.UNIX, WORKING_DIR).parse(
-				new String[] { FILE1, FILE2, "fileOut" });
+		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR).parse(new String[] { FILE1, FILE2, "fileOut" });
 		String cliArgsAsString = getCliArgsAsString(cliArgs);
 		assertStringResultEqualToValidation(cliArgsAsString);
 	}
 
 	@Test
 	public void testParse_OK_inputsAreDirs() throws Exception {
-		DiffToHtmlCommandLine cliArgs = new CliParser(OS.UNIX, WORKING_DIR).parse(
-				new String[] { DIR1, DIR2, "fileOut" });
+		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR).parse(new String[] { DIR1, DIR2, "fileOut" });
 		String cliArgsAsString = getCliArgsAsString(cliArgs);
 		assertStringResultEqualToValidation(cliArgsAsString);
 	}
 
 	@Test
 	public void testParse_OK_inputsAreDirs_noOutputSupplied() throws Exception {
-		DiffToHtmlCommandLine cliArgs = new CliParser(OS.UNIX, WORKING_DIR).parse(
+		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR).parse(
 				new String[] { DIR1, DIR2});
 		String cliArgsAsString = getCliArgsAsString(cliArgs);
 		assertStringResultEqualToValidation(cliArgsAsString);
@@ -86,8 +83,8 @@ public class CliParserTest extends TestBase {
 
 	@Test
 	public void testParse_OK_allCliArgs() throws Exception {
-		DiffToHtmlCommandLine cliArgs = new CliParser(OS.UNIX, WORKING_DIR)
-				.parse(new String[] { DIR1, DIR2, "fileOut", "-w", "-or", "-od", "-iu", "-de" });
+		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR)
+				.parse(new String[] { DIR1, DIR2, "fileOut", "-w", "-or", "-iu", "-de" });
 		String cliArgsAsString = getCliArgsAsString(cliArgs);
 		assertStringResultEqualToValidation(cliArgsAsString);
 	}
@@ -106,7 +103,7 @@ public class CliParserTest extends TestBase {
 
 	private void assertExceptionThrownHelpPrinted(String[] commandLineOptions, Class<?> clazz) throws IOException {
 		try {
-			new CliParser(OS.UNIX, WORKING_DIR).parse(commandLineOptions);
+			new CliParser(WORKING_DIR).parse(commandLineOptions);
 		} catch (Exception e) {
 			if (e.getClass() != clazz) {
 				fail("expected " + clazz.getSimpleName() + " but caught " + e.getClass().getSimpleName());

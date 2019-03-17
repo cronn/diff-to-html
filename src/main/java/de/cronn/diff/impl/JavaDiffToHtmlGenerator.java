@@ -7,9 +7,8 @@ import de.cronn.diff.impl.java.JavaFileDiffToHtmlImpl;
 import de.cronn.diff.util.DiffToHtmlParameters;
 import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
 
-public class JavaDiffToHtmlGenerator implements DiffToHtmlGenerator {
+public class JavaDiffToHtmlGenerator {
 
-	@Override
 	public DiffToHtmlResult generateHtml(DiffToHtmlParameters params) throws IOException {
 		if (params.getDiffType() == DiffType.DIRECTORIES) {
 			return new JavaDirDiffToHtmlImpl(params).runDiffToHtml();

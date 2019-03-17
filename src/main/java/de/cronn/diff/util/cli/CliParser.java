@@ -10,10 +10,9 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import de.cronn.diff.Main;
-import de.cronn.diff.util.OS;
 
 public class CliParser {
-
+	
 	public static final String OPT_OUTPUT = "o";
 
 	public static final String OPT_INPUT = "i";
@@ -21,8 +20,6 @@ public class CliParser {
 	public static final String OPT_DETECT_ENCODING = "de";
 
 	public static final String OPT_IGNORE_UNIQUE_FILES = "iu";
-
-	public static final String OPT_OS_DIFF = "od";
 
 	public static final String OPT_ONLY_REPORTS = "or";
 
@@ -38,12 +35,9 @@ public class CliParser {
 
 	private HelpFormatter helpFormatter;
 	
-	private OS os;
-	
 	private String workingDir;
 
-	public CliParser(OS operatingSystem, String workingDir) {
-		this.os = operatingSystem;
+	public CliParser(String workingDir) {
 		this.workingDir = workingDir;
 		options = createOptions();
 		helpFormatter = createHelpFormatter();
@@ -55,9 +49,6 @@ public class CliParser {
 		options.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignorespacechange", false, "ignore changes in the amount of white space"));
 		options.addOption(new Option(OPT_IGNORE_LINE_ENDINGS, "ignorelineendings", false, "ignore line endings, i.e. normalize CRLF / LF while comparing files"));
 		options.addOption(new Option(OPT_ONLY_REPORTS, "onlyreports", false, "always exits with zero"));
-		if(os != OS.WINDOWS) {
-			options.addOption(new Option(OPT_OS_DIFF, "osdiff", false, "uses operating system's diff instead of Java implementation and parses the output. Might slightly improve performance, depending on your machine. Try for large diffs in time-critial situations. Windows not supported currently"));
-		}
 		options.addOption(new Option(OPT_IGNORE_UNIQUE_FILES, "ignoreunique", false, "ignore unique files"));
 		options.addOption(new Option(OPT_DETECT_ENCODING, "detectencoding", false, "tries to determine encoding type"));
 		options.addOption(Option.builder(OPT_UNIFIED_CONTEXT).longOpt("unified").hasArg()

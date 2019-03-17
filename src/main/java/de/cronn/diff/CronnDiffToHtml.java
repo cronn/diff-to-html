@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import de.cronn.diff.impl.DiffToHtmlGenerator;
 import de.cronn.diff.impl.DiffToHtmlResult;
 import de.cronn.diff.impl.JavaDiffToHtmlGenerator;
-import de.cronn.diff.impl.OSDiffToHtmlGenerator;
 import de.cronn.diff.util.DiffToHtmlParameters;
 import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
 
@@ -34,8 +32,7 @@ public class CronnDiffToHtml {
 	}
 
 	private int generateDiffToHtml() throws IOException {
-		DiffToHtmlGenerator diffToHtml = params.isUseOsDiffTool() ? new OSDiffToHtmlGenerator() : new JavaDiffToHtmlGenerator();
-		DiffToHtmlResult res = diffToHtml.generateHtml(params);
+		DiffToHtmlResult res = new JavaDiffToHtmlGenerator().generateHtml(params);
 		writeToDisk(res.getHtml());
 		printResultMessage(res.getResultCode());
 		return res.getResultCode();
