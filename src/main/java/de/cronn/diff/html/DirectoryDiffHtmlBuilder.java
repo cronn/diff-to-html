@@ -27,6 +27,7 @@ import j2html.attributes.Attr;
 import j2html.tags.ContainerTag;
 import j2html.tags.Tag;
 
+@SuppressWarnings("rawtypes")
 public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 
 	private static final String MSG_IDENTICAL_DIRS = "Directories are identical!";
@@ -43,7 +44,7 @@ public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 
 	private static final String ID_PREFIX_UNIQUE_FILE_LEFT = "uniqueFileLeft";
 
-	private static final String ID_PREFIX_UNIQUE_FILE_Right = "uniqueFileRight";
+	private static final String ID_PREFIX_UNIQUE_FILE_RIGHT = "uniqueFileRight";
 
 	private static final String HEADER_UNIQUE_FILES = "Unique files, only in ";
 
@@ -110,7 +111,7 @@ public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 	}
 
 	public void appendUniqueFileRight(String filePath, Tag diffTable) {
-		String divIdStr = ID_PREFIX_UNIQUE_FILE_Right + uniqueFileRightDivCnt++;
+		String divIdStr = ID_PREFIX_UNIQUE_FILE_RIGHT + uniqueFileRightDivCnt++;
 		uniqueFileRightDivIds.add(divIdStr);
 		uniqueFilesRight.addAll(createDiffTableEntry(filePath, diffTable, divIdStr));
 	}
@@ -130,7 +131,7 @@ public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 
 	@Override
 	protected Tag createBody() {
-		List<String> combinedLists = new ArrayList<String>();
+		List<String> combinedLists = new ArrayList<>();
 		combinedLists.addAll(changedTextDivIds);
 		combinedLists.addAll(changedBinaryDivIds);
 		combinedLists.addAll(uniqueFileLeftDivIds);

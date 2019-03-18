@@ -1,13 +1,11 @@
 package de.cronn.diff.util;
 
 public class SimpleFileInfo {
-	private String path = "";
-	private String lastModified = "";
+	private String path;
+	private String lastModified;
 
-	public SimpleFileInfo() {}
-
-	public SimpleFileInfo(String path) {
-		this(path, "");
+	public SimpleFileInfo() {
+		this("", "");
 	}
 
 	public SimpleFileInfo(String path, String lastModified) {
@@ -21,13 +19,5 @@ public class SimpleFileInfo {
 
 	public String getLastModified() {
 		return lastModified;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public void setLastModified(String lastModified) {
-		this.lastModified = lastModified;
 	}
 }

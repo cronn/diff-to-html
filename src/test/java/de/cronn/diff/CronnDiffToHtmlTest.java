@@ -1,10 +1,5 @@
 package de.cronn.diff;
 
-import static org.junit.Assume.assumeTrue;
-
-import java.io.IOException;
-
-import org.apache.commons.lang3.SystemUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +21,7 @@ public class CronnDiffToHtmlTest extends TestBase {
 
 	@Override
 	@Before
-	public void setUp() throws IOException {
+	public void setUp() {
 		super.setUp();
 		diffToHtml = new CronnDiffToHtml();
 	}

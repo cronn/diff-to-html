@@ -24,8 +24,8 @@ public final class Main {
 
     public static final String PROGRAM_NAME = "cronn-diff-to-html";
 
+    private static String workingDir = FileHelper.getWorkingDir();
 
-    public static String workingDir = FileHelper.getWorkingDir();
 	private Main() {}
 
 	public static void main(String[] args) throws Exception {
@@ -49,5 +49,11 @@ public final class Main {
 		System.exit(status);
 	}
     
+    public static String getWorkingDir() {
+		return workingDir;
+	}
 
+	public static void setWorkingDir(String workingDir) {
+		Main.workingDir = workingDir;
+	}
 }

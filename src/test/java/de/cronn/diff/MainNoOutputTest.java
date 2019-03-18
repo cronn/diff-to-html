@@ -10,19 +10,19 @@ public class MainNoOutputTest extends MainTestBase {
 
 	@Before
 	public void backupMainWorkingDir() {
-		workingDirBkp = Main.workingDir;
+		workingDirBkp = Main.getWorkingDir();
 	}
 	
 	@After 
 	public void resetMainWorkingDir() {
-		Main.workingDir = workingDirBkp;
+		Main.setWorkingDir(workingDirBkp);
 	}
 	
 	@Test
 	public void testMainJAVADiffDirsToHtml_noOutputProvided() throws Exception {		
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
 		exit.checkAssertionAfterwards(new SystemMessageAssertion());
-		Main.workingDir = TestBase.TEST_DATA_OUTPUT_DIR;
+		Main.setWorkingDir(TestBase.TEST_DATA_OUTPUT_DIR);
 		Main.main(new String[] { INPUT_DIR_1, INPUT_DIR_1 });
 	}
 	

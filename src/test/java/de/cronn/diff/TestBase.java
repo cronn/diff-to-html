@@ -49,13 +49,13 @@ public class TestBase {
 	}
 	
 	@Before
-	public void setUp() throws IOException {
-		HtmlBuilder.useSimpleFormatOnHtmls = true;
+	public void setUp() {
+		HtmlBuilder.setUseSimpleFormatOnHtmls(true);
 	}
 
 	@After
 	public void tearDown() {
-		HtmlBuilder.useSimpleFormatOnHtmls = false;
+		HtmlBuilder.setUseSimpleFormatOnHtmls(false);
 	}
 
 	protected void assertHtmlResultEqualToValidation(String actualHtml) throws IOException {

@@ -100,13 +100,6 @@ public class MainTest extends MainTestBase {
 	}
 	
 	@Test
-	public void testMainJAVADiffFilesToHtml_pathWithMultipleSlashes() throws Exception {
-		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
-		exit.checkAssertionAfterwards(new DefaultAssertion());
-		Main.main(new String[] { INPUT_CODE_3_1, INPUT_CODE_3_2, getOutHtmlFilePath() });
-	}
-
-	@Test
 	public void testMainJAVADiffDirsToHtml() throws Exception {
 		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
 		exit.checkAssertionAfterwards(new DefaultAssertion());

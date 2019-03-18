@@ -2,8 +2,6 @@ package de.cronn.diff.impl.java;
 
 import static de.cronn.diff.util.DiffToHtmlParameters.DiffSide.LEFT;
 import static de.cronn.diff.util.DiffToHtmlParameters.DiffSide.RIGHT;
-import static de.cronn.diff.util.UnifiedDiffValues.UNIQUE_FILE_PREFIX;
-import static de.cronn.diff.util.UnifiedDiffValues.UNIQUE_LINE_SPLIT_STR;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +23,10 @@ import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
 import de.cronn.diff.util.FileHelper;
 
 public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
+	
+	public static final String UNIQUE_FILE_PREFIX = "Only in ";
+
+	public static final String UNIQUE_LINE_SPLIT_STR = ": ";
 
 	public JavaDirDiffToHtmlImpl(DiffToHtmlParameters params) {
 		super(params);
@@ -33,8 +35,8 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 	@Override
 	public DiffToHtmlResult runDiffToHtml() throws IOException {
 		DirectoryDiffHtmlBuilder dirDiffHtmlBuilder = new DirectoryDiffHtmlBuilder(params);
-		dirDiffHtmlBuilder = traverseLeftDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputLeftPath()));
-		dirDiffHtmlBuilder = traverseRightDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputRightPath()));
+		traverseLeftDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputLeftPath()));
+		traverseRightDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputRightPath()));
 		String html = dirDiffHtmlBuilder.toString();
 		return new DiffToHtmlResult(html, resultCode);
 	}
@@ -45,7 +47,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 		return files;
 	}
 
-	private DirectoryDiffHtmlBuilder traverseLeftDirectory(DirectoryDiffHtmlBuilder dirDiffHtmlBuilder, ArrayList<File> filesAndDirs) throws IOException {
+	private void traverseLeftDirectory(DirectoryDiffHtmlBuilder dirDiffHtmlBuilder, ArrayList<File> filesAndDirs) throws IOException {
 		for (File fileLeft : filesAndDirs) {
 			String fileLeftPath = FilenameUtils.separatorsToUnix(fileLeft.getPath());
 			String fileRightPath = fileLeftPath.replace(params.getInputLeftPath(), params.getInputRightPath());
@@ -59,10 +61,9 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 				makeUniqueFileEntry(dirDiffHtmlBuilder, fileDiffParams, LEFT);
 			}
 		}
-		return dirDiffHtmlBuilder;
 	}
 
-	private DirectoryDiffHtmlBuilder traverseRightDirectory(DirectoryDiffHtmlBuilder dirDiffHtmlBuilder, ArrayList<File> filesAndDirs) throws IOException {
+	private void traverseRightDirectory(DirectoryDiffHtmlBuilder dirDiffHtmlBuilder, ArrayList<File> filesAndDirs) throws IOException {
 		for (File fileRight : filesAndDirs) {
 			String fileRightPath = FilenameUtils.separatorsToUnix(fileRight.getPath());
 			String fileLeftPath = fileRightPath.replace(params.getInputRightPath(), params.getInputLeftPath());
@@ -71,16 +72,14 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 				makeUniqueFileEntry(dirDiffHtmlBuilder, fileDiffParams, RIGHT);
 			}
 		}
-		return dirDiffHtmlBuilder;
 	}
 
 	private DiffToHtmlParameters createFileDiffParams(String fileLeftPath, String fileRightPath) {
-		DiffToHtmlParameters fileDiffParams =  DiffToHtmlParameters.builder(params)
+		return DiffToHtmlParameters.builder(params)
 				.withDiffType(DiffType.FILES)
 				.withInputLeftPath(fileLeftPath)
 				.withInputRightPath(fileRightPath)
 				.build();
-		return fileDiffParams;
 	}
 
 	private void makeDifferingFilesEntry(DirectoryDiffHtmlBuilder dirDiffHtmlBuilder, DiffToHtmlParameters diffParams) throws IOException {

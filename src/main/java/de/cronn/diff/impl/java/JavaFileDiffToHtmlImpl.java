@@ -1,11 +1,5 @@
 package de.cronn.diff.impl.java;
 
-import static de.cronn.diff.util.UnifiedDiffValues.BINARY_FILES_DIFFER_PREFIX;
-import static de.cronn.diff.util.UnifiedDiffValues.BINARY_FILES_SUFFIX;
-import static de.cronn.diff.util.UnifiedDiffValues.BINARY_LINE_SPLIT_STR;
-import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_PREFIX;
-import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_FILES_SUFFIX;
-import static de.cronn.diff.util.UnifiedDiffValues.IDENTICAL_LINE_SPLIT_STR;
 import static org.apache.commons.lang3.StringUtils.CR;
 
 import java.io.File;
@@ -24,6 +18,18 @@ import de.cronn.diff.util.FileHelper;
 import de.cronn.diff.util.SimpleFileInfo;
 
 public class JavaFileDiffToHtmlImpl {
+	
+	public static final String BINARY_FILES_DIFFER_PREFIX = "Binary files ";
+	
+	public static final String BINARY_FILES_SUFFIX = " differ";
+
+	public static final String BINARY_LINE_SPLIT_STR = " and ";
+
+	public static final String IDENTICAL_FILES_PREFIX = "Files ";
+
+	public static final String IDENTICAL_FILES_SUFFIX = " are identical";
+
+	public static final String IDENTICAL_LINE_SPLIT_STR = " and ";
 
 	protected DiffToHtmlParameters params;
 

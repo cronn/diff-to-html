@@ -6,7 +6,6 @@ import static j2html.TagCreator.style;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
@@ -18,6 +17,7 @@ import de.cronn.diff.util.DiffToHtmlParameters;
 import j2html.tags.ContainerTag;
 import j2html.tags.Tag;
 
+@SuppressWarnings("rawtypes")
 public abstract class HtmlBuilder {
 
 	private static final String CSS_FILE = "diffToHtml.css";
@@ -40,7 +40,7 @@ public abstract class HtmlBuilder {
 
 	public static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
 	
-	public static boolean useSimpleFormatOnHtmls = false;
+	private static boolean useSimpleFormatOnHtmls = false;
 
 	protected String outputDirForRelativePaths = null;
 
@@ -97,12 +97,18 @@ public abstract class HtmlBuilder {
 	protected ContainerTag createStyleTag() {
 		String styleSheet;
 		try(InputStream cssInputStream =  Main.class.getResourceAsStream("/" + CSS_FILE)) {
-			styleSheet = IOUtils.toString(cssInputStream, Charset.forName("UTF-8"));
+			styleSheet = IOUtils.toString(cssInputStream, StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			styleSheet = "<!-- stylesheet " + CSS_FILE + " could not be loaded -->";
 		}
 		return style(styleSheet);
 	}
 
+	public static boolean isUseSimpleFormatOnHtmls() {
+		return useSimpleFormatOnHtmls;
+	}
 
+	public static void setUseSimpleFormatOnHtmls(boolean useSimpleFormatOnHtmls) {
+		HtmlBuilder.useSimpleFormatOnHtmls = useSimpleFormatOnHtmls;
+	}
 }

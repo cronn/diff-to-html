@@ -13,7 +13,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.mozilla.universalchardet.Constants;
@@ -25,27 +27,19 @@ public class FileHelper {
 	private static final int BYTE_BUFFER_SIZE_DETECT_ENCODING = 4096;
 	public static final String CSS_FILE = "diffToHtml.css";
 
-	public static void ensureDirExists(String dirPath) throws IOException {
-		if(!Files.exists(Paths.get(dirPath))) {
-			Files.createDirectory(Paths.get(dirPath));
-		}
-	}
+	private FileHelper( ) {}
 	
-	private static boolean lastIsBinaryResult;
-	private static String lastIsBinaryFile = "";
-	
-	/**
-	 * Imitates Unix diff's behavior in determining if a file is binary or text by checking the first few thousand bytes for zero values. See <a href="http://www.gnu.org/software/diffutils/manual/html_node/Binary.html">http://www.gnu.org/software/diffutils/manual/html_node/Binary.html</a>
-	 * @param filePath
-	 * @return true if file is binary or of size zero, false otherwise
-	 * @throws IOException
-	 */
+	private static Map<String, Boolean> binaryFilesMap = new HashMap<>();
+		
+	// Imitates Unix diff's behavior in determining if a file is binary or text by checking the first few thousand bytes for zero values. See <a href="http://www.gnu.org/software/diffutils/manual/html_node/Binary.html">http://www.gnu.org/software/diffutils/manual/html_node/Binary.html</a>
 	public static boolean isFileBinary(String filePath) throws IOException {
-		if(!lastIsBinaryFile.equals(filePath)) { //to save processing time if same file is checked more than once
-			lastIsBinaryFile = filePath;
-			lastIsBinaryResult = isFileBinaryCheck(filePath);
+		if(binaryFilesMap.containsKey(filePath)) {
+			return binaryFilesMap.get(filePath);
+		} else {
+			boolean isBinary = isFileBinaryCheck(filePath);
+			binaryFilesMap.put(filePath, isBinary);
+			return isBinary;
 		}
-		return lastIsBinaryResult;
 	}
 	
 	private static boolean isFileBinaryCheck(String filePath) throws IOException {
@@ -72,23 +66,24 @@ public class FileHelper {
 		if (encoding == null) {
 			return readAllLines(filePath, StandardCharsets.US_ASCII);
 
-		} else if (encoding == Constants.CHARSET_UTF_8) {
+		} else if (encoding.equals(Constants.CHARSET_UTF_8)) {
 			return readAllLines(filePath, StandardCharsets.UTF_8);
 
-		} else if (encoding == Constants.CHARSET_WINDOWS_1252) {
+		} else if (encoding.equals(Constants.CHARSET_WINDOWS_1252)) {
 			return readAllLines(filePath, StandardCharsets.ISO_8859_1);
 
-		} else if (encoding == Constants.CHARSET_UTF_16BE) {
+		} else if (encoding.equals(Constants.CHARSET_UTF_16BE)) {
 			return readAllLines(filePath, StandardCharsets.UTF_16BE);
 
-		} else if (encoding == Constants.CHARSET_UTF_16LE) {
+		} else if (encoding.equals(Constants.CHARSET_UTF_16LE)) {
 			return readAllLines(filePath, StandardCharsets.UTF_16LE);
 
 		} else {
 			try {
 				return readAllLines(filePath, Charset.forName(encoding));
 			} catch(IllegalCharsetNameException|UnsupportedCharsetException e) {
-				throw new RuntimeException("The charset encoding '" + encoding + "' of file " + filePath + " is not supported", e);
+				throw new UnsupportedOperationException(
+						"The charset encoding '" + encoding + "' of file " + filePath + " is not supported", e);
 			}
 		}
 	}
@@ -97,7 +92,8 @@ public class FileHelper {
 		try {
 			return Files.readAllLines(Paths.get(filePath), charset);
 		} catch (MalformedInputException e) {
-			throw new RuntimeException("File " + filePath + " could not be read with charset " + charset.toString() , e);
+			throw new UnsupportedOperationException(
+					"File " + filePath + " could not be read with charset " + charset.toString(), e);
 		}
 	}
 

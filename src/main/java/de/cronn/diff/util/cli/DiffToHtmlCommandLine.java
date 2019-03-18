@@ -49,7 +49,8 @@ public class DiffToHtmlCommandLine extends CommandLine {
 		} else if(noOptArgs.length > 3) {
 			throw new UnrecognizedOptionException("Too many arguments: " + String.join(", ", noOptArgs));
 		}
-		if(!(inputsAreFiles = isBothInputsFiles(noOptArgs)) && !isBothInputsDirs(noOptArgs)) {
+		inputsAreFiles = isBothInputsFiles(noOptArgs);
+		if(!inputsAreFiles && !isBothInputsDirs(noOptArgs)) {
 			throw new AmbiguousOptionException("Inputs must be either both regular files or both directories",
 					Arrays.asList(noOptArgs[0], noOptArgs[1]));
 		}

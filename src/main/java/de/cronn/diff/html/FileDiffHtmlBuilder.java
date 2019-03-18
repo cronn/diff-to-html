@@ -26,6 +26,7 @@ import j2html.attributes.Attr;
 import j2html.tags.ContainerTag;
 import j2html.tags.Tag;
 
+@SuppressWarnings("rawtypes")
 public class FileDiffHtmlBuilder extends HtmlBuilder {
 
 	public FileDiffHtmlBuilder(DiffToHtmlParameters params) {
@@ -44,13 +45,6 @@ public class FileDiffHtmlBuilder extends HtmlBuilder {
 
 	public void setFileRightInfo(SimpleFileInfo fileRightInfo) {
 		this.fileRightInfo = fileRightInfo;
-	}
-
-	public void setFileInfoPair(SimpleFileInfo[] fileInfoPair) {
-		if (fileInfoPair.length == 2) {
-			fileLeftInfo = fileInfoPair[0];
-			fileRightInfo = fileInfoPair[1];
-		}
 	}
 
 	public int getCurrentPosition() {

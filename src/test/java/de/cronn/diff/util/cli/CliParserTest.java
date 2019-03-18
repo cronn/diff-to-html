@@ -26,6 +26,7 @@ public class CliParserTest extends TestBase {
 	private static final String DIR1 = TEST_DATA_INPUT_DIR + "dir1_1";
 	private static final String FILE2 = TEST_DATA_INPUT_DIR + "code1_2.java.example";
 	private static final String FILE1 = TEST_DATA_INPUT_DIR + "code1_1.java.example";
+	private static final String FILE_OUT = "fileOut";
 	private final ByteArrayOutputStream sysOut = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream sysError = new ByteArrayOutputStream();
 
@@ -43,14 +44,14 @@ public class CliParserTest extends TestBase {
 
 	@Test
 	public void testParse_OK_inputsAreFiles() throws Exception {
-		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR).parse(new String[] { FILE1, FILE2, "fileOut" });
+		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR).parse(new String[] { FILE1, FILE2, FILE_OUT });
 		String cliArgsAsString = getCliArgsAsString(cliArgs);
 		assertStringResultEqualToValidation(cliArgsAsString);
 	}
 
 	@Test
 	public void testParse_OK_inputsAreDirs() throws Exception {
-		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR).parse(new String[] { DIR1, DIR2, "fileOut" });
+		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR).parse(new String[] { DIR1, DIR2, FILE_OUT });
 		String cliArgsAsString = getCliArgsAsString(cliArgs);
 		assertStringResultEqualToValidation(cliArgsAsString);
 	}
@@ -65,33 +66,33 @@ public class CliParserTest extends TestBase {
 	
 	@Test
 	public void testParse_Exception_inputsMissing() throws Exception {
-		assertExceptionThrownHelpPrinted(new String[] { "fileOut" },
+		assertExceptionThrownHelpPrinted(new String[] { FILE_OUT },
 				MissingArgumentException.class);
 	}
 	
 	@Test
 	public void testParse_Exception_inputsDifferentType() throws Exception {
-		assertExceptionThrownHelpPrinted(new String[] { DIR1, FILE2, "fileOut" },
+		assertExceptionThrownHelpPrinted(new String[] { DIR1, FILE2, FILE_OUT },
 				AmbiguousOptionException.class);
 	}
 
 	@Test
 	public void testParse_Exception_inputsTooMany() throws Exception {
-		assertExceptionThrownHelpPrinted(new String[] { DIR1, FILE2, DIR1, "fileOut" },
+		assertExceptionThrownHelpPrinted(new String[] { DIR1, FILE2, DIR1, FILE_OUT },
 				UnrecognizedOptionException.class);
 	}
 
 	@Test
 	public void testParse_OK_allCliArgs() throws Exception {
 		DiffToHtmlCommandLine cliArgs = new CliParser(WORKING_DIR)
-				.parse(new String[] { DIR1, DIR2, "fileOut", "-w", "-or", "-iu", "-de" });
+				.parse(new String[] { DIR1, DIR2, FILE_OUT, "-w", "-or", "-iu", "-de" });
 		String cliArgsAsString = getCliArgsAsString(cliArgs);
 		assertStringResultEqualToValidation(cliArgsAsString);
 	}
 
 	@Test
 	public void testParse_Exception_unkownOption() throws Exception {
-		String[] commandLineOptions = new String[] { FILE1, FILE2, "fileOut", "-w", "-or", "-unknowOption",
+		String[] commandLineOptions = new String[] { FILE1, FILE2, FILE_OUT, "-w", "-or", "-unknowOption",
 				"-nothingAtAll" };
 		assertExceptionThrownHelpPrinted(commandLineOptions, UnrecognizedOptionException.class);
 	}
@@ -135,7 +136,6 @@ public class CliParserTest extends TestBase {
 			sb.appendNewLine();
 		}
 
-		String cliArgsAsString = sb.toString();
-		return cliArgsAsString;
+		return sb.toString();
 	}
 }

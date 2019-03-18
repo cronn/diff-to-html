@@ -1,6 +1,6 @@
 package de.cronn.diff.util.cli;
 
-import java.util.Comparator;
+import static java.lang.String.format;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
@@ -44,27 +44,27 @@ public class CliParser {
 	}
 
 	private Options createOptions() {
-		Options options = new Options();
-		options.addOption(new Option(OPT_IGNORE_WHITESPACES, "ignorewhitespaces", false, "ignore all white spaces"));
-		options.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignorespacechange", false, "ignore changes in the amount of white space"));
-		options.addOption(new Option(OPT_IGNORE_LINE_ENDINGS, "ignorelineendings", false, "ignore line endings, i.e. normalize CRLF / LF while comparing files"));
-		options.addOption(new Option(OPT_ONLY_REPORTS, "onlyreports", false, "always exits with zero"));
-		options.addOption(new Option(OPT_IGNORE_UNIQUE_FILES, "ignoreunique", false, "ignore unique files"));
-		options.addOption(new Option(OPT_DETECT_ENCODING, "detectencoding", false, "tries to determine encoding type"));
-		options.addOption(Option.builder(OPT_UNIFIED_CONTEXT).longOpt("unified").hasArg()
+		Options opts = new Options();
+		opts.addOption(new Option(OPT_IGNORE_WHITESPACES, "ignorewhitespaces", false, "ignore all white spaces"));
+		opts.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignorespacechange", false, "ignore changes in the amount of white space"));
+		opts.addOption(new Option(OPT_IGNORE_LINE_ENDINGS, "ignorelineendings", false, "ignore line endings, i.e. normalize CRLF / LF while comparing files"));
+		opts.addOption(new Option(OPT_ONLY_REPORTS, "onlyreports", false, "always exits with zero"));
+		opts.addOption(new Option(OPT_IGNORE_UNIQUE_FILES, "ignoreunique", false, "ignore unique files"));
+		opts.addOption(new Option(OPT_DETECT_ENCODING, "detectencoding", false, "tries to determine encoding type"));
+		opts.addOption(Option.builder(OPT_UNIFIED_CONTEXT).longOpt("unified").hasArg()
 				.desc("output <arg> (default 3) lines of unified context").build());
-		return options;
+		return opts;
 	}
 
 	private HelpFormatter createHelpFormatter() {
-		HelpFormatter helpFormatter = new HelpFormatter();
-		helpFormatter.setOptionComparator(new Comparator<Option>() {
-			@Override
-			public int compare(Option o1, Option o2) {
-				return o1.isRequired() && o2.isRequired() ? 0 : o1.isRequired() ? -1 : 1;
+		HelpFormatter formatter = new HelpFormatter();
+		formatter.setOptionComparator((Option o1, Option o2) -> {
+			if (o1.isRequired() && o2.isRequired()) {
+				return 0;
 			}
+			return o1.isRequired() ? -1 : 1;
 		});
-		return helpFormatter;
+		return formatter;
 	}
 
 	public DiffToHtmlCommandLine parse(String[] args) throws ParseException {
@@ -73,7 +73,7 @@ public class CliParser {
 			return new DiffToHtmlCommandLine(cli, workingDir);
 		} catch (ParseException e) {
 			helpFormatter.printHelp(Main.PROGRAM_NAME + " <input_left> <input_right> [<output_html>] ", options, true);
-			System.err.println("Parsing failed. Reason: " + e.getMessage());
+			System.err.println(format("Parsing failed. Reason: %1$s", e.getMessage()));
 			throw e;
 		}
 	}

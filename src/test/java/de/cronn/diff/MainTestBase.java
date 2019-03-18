@@ -37,7 +37,7 @@ public class MainTestBase extends TestBase {
 
 	@Override
 	@Before
-	public void setUp() throws IOException {
+	public void setUp() {
 		super.setUp();
 		System.setErr(new PrintStream(sysErr));
 		System.setOut(new PrintStream(sysOut));
