@@ -1,7 +1,6 @@
 package de.cronn.diff.util;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
@@ -12,18 +11,18 @@ public class FileHelperTest extends TestBase {
 	@Test
 	public void testIsFileBinary_isBinary() throws Exception {
 		boolean isBinary = FileHelper.isFileBinary(TEST_DATA_INPUT_DIR + "binaryFile1_1");
-		assertTrue(isBinary);
+		assertThat(isBinary).isTrue();
 	}
 
 	@Test
 	public void testIsFileBinary_isNotBinary() throws Exception {
 		boolean isBinary = FileHelper.isFileBinary(TEST_DATA_INPUT_DIR + "text1_1.example");
-		assertFalse(isBinary);
+		assertThat(isBinary).isFalse();
 	}
 
 	@Test
 	public void testIsFileBinary_emptyFileIsBinary() throws Exception {
 		boolean isBinary = FileHelper.isFileBinary(TEST_DATA_INPUT_DIR + "emptyFile");
-		assertTrue(isBinary);
+		assertThat(isBinary).isTrue();
 	}
 }

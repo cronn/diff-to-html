@@ -1,9 +1,8 @@
 package de.cronn.diff.impl.java.wrapper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeFalse;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assumptions.assumeThat;
 
 import java.io.IOException;
 import java.nio.charset.MalformedInputException;
@@ -27,18 +26,18 @@ public class JavaDiffUtils2HtmlWrapperTest {
 
 	@Test
 	public void testAppendDiffToBuilder_Exception_ISO_8859_1() throws Exception {
-		//on windows the default charset is windows-1252 which is close to ISO 8859
-		assumeFalse(SystemUtils.IS_OS_WINDOWS);
-		try {
-			DiffToHtmlParameters paramWithDetectEncoding = DiffToHtmlParameters.builder()
-					.withInputLeftPath(ISO_8859_FILE)
-					.withInputRightPath(ISO_8859_FILE)
-					.build();
-			new JavaDiffUtils2HtmlWrapper().appendDiffToBuilder(new FileDiffHtmlBuilder(paramWithDetectEncoding), paramWithDetectEncoding);
-			fail();
-		} catch (RuntimeException e) {
-			assertEquals(e.getCause().getClass(), MalformedInputException.class);
-		}
+		// on windows the default charset is windows-1252 which is close to ISO 8859
+		assumeThat(SystemUtils.IS_OS_WINDOWS).isFalse();
+
+		DiffToHtmlParameters paramWithDetectEncoding = DiffToHtmlParameters.builder()
+				.withInputLeftPath(ISO_8859_FILE)
+				.withInputRightPath(ISO_8859_FILE)
+				.build();
+
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> new JavaDiffUtils2HtmlWrapper()
+						.appendDiffToBuilder(new FileDiffHtmlBuilder(paramWithDetectEncoding), paramWithDetectEncoding))
+				.withCauseExactlyInstanceOf(MalformedInputException.class);
 	}
 
 	@Test
@@ -66,16 +65,16 @@ public class JavaDiffUtils2HtmlWrapperTest {
 	}
 
 	private void assertNoExceptionReadAllLines(DiffToHtmlParameters params) throws IOException {
-		FileDiffHtmlBuilder htmlBuilder = new JavaDiffUtils2HtmlWrapper().appendDiffToBuilder(new FileDiffHtmlBuilder(params), params);
-		assertNotNull(htmlBuilder.toString());
+		FileDiffHtmlBuilder htmlBuilder = new JavaDiffUtils2HtmlWrapper()
+				.appendDiffToBuilder(new FileDiffHtmlBuilder(params), params);
+		assertThat(htmlBuilder.toString()).isNotNull();
 	}
 
 	private DiffToHtmlParameters createParams(String filePath, boolean detectEncoding) {
-		DiffToHtmlParameters paramWithDetectEncoding = DiffToHtmlParameters.builder()
+		return DiffToHtmlParameters.builder()
 				.withDetectTextFileEncoding(detectEncoding)
 				.withInputLeftPath(filePath)
 				.withInputRightPath(filePath)
 				.build();
-		return paramWithDetectEncoding;
 	}
 }

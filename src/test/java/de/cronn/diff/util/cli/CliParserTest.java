@@ -1,7 +1,5 @@
 package de.cronn.diff.util.cli;
 
-import static org.junit.Assert.fail;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -13,6 +11,7 @@ import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.UnrecognizedOptionException;
 import org.apache.commons.text.StrBuilder;
+import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -102,14 +101,10 @@ public class CliParserTest extends TestBase {
 		assertExceptionThrownHelpPrinted(new String[] { "" }, MissingArgumentException.class);
 	}
 
-	private void assertExceptionThrownHelpPrinted(String[] commandLineOptions, Class<?> clazz) throws IOException {
-		try {
-			new CliParser(WORKING_DIR).parse(commandLineOptions);
-		} catch (Exception e) {
-			if (e.getClass() != clazz) {
-				fail("expected " + clazz.getSimpleName() + " but caught " + e.getClass().getSimpleName());
-			}
-		}
+	private void assertExceptionThrownHelpPrinted(String[] commandLineOptions, Class<? extends Exception> clazz)
+			throws IOException {
+		Assertions.assertThatExceptionOfType(clazz)
+				.isThrownBy(() -> new CliParser(WORKING_DIR).parse(commandLineOptions));
 		assertStringResultEqualToValidation(sysError.toString() + System.lineSeparator() + sysOut.toString());
 	}
 

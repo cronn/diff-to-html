@@ -1,6 +1,6 @@
 package de.cronn.diff;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -63,7 +63,7 @@ public class TestBase {
 		writeToDisk(actualHtml, getOutHtmlFilePath()); // for external comparison by developer
 		String expectedHtml = readFileToString(getValidationHtmlFilePath());
 		expectedHtml = FileHelper.normalizeLineSeparators(expectedHtml);
-		assertEquals(expectedHtml, actualHtml);
+		assertThat(actualHtml).isEqualTo(expectedHtml);
 	}
 
 	protected void assertStringResultEqualToValidation(String actual) throws IOException {
@@ -71,7 +71,7 @@ public class TestBase {
 		writeToDisk(actual, getOutFilePath()); // for external comparison by developer
 		String expected = readFileToString(getValidationFilePath());
 		expected = FileHelper.normalizeLineSeparators(expected);
-		assertEquals(expected, actual);
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	protected void assertOutputEqualToValidation() throws IOException {
@@ -80,7 +80,7 @@ public class TestBase {
 		String actual = readFileToString(getOutHtmlFilePath());
 		actual = FileHelper.normalizeLineSeparators(normalizeTimestamps(actual));
 		writeToDisk(actual, getOutHtmlFilePath());
-		assertEquals(expected, actual);
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	protected void assertSysOutErrEqualToValidation(String actual) throws IOException {
@@ -90,7 +90,7 @@ public class TestBase {
 
 		String expectedNorm = FileHelper.normalizeLineSeparators(expected);
 		String actualNorm = FileHelper.normalizeLineSeparators(actual);
-		assertEquals(expectedNorm, actualNorm);
+		assertThat(actualNorm).isEqualTo(expectedNorm);
 	}
 
 	protected String getOutHtmlFilePath() {

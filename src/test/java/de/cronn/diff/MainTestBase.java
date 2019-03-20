@@ -1,7 +1,6 @@
 package de.cronn.diff;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
@@ -74,7 +73,7 @@ public class MainTestBase extends TestBase {
 		try {
 			Main.main(args);
 		} catch (Exception e) {
-			assertEquals(clazz, e.getClass());
+			assertThat(e.getClass()).isEqualTo(clazz);
 			assertSystemMessage();
 		}
 	}
@@ -82,8 +81,8 @@ public class MainTestBase extends TestBase {
 	private void assertSystemMessage() throws IOException {
 		String sysOutStr = FileHelper.normalizeLineSeparators(sysOut.toString());
 		String sysErrorStr = FileHelper.normalizeLineSeparators(sysErr.toString());
-		assertNotNull(sysOutStr);
-		assertNotNull(sysErrorStr);
+		assertThat(sysOutStr).isNotNull();
+		assertThat(sysErrorStr).isNotNull();
 		assertSysOutErrEqualToValidation(sysErrorStr + System.lineSeparator() + sysOutStr);
 	}
 }
