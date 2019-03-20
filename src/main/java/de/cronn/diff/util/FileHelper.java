@@ -79,16 +79,20 @@ public class FileHelper {
 			return readAllLines(filePath, StandardCharsets.UTF_16LE);
 
 		} else {
-			try {
-				return readAllLines(filePath, Charset.forName(encoding));
-			} catch(IllegalCharsetNameException|UnsupportedCharsetException e) {
-				throw new UnsupportedOperationException(
-						"The charset encoding '" + encoding + "' of file " + filePath + " is not supported", e);
-			}
+			return readLinesWithEncoding(filePath, encoding);
 		}
 	}
 
-	private static List<String> readAllLines(String filePath, Charset charset) throws IOException {
+	static List<String> readLinesWithEncoding(String filePath, String encoding) throws IOException {
+		try {
+			return readAllLines(filePath, Charset.forName(encoding));
+		} catch(IllegalCharsetNameException|UnsupportedCharsetException e) {
+			throw new UnsupportedOperationException(
+					"The charset encoding '" + encoding + "' of file " + filePath + " is not supported", e);
+		}
+	}
+
+	static List<String> readAllLines(String filePath, Charset charset) throws IOException {
 		try {
 			return Files.readAllLines(Paths.get(filePath), charset);
 		} catch (MalformedInputException e) {
