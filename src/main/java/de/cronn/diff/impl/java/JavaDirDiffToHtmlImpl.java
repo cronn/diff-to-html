@@ -1,5 +1,6 @@
 package de.cronn.diff.impl.java;
 
+import static de.cronn.diff.Main.EXIT_CODE_ERROR;
 import static de.cronn.diff.util.DiffToHtmlParameters.DiffSide.LEFT;
 import static de.cronn.diff.util.DiffToHtmlParameters.DiffSide.RIGHT;
 
@@ -14,7 +15,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
-import de.cronn.diff.Main;
 import de.cronn.diff.html.DirectoryDiffHtmlBuilder;
 import de.cronn.diff.html.FileDiffHtmlBuilder;
 import de.cronn.diff.impl.DiffToHtmlResult;
@@ -34,11 +34,20 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 
 	@Override
 	public DiffToHtmlResult runDiffToHtml() throws IOException {
-		DirectoryDiffHtmlBuilder dirDiffHtmlBuilder = new DirectoryDiffHtmlBuilder(params);
-		traverseLeftDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputLeftPath()));
-		traverseRightDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputRightPath()));
-		String html = dirDiffHtmlBuilder.toString();
-		return new DiffToHtmlResult(html, resultCode);
+		ArrayList<File> leftSortedFilesAndDirs = getSortedFilesAndDirs(params.getInputLeftPath());
+		ArrayList<File> rightSortedFilesAndDirs = getSortedFilesAndDirs(params.getInputRightPath());
+
+		if (leftSortedFilesAndDirs.size() > 2 && rightSortedFilesAndDirs.size() > 2) {
+			DirectoryDiffHtmlBuilder dirDiffHtmlBuilder = new DirectoryDiffHtmlBuilder(params);
+			traverseLeftDirectory(dirDiffHtmlBuilder, leftSortedFilesAndDirs);
+			traverseRightDirectory(dirDiffHtmlBuilder, rightSortedFilesAndDirs);
+			return new DiffToHtmlResult(dirDiffHtmlBuilder.toString(), resultCode);
+		} else {
+			FileDiffHtmlBuilder fileDiffHtmlBuilder = new FileDiffHtmlBuilder(params);
+			System.out.println("One of the directories seems to be empty. Abort!");
+			fileDiffHtmlBuilder.appendAttentionLine("One of the directories seems to be empty. Abort!");
+			return new DiffToHtmlResult(fileDiffHtmlBuilder.toString(), EXIT_CODE_ERROR);
+		}
 	}
 
 	private ArrayList<File> getSortedFilesAndDirs(String dirPath) {
@@ -91,7 +100,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 		} else {
 			dirDiffHtmlBuilder.appendChangedTextFile(fileLeftPath, htmlTableBuilder.createDiffTable());
 		}
-		resultCode = Main.EXIT_CODE_ERROR;
+		resultCode = EXIT_CODE_ERROR;
 	}
 
 	private void makeUniqueFileEntry(DirectoryDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters diffParams, DiffToHtmlParameters.DiffSide diffSide)
@@ -121,7 +130,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 		} else {
 			htmlBuilder.appendUniqueFileRight(filePath, htmlTableBuilder.createDiffTable());
 		}
-		resultCode = Main.EXIT_CODE_ERROR;
+		resultCode = EXIT_CODE_ERROR;
 	}
 
 	private String createUniqueFileMessage(String fileLeftPath) {
