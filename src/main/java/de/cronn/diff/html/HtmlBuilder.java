@@ -22,33 +22,33 @@ public abstract class HtmlBuilder {
 
 	private static final String CSS_FILE = "diffToHtml.css";
 
-	protected static final String EMPTY_LINE_HEIGHT = "16";
+	static final String EMPTY_LINE_HEIGHT = "16";
 
-	protected static final String CSS_CLASS_LINE_NUMBER = "line-number";
+	static final String CSS_CLASS_LINE_NUMBER = "line-number";
 
-	protected static final String CSS_ID_WRAPPER = "wrapper";
+	static final String CSS_ID_WRAPPER = "wrapper";
 
-	protected static final String CSS_CLASS_DELETE = "delete";
+	static final String CSS_CLASS_DELETE = "delete";
 
-	protected static final String CSS_CLASS_INSERT = "insert";
+	static final String CSS_CLASS_INSERT = "insert";
 
-	protected static final String CSS_CLASS_CONTEXT = "context";
+	static final String CSS_CLASS_CONTEXT = "context";
 
-	protected static final String CSS_CLASS_INFO = "info";
+	static final String CSS_CLASS_INFO = "info";
 
-	protected static final String CSS_CLASS_ATTENTION = "attention";
+	static final String CSS_CLASS_ATTENTION = "attention";
 
-	public static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
+	static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
 	
 	private static boolean useSimpleFormatOnHtmls = false;
 
-	protected String outputDirForRelativePaths = null;
+	private String outputDirForRelativePaths = null;
 
 	protected abstract Tag createHead();
 
 	protected abstract Tag createBody();
 
-	public HtmlBuilder(DiffToHtmlParameters params) {
+	HtmlBuilder(DiffToHtmlParameters params) {
 		String outPath = params.getOutputPath();
 		if(outPath != null) {
 			outputDirForRelativePaths = new File(FilenameUtils.getFullPath(outPath)).getAbsolutePath();
@@ -68,7 +68,7 @@ public abstract class HtmlBuilder {
 		}
 	}
 
-	protected String getRelativePath(String path) {
+	String getRelativePath(String path) {
 		if(path.isEmpty()) {
 			return "";
 		}
@@ -90,11 +90,11 @@ public abstract class HtmlBuilder {
 		return FilenameUtils.separatorsToUnix(path);
 	}
 
-	protected String newlineAllHtmlTags(String html) {
+	private String newlineAllHtmlTags(String html) {
 		return html.replaceAll("(<[^/].*?>)", System.lineSeparator() + "$1");
 	}
 
-	protected ContainerTag createStyleTag() {
+	ContainerTag createStyleTag() {
 		String styleSheet;
 		try(InputStream cssInputStream =  Main.class.getResourceAsStream("/" + CSS_FILE)) {
 			styleSheet = IOUtils.toString(cssInputStream, StandardCharsets.UTF_8);
@@ -102,10 +102,6 @@ public abstract class HtmlBuilder {
 			styleSheet = "<!-- stylesheet " + CSS_FILE + " could not be loaded -->";
 		}
 		return style(styleSheet);
-	}
-
-	public static boolean isUseSimpleFormatOnHtmls() {
-		return useSimpleFormatOnHtmls;
 	}
 
 	public static void setUseSimpleFormatOnHtmls(boolean useSimpleFormatOnHtmls) {

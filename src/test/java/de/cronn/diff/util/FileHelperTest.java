@@ -32,7 +32,7 @@ public class FileHelperTest extends TestBase {
 	}
 
 	@Test
-	public void testReadAllLines_notReadableWithCharset_exception() throws Exception {
+	public void testReadAllLines_notReadableWithCharset_exception() {
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(() -> FileHelper.readAllLines(	TEST_DATA_INPUT_DIR + "iso88591textfile",
 															StandardCharsets.UTF_8))
@@ -40,7 +40,7 @@ public class FileHelperTest extends TestBase {
 	}
 
 	@Test
-	public void testReadLinesWithEncoding_illegalCharsetName_exception() throws Exception {
+	public void testReadLinesWithEncoding_illegalCharsetName_exception() {
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(() -> FileHelper.readLinesWithEncoding("", "this is an illegal charset name"))
 				.withCauseExactlyInstanceOf(IllegalCharsetNameException.class);

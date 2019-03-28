@@ -24,9 +24,9 @@ import de.cronn.diff.util.FileHelper;
 
 public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 	
-	public static final String UNIQUE_FILE_PREFIX = "Only in ";
+	private static final String UNIQUE_FILE_PREFIX = "Only in ";
 
-	public static final String UNIQUE_LINE_SPLIT_STR = ": ";
+	private static final String UNIQUE_LINE_SPLIT_STR = ": ";
 
 	public JavaDirDiffToHtmlImpl(DiffToHtmlParameters params) {
 		super(params);

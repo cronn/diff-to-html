@@ -16,22 +16,22 @@ import de.cronn.diff.util.FileHelper;
 
 public class MainTestBase extends TestBase {
 
-	protected static final String INPUT_DIR_1 = TEST_DATA_INPUT_DIR + "dir1_1";
-	protected static final String INPUT_DIR_3 = TEST_DATA_INPUT_DIR + "dir1_3";
-	protected static final String INPUT_DIR_1_DOUBLE_SLASH = TEST_DATA_INPUT_DIR + "/dir1_1";
-	protected static final String INPUT_DIR_3_TRIPPLE_SLASH = TEST_DATA_INPUT_DIR + "//dir1_3";
-	protected static final String INPUT_CODE_3_1 = TEST_DATA_INPUT_DIR + "code3_1.java.example";
-	protected static final String INPUT_CODE_3_2 = TEST_DATA_INPUT_DIR + "code3_2.java.example";
-	protected static final String INPUT_TEXT_WITH_SPACES_1 = TEST_DATA_INPUT_DIR + "textWithSpaces1";
-	protected static final String INPUT_TEXT_WITH_SPACES_2 = TEST_DATA_INPUT_DIR + "textWithSpaces2";
-	protected static final String INPUT_TEXT_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "textWithoutSpaces";
-	protected static final String INPUT_DIR_WITH_SPACES_1 = TEST_DATA_INPUT_DIR + "dirWithSpaces1";
-	protected static final String INPUT_DIR_WITH_SPACES_2 = TEST_DATA_INPUT_DIR + "dirWithSpaces2";
-	protected static final String INPUT_DIR_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "dirWithoutSpaces";
-	protected static final String INPUT_TEXT_1_1 = TEST_DATA_INPUT_DIR + "text1_1.example";
-	protected static final String INPUT_TEXT_1_2 = TEST_DATA_INPUT_DIR + "text1_2.example";
-	protected static final String SMALL_FILE = TEST_DATA_INPUT_DIR + "smallfile";
-	protected static final String BIG_FILE = TEST_DATA_INPUT_DIR + "bigfile";
+	static final String INPUT_DIR_1 = TEST_DATA_INPUT_DIR + "dir1_1";
+	static final String INPUT_DIR_3 = TEST_DATA_INPUT_DIR + "dir1_3";
+	static final String INPUT_DIR_1_DOUBLE_SLASH = TEST_DATA_INPUT_DIR + "/dir1_1";
+	static final String INPUT_DIR_3_TRIPPLE_SLASH = TEST_DATA_INPUT_DIR + "//dir1_3";
+	static final String INPUT_CODE_3_1 = TEST_DATA_INPUT_DIR + "code3_1.java.example";
+	static final String INPUT_CODE_3_2 = TEST_DATA_INPUT_DIR + "code3_2.java.example";
+	static final String INPUT_TEXT_WITH_SPACES_1 = TEST_DATA_INPUT_DIR + "textWithSpaces1";
+	static final String INPUT_TEXT_WITH_SPACES_2 = TEST_DATA_INPUT_DIR + "textWithSpaces2";
+	static final String INPUT_TEXT_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "textWithoutSpaces";
+	static final String INPUT_DIR_WITH_SPACES_1 = TEST_DATA_INPUT_DIR + "dirWithSpaces1";
+	static final String INPUT_DIR_WITH_SPACES_2 = TEST_DATA_INPUT_DIR + "dirWithSpaces2";
+	static final String INPUT_DIR_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "dirWithoutSpaces";
+	static final String INPUT_TEXT_1_1 = TEST_DATA_INPUT_DIR + "text1_1.example";
+	static final String INPUT_TEXT_1_2 = TEST_DATA_INPUT_DIR + "text1_2.example";
+	static final String SMALL_FILE = TEST_DATA_INPUT_DIR + "smallfile";
+	static final String BIG_FILE = TEST_DATA_INPUT_DIR + "bigfile";
 
 	private final ByteArrayOutputStream sysErr = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream sysOut = new ByteArrayOutputStream();
@@ -56,7 +56,7 @@ public class MainTestBase extends TestBase {
 		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 	}
 
-	protected class DefaultAssertion implements Assertion {
+	class DefaultAssertion implements Assertion {
 		@Override
 		public void checkAssertion() throws Exception {
 			assertSystemMessage();
@@ -64,14 +64,14 @@ public class MainTestBase extends TestBase {
 		}
 	}
 
-	protected class SystemMessageAssertion implements Assertion {
+	class SystemMessageAssertion implements Assertion {
 		@Override
 		public void checkAssertion() throws Exception {
 			assertSystemMessage();
 		}
 	}
 
-	protected void assertExceptionAndSystemMessage(String[] args, Class<?> clazz) throws IOException {
+	void assertExceptionAndSystemMessage(String[] args, Class<?> clazz) throws IOException {
 		try {
 			Main.main(args);
 		} catch (Exception e) {

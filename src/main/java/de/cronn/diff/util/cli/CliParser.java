@@ -29,11 +29,11 @@ public class CliParser {
 
 	public static final String OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE = "fs";
 
-	private Options options;
+	private final Options options;
 
-	private HelpFormatter helpFormatter;
+	private final HelpFormatter helpFormatter;
 	
-	private String workingDir;
+	private final String workingDir;
 
 	public CliParser(String workingDir) {
 		this.workingDir = workingDir;

@@ -48,10 +48,10 @@ public class JavaDiffUtils2HtmlWrapper {
 
 	private void appendDiffToBuilder(List<String> originalLines, List<String> revisedLines) {
 		Patch<String> diffPatches = DiffUtils.diff(originalLines, revisedLines);
-		List<Delta<String>> diffPatchDeltas = new ArrayList<Delta<String>>(diffPatches.getDeltas());
+		List<Delta<String>> diffPatchDeltas = new ArrayList<>(diffPatches.getDeltas());
 
 		if (!diffPatchDeltas.isEmpty()) {
-			List<Delta<String>> currentDeltas = new ArrayList<Delta<String>>();
+			List<Delta<String>> currentDeltas = new ArrayList<>();
 			Delta<String> currentDelta = diffPatchDeltas.get(0);
 			currentDeltas.add(currentDelta);
 

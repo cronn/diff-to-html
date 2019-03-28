@@ -8,7 +8,7 @@ public final class DiffToHtmlParameters {
 	}
 
 	public enum DiffSide {
-		LEFT, RIGHT;
+		LEFT, RIGHT
 	}
 
 	private final DiffType diffType;
@@ -76,7 +76,6 @@ public final class DiffToHtmlParameters {
 			this.detectTextFileEncoding = other.isDetectTextFileEncoding();
 			this.onlyReports = other.isOnlyReports();
 			this.unifiedContext = other.unifiedContext;
-			this.maxAllowedDifferenceInByte = maxAllowedDifferenceInByte;
 		}
 
 		public Builder withDiffType(DiffType diffType) {
@@ -116,11 +115,6 @@ public final class DiffToHtmlParameters {
 
 		public Builder withIgnoreLineEndings(boolean ignoreLineEndings) {
 			this.ignoreLineEndings = ignoreLineEndings;
-			return this;
-		}
-
-		public Builder withDiffCommandLineAsString(String diffCommandLineAsString) {
-			this.diffCommandLineAsString = diffCommandLineAsString;
 			return this;
 		}
 
@@ -174,7 +168,7 @@ public final class DiffToHtmlParameters {
 		return outputPath;
 	}
 
-	public String getDiffCommandLineAsString() {
+	private String getDiffCommandLineAsString() {
 		return diffCommandLineAsString;
 	}
 

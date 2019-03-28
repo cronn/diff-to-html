@@ -22,13 +22,13 @@ public final class Main {
 
     public static final int EXIT_CODE_OK = 0;
 
-    public static final int UNIFIED_CONTEXT_LINES = 3;
+    private static final int UNIFIED_CONTEXT_LINES = 3;
 
     public static final String PROGRAM_NAME = "cronn-diff-to-html";
 
     private static String workingDir = FileHelper.getWorkingDir();
 
-	public static Long MAX_ALLOWED_FILESIZE_DIFFERENCE = 500000l;
+	private static final Long MAX_ALLOWED_FILESIZE_DIFFERENCE = 500000l;
 
 	private Main() {}
 

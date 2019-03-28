@@ -25,11 +25,10 @@ public class FileHelper {
 
 	private static final int BYTE_BUFFER_SIZE_DETECT_BINARY = 16000;
 	private static final int BYTE_BUFFER_SIZE_DETECT_ENCODING = 4096;
-	public static final String CSS_FILE = "diffToHtml.css";
 
 	private FileHelper( ) {}
 	
-	private static Map<String, Boolean> binaryFilesMap = new HashMap<>();
+	private static final Map<String, Boolean> binaryFilesMap = new HashMap<>();
 		
 	// Imitates Unix diff's behavior in determining if a file is binary or text by checking the first few thousand bytes for zero values. See <a href="http://www.gnu.org/software/diffutils/manual/html_node/Binary.html">http://www.gnu.org/software/diffutils/manual/html_node/Binary.html</a>
 	public static boolean isFileBinary(String filePath) throws IOException {
@@ -101,7 +100,7 @@ public class FileHelper {
 		}
 	}
 
-	static String getCharsetEncoding(String filePath) throws IOException {
+	private static String getCharsetEncoding(String filePath) throws IOException {
 		UniversalDetector detector = new UniversalDetector(null);
 		FileInputStream fileInputStream = new FileInputStream(new File(filePath));
 		byte[] buffer = new byte[BYTE_BUFFER_SIZE_DETECT_ENCODING];

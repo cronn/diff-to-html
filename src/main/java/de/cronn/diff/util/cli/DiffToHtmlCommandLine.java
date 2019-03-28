@@ -25,7 +25,7 @@ public class DiffToHtmlCommandLine extends CommandLine {
 
 	private boolean inputsAreFiles;
 	
-	private String workingDir;
+	private final String workingDir;
 
 	public DiffToHtmlCommandLine(CommandLine cli, String workingDir) throws ParseException {
 		for(Option opt : cli.getOptions()) {

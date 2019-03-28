@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,7 +15,7 @@ import static de.cronn.diff.util.cli.CliParser.*;
 
 public class MainTest extends MainTestBase {
 
-	public static final String EMPTYDIR = TEST_DATA_INPUT_DIR + "emptyDir";
+	private static final String EMPTYDIR = TEST_DATA_INPUT_DIR + "emptyDir";
 
 	@Before
 	public void setup() throws IOException{

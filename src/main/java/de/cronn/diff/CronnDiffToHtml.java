@@ -9,7 +9,7 @@ import de.cronn.diff.impl.JavaDiffToHtmlGenerator;
 import de.cronn.diff.util.DiffToHtmlParameters;
 import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
 
-public class CronnDiffToHtml {
+class CronnDiffToHtml {
 
 	private static final String NEWLINE = System.lineSeparator();
 

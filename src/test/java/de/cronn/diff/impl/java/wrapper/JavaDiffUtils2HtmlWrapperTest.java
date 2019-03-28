@@ -25,7 +25,7 @@ public class JavaDiffUtils2HtmlWrapperTest {
 	private static final String ISO_8859_FILE = TestBase.TEST_DATA_INPUT_DIR + "iso88591textfile";
 
 	@Test
-	public void testAppendDiffToBuilder_Exception_ISO_8859_1() throws Exception {
+	public void testAppendDiffToBuilder_Exception_ISO_8859_1() {
 		// on windows the default charset is windows-1252 which is close to ISO 8859
 		assumeThat(SystemUtils.IS_OS_WINDOWS).isFalse();
 
@@ -42,25 +42,25 @@ public class JavaDiffUtils2HtmlWrapperTest {
 
 	@Test
 	public void testAppendDiffToBuilder_detectEncoding_OK_UTF_8() throws Exception {
-		DiffToHtmlParameters paramWithDetectEncoding = createParams(UTF_8_FILE, true);
+		DiffToHtmlParameters paramWithDetectEncoding = createParams(UTF_8_FILE);
 		assertNoExceptionReadAllLines(paramWithDetectEncoding);
 	}
 
 	@Test
 	public void testAppendDiffToBuilder_detectEncoding_OK_UTF_16_BE() throws Exception {
-		DiffToHtmlParameters paramWithDetectEncoding = createParams(UTF_16_BE_FILE, true);
+		DiffToHtmlParameters paramWithDetectEncoding = createParams(UTF_16_BE_FILE);
 		assertNoExceptionReadAllLines(paramWithDetectEncoding);
 	}
 
 	@Test
 	public void testAppendDiffToBuilder_detectEncoding_OK_UTF_16_LE() throws Exception {
-		DiffToHtmlParameters paramWithDetectEncoding = createParams(UTF_16_LE_FILE, true);
+		DiffToHtmlParameters paramWithDetectEncoding = createParams(UTF_16_LE_FILE);
 		assertNoExceptionReadAllLines(paramWithDetectEncoding);
 	}
 
 	@Test
 	public void testAppendDiffToBuilder_detectEncoding_OK_ISO_8859_1() throws Exception {
-		DiffToHtmlParameters paramWithDetectEncoding = createParams(ISO_8859_FILE, true);
+		DiffToHtmlParameters paramWithDetectEncoding = createParams(ISO_8859_FILE);
 		assertNoExceptionReadAllLines(paramWithDetectEncoding);
 	}
 
@@ -70,9 +70,9 @@ public class JavaDiffUtils2HtmlWrapperTest {
 		assertThat(htmlBuilder.toString()).isNotNull();
 	}
 
-	private DiffToHtmlParameters createParams(String filePath, boolean detectEncoding) {
+	private DiffToHtmlParameters createParams(String filePath) {
 		return DiffToHtmlParameters.builder()
-				.withDetectTextFileEncoding(detectEncoding)
+				.withDetectTextFileEncoding(true)
 				.withInputLeftPath(filePath)
 				.withInputRightPath(filePath)
 				.build();
