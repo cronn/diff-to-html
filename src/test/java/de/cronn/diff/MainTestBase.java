@@ -32,6 +32,9 @@ public class MainTestBase extends TestBase {
 	static final String INPUT_TEXT_1_2 = TEST_DATA_INPUT_DIR + "text1_2.example";
 	static final String SMALL_FILE = TEST_DATA_INPUT_DIR + "smallfile";
 	static final String BIG_FILE = TEST_DATA_INPUT_DIR + "bigfile";
+	static final String SMALL_DIR = TEST_DATA_INPUT_DIR  + "smalldir";
+	static final String BIG_DIR = TEST_DATA_INPUT_DIR + "bigdir";
+	static final String MEDIUM_DIR = TEST_DATA_INPUT_DIR + "mediumdir";
 
 	private final ByteArrayOutputStream sysErr = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream sysOut = new ByteArrayOutputStream();

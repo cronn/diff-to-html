@@ -63,4 +63,13 @@ public final class Main {
 	public static void setWorkingDir(String workingDir) {
 		Main.workingDir = workingDir;
 	}
+
+	private static int tooManyFilesAmount = 1000;
+
+	public static int getTooManyFilesAmount() {
+		return tooManyFilesAmount;
+	}
+	static void setTooManyFilesAmount(int amount) {
+		tooManyFilesAmount = amount;
+	}
 }

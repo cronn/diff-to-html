@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import de.cronn.diff.Main;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -23,10 +24,12 @@ import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
 import de.cronn.diff.util.FileHelper;
 
 public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
-	
+
 	private static final String UNIQUE_FILE_PREFIX = "Only in ";
 
 	private static final String UNIQUE_LINE_SPLIT_STR = ": ";
+	public static final String tooManyDifferencesErrorMsg = "One of the directories seems to be empty or the difference in diffing is too big. Abort!";
+
 
 	public JavaDirDiffToHtmlImpl(DiffToHtmlParameters params) {
 		super(params);
@@ -37,17 +40,39 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 		ArrayList<File> leftSortedFilesAndDirs = getSortedFilesAndDirs(params.getInputLeftPath());
 		ArrayList<File> rightSortedFilesAndDirs = getSortedFilesAndDirs(params.getInputRightPath());
 
-		if (leftSortedFilesAndDirs.size() > 2 && rightSortedFilesAndDirs.size() > 2) {
+		if (dirsToDiffNotEmpty(leftSortedFilesAndDirs, rightSortedFilesAndDirs) && fileNumberToDiffNotTooDifferent(leftSortedFilesAndDirs, rightSortedFilesAndDirs)) {
 			DirectoryDiffHtmlBuilder dirDiffHtmlBuilder = new DirectoryDiffHtmlBuilder(params);
 			traverseLeftDirectory(dirDiffHtmlBuilder, leftSortedFilesAndDirs);
 			traverseRightDirectory(dirDiffHtmlBuilder, rightSortedFilesAndDirs);
 			return new DiffToHtmlResult(dirDiffHtmlBuilder.toString(), resultCode);
 		} else {
 			FileDiffHtmlBuilder fileDiffHtmlBuilder = new FileDiffHtmlBuilder(params);
-			System.out.println("One of the directories seems to be empty. Abort!");
-			fileDiffHtmlBuilder.appendAttentionLine("One of the directories seems to be empty. Abort!");
+			System.out.println(tooManyDifferencesErrorMsg);
+			fileDiffHtmlBuilder.appendAttentionLine(tooManyDifferencesErrorMsg);
 			return new DiffToHtmlResult(fileDiffHtmlBuilder.toString(), EXIT_CODE_ERROR);
 		}
+	}
+
+	private boolean dirsToDiffNotEmpty(ArrayList<File> leftSortedFilesAndDirs, ArrayList<File> rightSortedFilesAndDirs) {
+		return leftSortedFilesAndDirs.size() > 2 && rightSortedFilesAndDirs.size() > 2;
+	}
+
+	private boolean fileNumberToDiffNotTooDifferent(ArrayList<File> leftSortedFilesAndDirs, ArrayList<File> rightSortedFilesAndDirs) {
+        boolean status = true;
+		if (leftSortedFilesAndDirs.size() > Main.getTooManyFilesAmount() || rightSortedFilesAndDirs.size() > Main.getTooManyFilesAmount()) {
+		    int smallList = 0;
+		    int bigList = 0;
+		    if (leftSortedFilesAndDirs.size() > rightSortedFilesAndDirs.size()) {
+				smallList = rightSortedFilesAndDirs.size();
+				bigList = leftSortedFilesAndDirs.size();
+			} else if (rightSortedFilesAndDirs.size() > leftSortedFilesAndDirs.size()) {
+				smallList = leftSortedFilesAndDirs.size();
+				bigList = rightSortedFilesAndDirs.size();
+			}
+			int halfList = bigList/2;
+			status = halfList <= smallList;
+		}
+		return status;
 	}
 
 	private ArrayList<File> getSortedFilesAndDirs(String dirPath) {

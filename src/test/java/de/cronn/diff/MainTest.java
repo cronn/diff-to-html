@@ -16,6 +16,7 @@ import static de.cronn.diff.util.cli.CliParser.*;
 public class MainTest extends MainTestBase {
 
 	private static final String EMPTYDIR = TEST_DATA_INPUT_DIR + "emptyDir";
+	private int tooManyFilesAmountOrig = Main.getTooManyFilesAmount();
 
 	@Before
 	public void setup() throws IOException{
@@ -25,6 +26,7 @@ public class MainTest extends MainTestBase {
 	@After
 	public void teardown() throws IOException {
 		Files.deleteIfExists(Paths.get(EMPTYDIR));
+		Main.setTooManyFilesAmount(tooManyFilesAmountOrig);
 	}
 
 	@Test
@@ -212,4 +214,27 @@ public class MainTest extends MainTestBase {
 		Main.main(new String[] {INPUT_DIR_1, EMPTYDIR, getOutHtmlFilePath()});
 	}
 
+	@Test
+	public void testFileNumberToDiffNotTooDifferent_tooSmallLeftDir() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.setTooManyFilesAmount(20);
+		Main.main(new String[] {SMALL_DIR, BIG_DIR, getOutHtmlFilePath()});
+	}
+
+	@Test
+	public void testFileNumberToDiffNotTooDifferent_tooSmallRightDir() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.setTooManyFilesAmount(20);
+		Main.main(new String[] {BIG_DIR, SMALL_DIR, getOutHtmlFilePath()});
+	}
+
+	@Test
+	public void testFileNumberToDiffNotTooDifferent_true() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_ERROR);
+		exit.checkAssertionAfterwards(new DefaultAssertion());
+		Main.setTooManyFilesAmount(20);
+		Main.main(new String[] {BIG_DIR, MEDIUM_DIR, getOutHtmlFilePath()});
+	}
 }
