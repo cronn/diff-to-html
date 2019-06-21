@@ -9,7 +9,7 @@ plugins {
     id 'eclipse'
     id 'application'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version "1.7.3"
+    id 'com.jfrog.bintray' version "1.8.4"
 }
 
 group = 'de.cronn'
