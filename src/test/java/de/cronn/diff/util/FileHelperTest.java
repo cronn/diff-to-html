@@ -26,9 +26,9 @@ public class FileHelperTest extends TestBase {
 	}
 
 	@Test
-	public void testIsFileBinary_emptyFileIsBinary() throws Exception {
+	public void testIsFileBinary_emptyFileIsNotBinary() throws Exception {
 		boolean isBinary = FileHelper.isFileBinary(TEST_DATA_INPUT_DIR + "emptyFile");
-		assertThat(isBinary).isTrue();
+		assertThat(isBinary).isFalse();
 	}
 
 	@Test

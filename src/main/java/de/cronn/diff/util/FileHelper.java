@@ -49,7 +49,7 @@ public class FileHelper {
 		fileInputStream.close();
 
 		if(bytesRead == 0) {
-			return true;
+			return false;
 		}
 
 		for(int i = 0; i < bytesRead; i++) {
