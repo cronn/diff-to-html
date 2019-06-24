@@ -10,6 +10,7 @@ import java.util.List;
 
 import de.cronn.diff.html.FileDiffHtmlBuilder;
 import de.cronn.diff.util.DiffToHtmlParameters;
+import de.cronn.diff.util.DiffToHtmlRuntimeException;
 import de.cronn.diff.util.FileHelper;
 import difflib.Delta;
 import difflib.DiffUtils;
@@ -76,7 +77,8 @@ public class JavaDiffUtils2HtmlWrapper {
 			try {
 				return Files.readAllLines(Paths.get(filePath), DEFAULT_CHARSET);
 			} catch (CharacterCodingException e) {
-				throw new RuntimeException("File " + filePath + " cannot be read with default charset of this VM: " + DEFAULT_CHARSET, e);
+				throw new DiffToHtmlRuntimeException(
+						"File " + filePath + " cannot be read with default charset of this VM: " + DEFAULT_CHARSET, e);
 			}
 		} else {
 			return FileHelper.readAllLinesWithDetectedEncoding(filePath);

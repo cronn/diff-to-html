@@ -13,6 +13,7 @@ import org.junit.Test;
 import de.cronn.diff.TestBase;
 import de.cronn.diff.html.FileDiffHtmlBuilder;
 import de.cronn.diff.util.DiffToHtmlParameters;
+import de.cronn.diff.util.DiffToHtmlRuntimeException;
 
 public class JavaDiffUtils2HtmlWrapperTest {
 
@@ -34,7 +35,7 @@ public class JavaDiffUtils2HtmlWrapperTest {
 				.withInputRightPath(ISO_8859_FILE)
 				.build();
 
-		assertThatExceptionOfType(RuntimeException.class)
+		assertThatExceptionOfType(DiffToHtmlRuntimeException.class)
 				.isThrownBy(() -> new JavaDiffUtils2HtmlWrapper()
 						.appendDiffToBuilder(new FileDiffHtmlBuilder(paramWithDetectEncoding), paramWithDetectEncoding))
 				.withCauseExactlyInstanceOf(MalformedInputException.class);

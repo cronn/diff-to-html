@@ -23,6 +23,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
 import de.cronn.diff.util.DiffToHtmlParameters;
+import de.cronn.diff.util.DiffToHtmlRuntimeException;
 import j2html.attributes.Attr;
 import j2html.tags.ContainerTag;
 import j2html.tags.Tag;
@@ -212,7 +213,7 @@ public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 			InputStream resourceAsStream = getClass().getResourceAsStream("/" + JS_SCRIPTS_URI);
 			script = IOUtils.toString(resourceAsStream, StandardCharsets.UTF_8);
 		} catch (NullPointerException | IOException e) {
-			throw new RuntimeException("The resource " + JS_SCRIPTS_URI + " could not be loaded.", e);
+			throw new DiffToHtmlRuntimeException("The resource " + JS_SCRIPTS_URI + " could not be loaded.", e);
 		}
 		return script().attr(Attr.TYPE, "text/javascript").with(rawHtml(script));
 	}
