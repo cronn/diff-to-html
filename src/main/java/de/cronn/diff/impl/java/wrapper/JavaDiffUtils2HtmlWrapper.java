@@ -12,6 +12,8 @@ import com.github.difflib.DiffUtils;
 import com.github.difflib.algorithm.DiffException;
 import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
+import com.github.difflib.text.DiffRow;
+import com.github.difflib.text.DiffRowGenerator;
 
 import de.cronn.diff.html.FileDiffHtmlBuilder;
 import de.cronn.diff.util.DiffToHtmlParameters;
@@ -45,17 +47,18 @@ public class JavaDiffUtils2HtmlWrapper {
 
 		List<String> originalLines = readAllLinesWithCorrectEncoding(params.getInputLeftPath());
 		List<String> revisedLines = readAllLinesWithCorrectEncoding(params.getInputRightPath());
-		appendDiffToBuilder(originalLines, revisedLines);
-		return htmlBuilder;
-	}
-
-	private void appendDiffToBuilder(List<String> originalLines, List<String> revisedLines) {
-		Patch<String> diffPatches;
 		try {
-			diffPatches = DiffUtils.diff(originalLines, revisedLines);
+			appendDiffToBuilder(originalLines, revisedLines);
 		} catch (DiffException e) {
 			throw new DiffToHtmlRuntimeException("Error while atempting to generate diff.", e);
 		}
+		return htmlBuilder;
+	}
+
+	private void appendDiffToBuilder(List<String> originalLines, List<String> revisedLines) throws DiffException {
+		Patch<String> diffPatches;
+		diffPatches = DiffUtils.diff(originalLines, revisedLines);
+		
 		List<AbstractDelta<String>> diffPatchDeltas = new ArrayList<>(diffPatches.getDeltas());
 
 		if (!diffPatchDeltas.isEmpty()) {
@@ -98,7 +101,7 @@ public class JavaDiffUtils2HtmlWrapper {
 		return positionAfterCurrentDelta + params.getUnifiedContext() >= positionOfNextDelta - params.getUnifiedContext();
 	}
 
-	private void processDeltas(List<String> origLines, List<AbstractDelta<String>> deltas) {
+	private void processDeltas(List<String> origLines, List<AbstractDelta<String>> deltas) throws DiffException {
 		AbstractDelta<String> curDelta = deltas.get(0);
 		resetPositionsAndCounters(curDelta);
 
@@ -134,14 +137,15 @@ public class JavaDiffUtils2HtmlWrapper {
 		}
 	}
 
-	private void appendFirstContextAndDelta(List<String> origLines, AbstractDelta<String> curDelta) {
+	private void appendFirstContextAndDelta(List<String> origLines, AbstractDelta<String> curDelta) throws DiffException {
 		for (int line = contextLinesStart; line < curDelta.getSource().getPosition(); line++) {
 			appendContextToHtmlBuilder(origLines, line);
 		}
 		appendDeltaTextToHtmlBuilder(curDelta);
 	}
 
-	private AbstractDelta<String> appendFollowingDeltasWithLeadingContexts(List<String> origLines, List<AbstractDelta<String>> deltas, AbstractDelta<String> curDelta) {
+	private AbstractDelta<String> appendFollowingDeltasWithLeadingContexts(List<String> origLines,
+			List<AbstractDelta<String>> deltas, AbstractDelta<String> curDelta) throws DiffException {
 		int deltaIndex = 1;
 		while (deltaIndex < deltas.size()) { // for each of the other Deltas
 			AbstractDelta<String> nextDelta = deltas.get(deltaIndex);
@@ -174,19 +178,47 @@ public class JavaDiffUtils2HtmlWrapper {
 		contextLinesCounter++;
 	}
 
-	private void appendDeltaTextToHtmlBuilder(AbstractDelta<String> delta) {
-		for (String line : delta.getSource().getLines()) {
-			htmlBuilder.appendDeletionLine("-" + line, getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
-			origLinesCounter++;
+	private void appendDeltaTextToHtmlBuilder(AbstractDelta<String> delta) throws DiffException {
+		List<String> sourceLines = delta.getSource().getLines();
+		List<String> targetLines = delta.getTarget().getLines();
+		
+		switch(delta.getType()) {
+		case CHANGE:
+			DiffRowGenerator diffGen = DiffRowGenerator.create().build();
+			
+			List<DiffRow> diffRows = diffGen.generateDiffRows(sourceLines, targetLines);
+			
+			for (int i = 0; i < sourceLines.size(); i++) {
+				htmlBuilder.appendDeletionLine("-" + diffRows.get(i).getOldLine(), getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
+				origLinesCounter++;
+			}
+			for (int j = 0; j < targetLines.size(); j++) {
+				htmlBuilder.appendInsertionLine("+" + diffRows.get(j).getNewLine(), getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
+				revLinesCounter++;
+			}
+			
+			break;
+		case DELETE:
+			for (String line : sourceLines) {
+				htmlBuilder.appendDeletionLine("-" + line, getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
+				origLinesCounter++;
+			}
+			break;
+		case INSERT:
+			for (String line : targetLines) {
+				htmlBuilder.appendInsertionLine("+" + line, getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
+				revLinesCounter++;
+			}
+			break;
+		case EQUAL:
+		default:
+			break;
+		
 		}
-		for (String line : delta.getTarget().getLines()) {
-			htmlBuilder.appendInsertionLine("+" + line, getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
-			revLinesCounter++;
-		}
-		origLinesTotal += delta.getSource().getLines().size();
-		revLinesTotal += delta.getTarget().getLines().size();
+		origLinesTotal += sourceLines.size();
+		revLinesTotal += targetLines.size();
 	}
-
+	
 	private void insertUnifiedDiffBlockHeaderAtStartOfHtml() {
 		String header = "@@ -" + origLinesStart + "," + origLinesTotal + " +" + revLinesStart + "," + revLinesTotal + " @@";
 		htmlBuilder.appendInfoLineAt(initialPostionInHtmlBuilder, header);

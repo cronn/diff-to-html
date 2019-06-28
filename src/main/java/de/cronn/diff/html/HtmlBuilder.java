@@ -62,10 +62,9 @@ public abstract class HtmlBuilder {
 				createBody())
 				.render();
 		if (useSimpleFormatOnHtmls) {
-			return newlineAllHtmlTags(renderedHtml);
-		} else {
-			return renderedHtml;
-		}
+			renderedHtml = newlineAllHtmlTags(renderedHtml);
+		} 
+		return renderedHtml;
 	}
 
 	protected String getRelativePath(String path) {
