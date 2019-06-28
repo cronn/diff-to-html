@@ -184,7 +184,9 @@ public class JavaDiffUtils2HtmlWrapper {
 		
 		switch(delta.getType()) {
 		case CHANGE:
-			DiffRowGenerator diffGen = DiffRowGenerator.create().build();
+			DiffRowGenerator diffGen = DiffRowGenerator.create()
+			.lineNormalizer(s -> s)
+			.build();
 			
 			List<DiffRow> diffRows = diffGen.generateDiffRows(sourceLines, targetLines);
 			
