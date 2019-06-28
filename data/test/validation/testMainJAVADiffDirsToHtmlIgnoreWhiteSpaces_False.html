@@ -66,10 +66,10 @@ a:hover
      cursor:pointer;  
 }
 .delete {
-    background-color: #fdd;
+    background-color: #ffeef0;
 }
 .insert {
-    background-color: #dfd;
+    background-color: #e5ffee;
 }
 .info {
     color: #808080;
@@ -86,6 +86,14 @@ a:hover
 }
 .expand-all-link {
     font-family: monospace;
+}
+.deleteChar {
+    background-color: #ffb8c0;
+    text-decoration: none;
+}
+.insertChar {
+    background-color: #a9f2c0;
+    text-decoration: none;
 }
 </style></head>
 <body id="wrapper2">
@@ -123,7 +131,7 @@ a:hover
 <td class="line-number">1</td>
 <td class="line-number">1</td>
 <td class="delete">
-<pre>-here for you some text </pre></td></tr>
+<pre>-here<u class="deleteChar"> </u>for<u class="deleteChar"> </u>you<u class="deleteChar"> </u>some<u class="deleteChar"> </u>text<u class="deleteChar"> </u></pre></td></tr>
 <tr>
 <td class="line-number">2</td>
 <td class="line-number">1</td>
@@ -155,12 +163,12 @@ a:hover
 <td class="line-number">1</td>
 <td class="line-number">1</td>
 <td class="delete">
-<pre>-This is a text .</pre></td></tr>
+<pre>-This<u class="deleteChar"> </u>is<u class="deleteChar"> </u>a<u class="deleteChar"> </u>text<u class="deleteChar"> </u>.</pre></td></tr>
 <tr>
 <td class="line-number">2</td>
 <td class="line-number">1</td>
 <td class="delete">
-<pre>-A text   t h i s is.</pre></td></tr>
+<pre>-A<u class="deleteChar"> </u>text<u class="deleteChar">   </u>t<u class="deleteChar"> </u>h<u class="deleteChar"> </u>i<u class="deleteChar"> </u>s<u class="deleteChar"> </u>is.</pre></td></tr>
 <tr>
 <td class="line-number">3</td>
 <td class="line-number">1</td>

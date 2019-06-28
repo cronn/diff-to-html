@@ -1,5 +1,9 @@
 package de.cronn.diff.html;
 
+import static de.cronn.diff.impl.java.wrapper.JavaDiffUtils2HtmlWrapper.DELETION_CLOSE_TAG;
+import static de.cronn.diff.impl.java.wrapper.JavaDiffUtils2HtmlWrapper.DELETION_OPEN_TAG;
+import static de.cronn.diff.impl.java.wrapper.JavaDiffUtils2HtmlWrapper.INSERTION_CLOSE_TAG;
+import static de.cronn.diff.impl.java.wrapper.JavaDiffUtils2HtmlWrapper.INSERTION_OPEN_TAG;
 import static j2html.TagCreator.html;
 import static j2html.TagCreator.style;
 
@@ -37,6 +41,10 @@ public abstract class HtmlBuilder {
 	protected static final String CSS_CLASS_INFO = "info";
 
 	protected static final String CSS_CLASS_ATTENTION = "attention";
+	
+	private static final String CSS_CLASS_INSERT_CHAR = "insertChar";
+	
+	private static final String CSS_CLASS_DELETE_CHAR = "deleteChar";
 
 	protected static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
 	
@@ -64,7 +72,10 @@ public abstract class HtmlBuilder {
 		if (useSimpleFormatOnHtmls) {
 			renderedHtml = newlineAllHtmlTags(renderedHtml);
 		} 
-		return renderedHtml;
+		return renderedHtml.replaceAll(DELETION_OPEN_TAG, "<u class=\"" + CSS_CLASS_DELETE_CHAR + "\">")
+				.replaceAll(DELETION_CLOSE_TAG, "</u>")
+				.replaceAll(INSERTION_OPEN_TAG, "<u class=\""+CSS_CLASS_INSERT_CHAR+"\">")
+				.replaceAll(INSERTION_CLOSE_TAG, "</u>");
 	}
 
 	protected String getRelativePath(String path) {

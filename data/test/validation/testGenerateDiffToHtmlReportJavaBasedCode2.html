@@ -66,10 +66,10 @@ a:hover
      cursor:pointer;  
 }
 .delete {
-    background-color: #fdd;
+    background-color: #ffeef0;
 }
 .insert {
-    background-color: #dfd;
+    background-color: #e5ffee;
 }
 .info {
     color: #808080;
@@ -86,6 +86,14 @@ a:hover
 }
 .expand-all-link {
     font-family: monospace;
+}
+.deleteChar {
+    background-color: #ffb8c0;
+    text-decoration: none;
+}
+.insertChar {
+    background-color: #a9f2c0;
+    text-decoration: none;
 }
 </style></head>
 <body>
@@ -170,12 +178,12 @@ a:hover
 <td class="line-number">120</td>
 <td class="line-number">119</td>
 <td class="delete">
-<pre>-				StringUtils.substringAfter(line, binaryFilesDifferPrefix),</pre></td></tr>
+<pre>-				StringUtils.substring<u class="deleteChar">A</u>fter(line, binaryFilesDifferPrefix),</pre></td></tr>
 <tr>
 <td class="line-number">121</td>
 <td class="line-number">119</td>
 <td class="insert">
-<pre>+				StringUtils.substringafter(line, binaryFilesDifferPrefix),</pre></td></tr>
+<pre>+				StringUtils.substring<u class="insertChar">a</u>fter(line, binaryFilesDifferPrefix),</pre></td></tr>
 <tr>
 <td class="line-number">121</td>
 <td class="line-number">120</td>
@@ -224,7 +232,7 @@ a:hover
 <td class="line-number">133</td>
 <td class="line-number">131</td>
 <td class="insert">
-<pre>+	private SimpleFileInfo[] createFileInfoPaiirr(String[] paths) {</pre></td></tr>
+<pre>+	private SimpleFileInfo[] createFileInfoPai<u class="insertChar">i</u>r<u class="insertChar">r</u>(String[] paths) {</pre></td></tr>
 <tr>
 <td class="line-number">133</td>
 <td class="line-number">132</td>
@@ -268,22 +276,22 @@ a:hover
 <td class="line-number">145</td>
 <td class="line-number">144</td>
 <td class="delete">
-<pre>-		fInfo.setPath(fileInfos.length &gt; 0 ? fileInfos[0].trim() : &quot;&quot;);</pre></td></tr>
+<pre>-		fInfo.setPath(fileInfos.length <u class="deleteChar">&gt;</u> 0 ? fileInfos[0].trim() : &quot;&quot;);</pre></td></tr>
 <tr>
 <td class="line-number">146</td>
 <td class="line-number">144</td>
 <td class="delete">
-<pre>-		fInfo.setLastModified(fileInfos.length &gt; 1 ? fileInfos[1] : &quot;&quot;);</pre></td></tr>
+<pre>-		fInfo.setLastModified(fileInfos.length <u class="deleteChar">&gt;</u> 1 ? fileInfos[1] : &quot;&quot;);</pre></td></tr>
 <tr>
 <td class="line-number">147</td>
 <td class="line-number">144</td>
 <td class="insert">
-<pre>+		fInfo.setPath(fileInfos.length &lt; 0 ? fileInfos[0].trim() : &quot;&quot;);</pre></td></tr>
+<pre>+		fInfo.setPath(fileInfos.length <u class="insertChar">&lt;</u> 0 ? fileInfos[0].trim() : &quot;&quot;);</pre></td></tr>
 <tr>
 <td class="line-number">147</td>
 <td class="line-number">145</td>
 <td class="insert">
-<pre>+		fInfo.setLastModified(fileInfos.length &lt; 1 ? fileInfos[1] : &quot;&quot;);</pre></td></tr>
+<pre>+		fInfo.setLastModified(fileInfos.length <u class="insertChar">&lt;</u> 1 ? fileInfos[1] : &quot;&quot;);</pre></td></tr>
 <tr>
 <td class="line-number">147</td>
 <td class="line-number">146</td>
@@ -327,7 +335,7 @@ a:hover
 <td class="line-number">169</td>
 <td class="line-number">168</td>
 <td class="delete">
-<pre>-	String getUniqueFileNameFromCurrentDiffLine() {</pre></td></tr>
+<pre>-	String getUnique<u class="deleteChar">File</u>NameFromCurrentDiffLine() {</pre></td></tr>
 <tr>
 <td class="line-number">170</td>
 <td class="line-number">168</td>

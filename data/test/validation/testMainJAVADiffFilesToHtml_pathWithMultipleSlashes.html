@@ -66,10 +66,10 @@ a:hover
      cursor:pointer;  
 }
 .delete {
-    background-color: #fdd;
+    background-color: #ffeef0;
 }
 .insert {
-    background-color: #dfd;
+    background-color: #e5ffee;
 }
 .info {
     color: #808080;
@@ -86,6 +86,14 @@ a:hover
 }
 .expand-all-link {
     font-family: monospace;
+}
+.deleteChar {
+    background-color: #ffb8c0;
+    text-decoration: none;
+}
+.insertChar {
+    background-color: #a9f2c0;
+    text-decoration: none;
 }
 </style></head>
 <body>
@@ -126,12 +134,12 @@ a:hover
 <td class="line-number">4</td>
 <td class="line-number">4</td>
 <td class="delete">
-<pre>-		System.out.println(&quot;Hello World!&quot;);</pre></td></tr>
+<pre>-		System.out.println(&quot;<u class="deleteChar">Hell</u>o<u class="deleteChar"> World</u>!&quot;);</pre></td></tr>
 <tr>
 <td class="line-number">5</td>
 <td class="line-number">4</td>
 <td class="insert">
-<pre>+		System.out.println(&quot;Ahoi!&quot;);</pre></td></tr>
+<pre>+		System.out.println(&quot;<u class="insertChar">Ah</u>o<u class="insertChar">i</u>!&quot;);</pre></td></tr>
 <tr>
 <td class="line-number">5</td>
 <td class="line-number">5</td>

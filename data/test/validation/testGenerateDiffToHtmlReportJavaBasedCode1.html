@@ -66,10 +66,10 @@ a:hover
      cursor:pointer;  
 }
 .delete {
-    background-color: #fdd;
+    background-color: #ffeef0;
 }
 .insert {
-    background-color: #dfd;
+    background-color: #e5ffee;
 }
 .info {
     color: #808080;
@@ -86,6 +86,14 @@ a:hover
 }
 .expand-all-link {
     font-family: monospace;
+}
+.deleteChar {
+    background-color: #ffb8c0;
+    text-decoration: none;
+}
+.insertChar {
+    background-color: #a9f2c0;
+    text-decoration: none;
 }
 </style></head>
 <body>
@@ -131,7 +139,7 @@ a:hover
 <td class="line-number">8</td>
 <td class="line-number">7</td>
 <td class="insert">
-<pre>+public class SimpleFileInformation {</pre></td></tr>
+<pre>+public class SimpleFileInfo<u class="insertChar">rmation</u> {</pre></td></tr>
 <tr>
 <td class="line-number">8</td>
 <td class="line-number">8</td>
@@ -141,12 +149,12 @@ a:hover
 <td class="line-number">9</td>
 <td class="line-number">9</td>
 <td class="delete">
-<pre>-	private String lastModified = &quot;&quot;;</pre></td></tr>
+<pre>-	private String lastModifie<u class="deleteChar">d</u> = &quot;&quot;;</pre></td></tr>
 <tr>
 <td class="line-number">10</td>
 <td class="line-number">9</td>
 <td class="insert">
-<pre>+	private String lastModifiet = &quot;&quot;;</pre></td></tr>
+<pre>+	private String lastModifie<u class="insertChar">t</u> = &quot;&quot;;</pre></td></tr>
 <tr>
 <td class="line-number">10</td>
 <td class="line-number">10</td>
@@ -190,12 +198,12 @@ a:hover
 <td class="line-number">17</td>
 <td class="line-number">17</td>
 <td class="delete">
-<pre>-	public SimpleFileInfo(String path, String lastModified) {</pre></td></tr>
+<pre>-	public SimpleFileInfo(String path, String lastModifie<u class="deleteChar">d</u>) {</pre></td></tr>
 <tr>
 <td class="line-number">18</td>
 <td class="line-number">17</td>
 <td class="insert">
-<pre>+	//TODO: do something</pre></td></tr>
+<pre>+	<u class="insertChar">//TODO: do something</u></pre></td></tr>
 <tr>
 <td class="line-number">18</td>
 <td class="line-number">18</td>
@@ -205,7 +213,7 @@ a:hover
 <td class="line-number">18</td>
 <td class="line-number">19</td>
 <td class="insert">
-<pre>+	public SimpleFileInformation(String path, String lastModifiet) {</pre></td></tr>
+<pre>+<u class="insertChar">	</u>public SimpleFileInfo<u class="insertChar">rmation</u>(String path, String lastModifie<u class="insertChar">t</u>) {</pre></td></tr>
 <tr>
 <td class="line-number">18</td>
 <td class="line-number">20</td>
@@ -215,12 +223,12 @@ a:hover
 <td class="line-number">19</td>
 <td class="line-number">21</td>
 <td class="delete">
-<pre>-		this.lastModified = lastModified;</pre></td></tr>
+<pre>-		this.lastModifie<u class="deleteChar">d</u> = lastModifie<u class="deleteChar">d;</u></pre></td></tr>
 <tr>
 <td class="line-number">20</td>
 <td class="line-number">21</td>
 <td class="insert">
-<pre>+		this.lastModifiet = lastModifiet</pre></td></tr>
+<pre>+		this.lastModifie<u class="insertChar">t</u> = lastModifie<u class="insertChar">t</u></pre></td></tr>
 <tr>
 <td class="line-number">20</td>
 <td class="line-number">22</td>
@@ -269,7 +277,7 @@ a:hover
 <td class="line-number">28</td>
 <td class="line-number">29</td>
 <td class="insert">
-<pre>+		return lastModified; 		return lastModified;</pre></td></tr>
+<pre>+		return lastModified;<u class="insertChar"> 		return lastModified;</u></pre></td></tr>
 <tr>
 <td class="line-number">28</td>
 <td class="line-number">30</td>
@@ -304,7 +312,7 @@ a:hover
 <td class="line-number">34</td>
 <td class="line-number">36</td>
 <td class="delete">
-<pre>-	public void setLastModified(String lastModified) {</pre></td></tr>
+<pre>-	public void setLastModified(String lastMod<u class="deleteChar">ified</u>) {</pre></td></tr>
 <tr>
 <td class="line-number">35</td>
 <td class="line-number">36</td>

@@ -22,6 +22,11 @@ import de.cronn.diff.util.FileHelper;
 
 public class JavaDiffUtils2HtmlWrapper {
 
+	public static final String DELETION_OPEN_TAG = "###DELETION_OPEN_383dc8aa341f41289278324023e4a030###";
+	public static final String DELETION_CLOSE_TAG = "###DELETION_CLOSE_a6af1ef424e74b97a3a2853df441be2a###";
+	public static final String INSERTION_OPEN_TAG = "###INSERTION_OPEN_b20a6ec4c51d45499a527bbe19628281###";
+	public static final String INSERTION_CLOSE_TAG = "###INSERTION_CLOSE_594bd9ee828743ef95eb721da47ad406###";
+	
 	private static final Charset DEFAULT_CHARSET = Charset.defaultCharset();
 	private FileDiffHtmlBuilder htmlBuilder = null;
 	private int contextLinesCounter = 0;
@@ -185,8 +190,11 @@ public class JavaDiffUtils2HtmlWrapper {
 		switch(delta.getType()) {
 		case CHANGE:
 			DiffRowGenerator diffGen = DiffRowGenerator.create()
-			.lineNormalizer(s -> s)
-			.build();
+				.showInlineDiffs(true)
+				.oldTag(f -> f ? DELETION_OPEN_TAG : DELETION_CLOSE_TAG)
+				.newTag(f -> f ? INSERTION_OPEN_TAG : INSERTION_CLOSE_TAG)
+				.lineNormalizer(s -> s) //disable default normalizer to avoid replacing tab with spaces
+				.build();
 			
 			List<DiffRow> diffRows = diffGen.generateDiffRows(sourceLines, targetLines);
 			
