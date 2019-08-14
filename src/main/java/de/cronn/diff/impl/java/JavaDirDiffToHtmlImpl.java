@@ -28,7 +28,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 	private static final String UNIQUE_FILE_PREFIX = "Only in ";
 
 	private static final String UNIQUE_LINE_SPLIT_STR = ": ";
-	public static final String tooManyDifferencesErrorMsg = "One of the directories seems to be empty or the difference in diffing is too big. Abort!";
+	public static final String tooManyDifferencesErrorMsg = "Empty directory or too many unique files. Abort!";
 
 
 	public JavaDirDiffToHtmlImpl(DiffToHtmlParameters params) {

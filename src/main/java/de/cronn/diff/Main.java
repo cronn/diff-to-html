@@ -28,7 +28,7 @@ public final class Main {
 
     private static String workingDir = FileHelper.getWorkingDir();
 
-	private static final Long MAX_ALLOWED_FILESIZE_DIFFERENCE = 500000l;
+	private static final Long MAX_ALLOWED_FILESIZE_DIFFERENCE_IN_BYTES = 500000l;
 
 	private Main() {}
 
@@ -49,7 +49,7 @@ public final class Main {
 				.withUnifiedContext(Integer
 						.parseInt(cli.getOptionValue(OPT_UNIFIED_CONTEXT, Integer.toString(UNIFIED_CONTEXT_LINES))))
 				.withMaxAllowedDifferenceInByte(Long.parseLong(cli.getOptionValue(OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE,
-						Long.toString(MAX_ALLOWED_FILESIZE_DIFFERENCE))))
+						Long.toString(MAX_ALLOWED_FILESIZE_DIFFERENCE_IN_BYTES))))
 				.build();
 		int status = new CronnDiffToHtml().generateDiffToHtmlReport(parameters);
 		System.exit(status);

@@ -1,5 +1,5 @@
 
-One of the directories seems to be empty or the difference in diffing is too big. Abort!
+Empty directory or too many unique files. Abort!
 
 Output written to: file://[current/working/directory/]data/test/output/testFileNumberToDiffNotTooDifferent_tooSmallRightDir.html
 
