@@ -62,7 +62,7 @@ public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 
 	private static final String CSS_CLASS_ONE_LINE_HEADER = "one-line-header";
 
-	private final String title;
+	private String title;
 
 	private final DiffToHtmlParameters params;
 

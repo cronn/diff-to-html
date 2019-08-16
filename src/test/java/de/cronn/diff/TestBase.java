@@ -38,7 +38,7 @@ public class TestBase {
 	private static boolean outputDirChecked = false;
 
 	@Rule
-	public final TestName testName = new TestName();
+	public TestName testName = new TestName();
 
 	@Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();

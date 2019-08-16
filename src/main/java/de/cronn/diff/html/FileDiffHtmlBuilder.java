@@ -33,7 +33,7 @@ public class FileDiffHtmlBuilder extends HtmlBuilder {
 		super(params);
 	}
 
-	private final List<Tag> diffLines = new ArrayList<>();
+	private List<Tag> diffLines = new ArrayList<>();
 
 	private SimpleFileInfo fileLeftInfo = new SimpleFileInfo();
 

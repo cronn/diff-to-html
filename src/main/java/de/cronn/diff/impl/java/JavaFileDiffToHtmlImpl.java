@@ -31,7 +31,7 @@ public class JavaFileDiffToHtmlImpl {
 
 	private static final String IDENTICAL_LINE_SPLIT_STR = " and ";
 
-	final DiffToHtmlParameters params;
+	protected DiffToHtmlParameters params;
 
 	int resultCode = Main.EXIT_CODE_OK;
 
@@ -92,7 +92,7 @@ public class JavaFileDiffToHtmlImpl {
 		setRightFileInfo(htmlBuilder, params);
 	}
 
-	void setLeftFileInfo(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params) throws IOException {
+	protected void setLeftFileInfo(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params) throws IOException {
 		String fileLeftPath = params.getInputLeftPath();
 		if (Files.exists(Paths.get(fileLeftPath))) {
 			String fileLeftLastModified = Files.getLastModifiedTime(Paths.get(fileLeftPath)).toString();

@@ -22,33 +22,33 @@ public abstract class HtmlBuilder {
 
 	private static final String CSS_FILE = "diffToHtml.css";
 
-	static final String EMPTY_LINE_HEIGHT = "16";
+	protected static final String EMPTY_LINE_HEIGHT = "16";
 
-	static final String CSS_CLASS_LINE_NUMBER = "line-number";
+	protected static final String CSS_CLASS_LINE_NUMBER = "line-number";
 
-	static final String CSS_ID_WRAPPER = "wrapper";
+	protected static final String CSS_ID_WRAPPER = "wrapper";
 
-	static final String CSS_CLASS_DELETE = "delete";
+	protected static final String CSS_CLASS_DELETE = "delete";
 
-	static final String CSS_CLASS_INSERT = "insert";
+	protected static final String CSS_CLASS_INSERT = "insert";
 
-	static final String CSS_CLASS_CONTEXT = "context";
+	protected static final String CSS_CLASS_CONTEXT = "context";
 
-	static final String CSS_CLASS_INFO = "info";
+	protected static final String CSS_CLASS_INFO = "info";
 
-	static final String CSS_CLASS_ATTENTION = "attention";
+	protected static final String CSS_CLASS_ATTENTION = "attention";
 
-	static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
+	protected static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
 	
-	private static boolean useSimpleFormatOnHtmls = false;
+	protected static boolean useSimpleFormatOnHtmls = false;
 
-	private String outputDirForRelativePaths = null;
+	protected String outputDirForRelativePaths = null;
 
 	protected abstract Tag createHead();
 
 	protected abstract Tag createBody();
 
-	HtmlBuilder(DiffToHtmlParameters params) {
+	public HtmlBuilder(DiffToHtmlParameters params) {
 		String outPath = params.getOutputPath();
 		if(outPath != null) {
 			outputDirForRelativePaths = new File(FilenameUtils.getFullPath(outPath)).getAbsolutePath();
@@ -68,7 +68,7 @@ public abstract class HtmlBuilder {
 		}
 	}
 
-	String getRelativePath(String path) {
+	protected String getRelativePath(String path) {
 		if(path.isEmpty()) {
 			return "";
 		}
