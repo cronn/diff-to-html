@@ -58,21 +58,14 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 	}
 
 	private boolean fileNumberToDiffNotTooDifferent(ArrayList<File> leftSortedFilesAndDirs, ArrayList<File> rightSortedFilesAndDirs) {
-        boolean status = true;
-		if (leftSortedFilesAndDirs.size() > Main.getTooManyFilesAmount() || rightSortedFilesAndDirs.size() > Main.getTooManyFilesAmount()) {
-		    int smallList = 0;
-		    int bigList = 0;
-		    if (leftSortedFilesAndDirs.size() > rightSortedFilesAndDirs.size()) {
-				smallList = rightSortedFilesAndDirs.size();
-				bigList = leftSortedFilesAndDirs.size();
-			} else if (rightSortedFilesAndDirs.size() > leftSortedFilesAndDirs.size()) {
-				smallList = leftSortedFilesAndDirs.size();
-				bigList = rightSortedFilesAndDirs.size();
-			}
-			int halfList = bigList/2;
-			status = halfList <= smallList;
+		int leftSize = leftSortedFilesAndDirs.size();
+		int rightSize = rightSortedFilesAndDirs.size();
+		if (leftSize > Main.getTooManyFilesAmount() || rightSize > Main.getTooManyFilesAmount()) {
+			int minSize = Math.min(leftSize, rightSize);
+			int maxSize = Math.max(leftSize, rightSize);
+			return minSize > maxSize / 2;
 		}
-		return status;
+		return true;
 	}
 
 	private ArrayList<File> getSortedFilesAndDirs(String dirPath) {
