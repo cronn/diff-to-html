@@ -3,22 +3,22 @@ data/test/input/dir1_2
 [current/working/directory/]fileOut
 
 w
-ignorewhitespaces
+ignore-white-spaces
 String
 ignore all white spaces
 
 or
-onlyreports
+only-reports
 String
 always exits with zero
 
 iu
-ignoreunique
+ignore-unique
 String
 ignore unique files
 
 de
-detectencoding
+detect-encoding
 String
 tries to determine encoding type
 

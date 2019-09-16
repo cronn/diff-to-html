@@ -1,8 +1,8 @@
 package de.cronn.diff.util;
 
 public class SimpleFileInfo {
-	private String path;
-	private String lastModified;
+	private final String path;
+	private final String lastModified;
 
 	public SimpleFileInfo() {
 		this("", "");

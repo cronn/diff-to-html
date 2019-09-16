@@ -1,13 +1,15 @@
 Parsing failed. Reason: Too many arguments: one, two, three, four
 
 usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
-       [-b] [-crlf] [-or] [-iu] [-de] [-u <arg>]
- -w,--ignorewhitespaces      ignore all white spaces
- -b,--ignorespacechange      ignore changes in the amount of white space
- -crlf,--ignorelineendings   ignore line endings, i.e. normalize CRLF / LF
-                             while comparing files
- -or,--onlyreports           always exits with zero
- -iu,--ignoreunique          ignore unique files
- -de,--detectencoding        tries to determine encoding type
- -u,--unified <arg>          output <arg> (default 3) lines of unified
-                             context
+       [-b] [-crlf] [-or] [-iu] [-de] [-u <arg>] [-fs <arg>]
+ -w,--ignore-white-spaces      ignore all white spaces
+ -b,--ignore-space-change      ignore changes in the amount of white space
+ -crlf,--ignore-line-endings   ignore line endings, i.e. normalize CRLF /
+                               LF while comparing files
+ -or,--only-reports            always exits with zero
+ -iu,--ignore-unique           ignore unique files
+ -de,--detect-encoding         tries to determine encoding type
+ -u,--unified <arg>            output <arg> (default 3) lines of unified
+                               context
+ -fs,--max-size-diff <arg>     no textual diff if file size differs too
+                               much

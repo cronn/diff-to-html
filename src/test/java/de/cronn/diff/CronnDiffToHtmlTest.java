@@ -17,7 +17,7 @@ public class CronnDiffToHtmlTest extends TestBase {
 	private static final String INPUT_BINARY_1_1 = TEST_DATA_INPUT_DIR + "binaryFile1_1";
 	private static final String INPUT_BINARY_1_2 = TEST_DATA_INPUT_DIR + "binaryFile1_2";
 
-	CronnDiffToHtml diffToHtml = null;
+	private CronnDiffToHtml diffToHtml = null;
 
 	@Override
 	@Before

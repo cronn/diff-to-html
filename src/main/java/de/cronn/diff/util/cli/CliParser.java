@@ -13,10 +13,6 @@ import de.cronn.diff.Main;
 
 public class CliParser {
 	
-	public static final String OPT_OUTPUT = "o";
-
-	public static final String OPT_INPUT = "i";
-
 	public static final String OPT_DETECT_ENCODING = "de";
 
 	public static final String OPT_IGNORE_UNIQUE_FILES = "iu";
@@ -31,11 +27,13 @@ public class CliParser {
 
 	public static final String OPT_UNIFIED_CONTEXT = "u";
 
-	private Options options;
+	public static final String OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE = "fs";
 
-	private HelpFormatter helpFormatter;
+	private final Options options;
+
+	private final HelpFormatter helpFormatter;
 	
-	private String workingDir;
+	private final String workingDir;
 
 	public CliParser(String workingDir) {
 		this.workingDir = workingDir;
@@ -44,16 +42,17 @@ public class CliParser {
 	}
 
 	private Options createOptions() {
-		Options opts = new Options();
-		opts.addOption(new Option(OPT_IGNORE_WHITESPACES, "ignorewhitespaces", false, "ignore all white spaces"));
-		opts.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignorespacechange", false, "ignore changes in the amount of white space"));
-		opts.addOption(new Option(OPT_IGNORE_LINE_ENDINGS, "ignorelineendings", false, "ignore line endings, i.e. normalize CRLF / LF while comparing files"));
-		opts.addOption(new Option(OPT_ONLY_REPORTS, "onlyreports", false, "always exits with zero"));
-		opts.addOption(new Option(OPT_IGNORE_UNIQUE_FILES, "ignoreunique", false, "ignore unique files"));
-		opts.addOption(new Option(OPT_DETECT_ENCODING, "detectencoding", false, "tries to determine encoding type"));
-		opts.addOption(Option.builder(OPT_UNIFIED_CONTEXT).longOpt("unified").hasArg()
+		Options options = new Options();
+		options.addOption(new Option(OPT_IGNORE_WHITESPACES, "ignore-white-spaces", false, "ignore all white spaces"));
+		options.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignore-space-change", false, "ignore changes in the amount of white space"));
+		options.addOption(new Option(OPT_IGNORE_LINE_ENDINGS, "ignore-line-endings", false, "ignore line endings, i.e. normalize CRLF / LF while comparing files"));
+		options.addOption(new Option(OPT_ONLY_REPORTS, "only-reports", false, "always exits with zero"));
+		options.addOption(new Option(OPT_IGNORE_UNIQUE_FILES, "ignore-unique", false, "ignore unique files"));
+		options.addOption(new Option(OPT_DETECT_ENCODING, "detect-encoding", false, "tries to determine encoding type"));
+		options.addOption(Option.builder(OPT_UNIFIED_CONTEXT).longOpt("unified").hasArg()
 				.desc("output <arg> (default 3) lines of unified context").build());
-		return opts;
+		options.addOption(new Option(OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE, "max-size-diff", true, "no textual diff if file size differs too much"));
+		return options;
 	}
 
 	private HelpFormatter createHelpFormatter() {

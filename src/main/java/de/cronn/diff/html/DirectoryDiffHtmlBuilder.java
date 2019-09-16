@@ -64,27 +64,27 @@ public class DirectoryDiffHtmlBuilder extends HtmlBuilder {
 
 	private String title;
 
-	private DiffToHtmlParameters params;
+	private final DiffToHtmlParameters params;
 
-	private List<Tag> changedTextFiles = new ArrayList<>();
+	private final List<Tag> changedTextFiles = new ArrayList<>();
 
-	private List<Tag> changedBinaryFiles = new ArrayList<>();
+	private final List<Tag> changedBinaryFiles = new ArrayList<>();
 
-	private List<Tag> uniqueFilesLeft = new ArrayList<>();
+	private final List<Tag> uniqueFilesLeft = new ArrayList<>();
 
-	private List<Tag> uniqueFilesRight = new ArrayList<>();
+	private final List<Tag> uniqueFilesRight = new ArrayList<>();
 
 	private int changedTextDivCnt = 0;
-	private List<String> changedTextDivIds = new ArrayList<>();
+	private final List<String> changedTextDivIds = new ArrayList<>();
 
 	private int changedBinaryDivCnt = 0;
-	private List<String> changedBinaryDivIds = new ArrayList<>();
+	private final List<String> changedBinaryDivIds = new ArrayList<>();
 
 	private int uniqueFileLeftDivCnt = 0;
-	private List<String> uniqueFileLeftDivIds = new ArrayList<>();
+	private final List<String> uniqueFileLeftDivIds = new ArrayList<>();
 
 	private int uniqueFileRightDivCnt = 0;
-	private List<String> uniqueFileRightDivIds = new ArrayList<>();
+	private final List<String> uniqueFileRightDivIds = new ArrayList<>();
 
 	public DirectoryDiffHtmlBuilder(DiffToHtmlParameters params) {
 		super(params);

@@ -36,7 +36,7 @@ public class MainLineEndingsTest extends MainTestBase {
 		Main.main(new String[] { TEXT_LINE_ENDINGS_LF, TEXT_LINE_ENDINGS_CRLF, getOutHtmlFilePath() });
 	}
 
-	protected static void createFileWithLineEndings(String lineEndings, String pathToFile) throws IOException {
+	private static void createFileWithLineEndings(String lineEndings, String pathToFile) throws IOException {
 		if (!Files.exists(Paths.get(pathToFile))) {
 			Files.write(Paths.get(pathToFile), ("Some text. " + lineEndings + "Some more text." + lineEndings).getBytes());
 		}

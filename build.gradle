@@ -12,6 +12,10 @@ plugins {
     id 'com.jfrog.bintray' version "1.8.4"
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 group = 'de.cronn'
 
 version = '1.4'
@@ -47,6 +51,10 @@ sourceSets {
             srcDir 'src/test/java'
         }
     }
+}
+
+test {
+    systemProperty "file.encoding", "utf-8"
 }
 
 test.inputs.dir('data/test/input')

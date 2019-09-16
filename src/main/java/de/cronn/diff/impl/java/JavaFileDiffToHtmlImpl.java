@@ -19,21 +19,21 @@ import de.cronn.diff.util.SimpleFileInfo;
 
 public class JavaFileDiffToHtmlImpl {
 	
-	public static final String BINARY_FILES_DIFFER_PREFIX = "Binary files ";
+	private static final String BINARY_FILES_DIFFER_PREFIX = "Binary files ";
 	
-	public static final String BINARY_FILES_SUFFIX = " differ";
+	private static final String BINARY_FILES_SUFFIX = " differ";
 
-	public static final String BINARY_LINE_SPLIT_STR = " and ";
+	private static final String BINARY_LINE_SPLIT_STR = " and ";
 
-	public static final String IDENTICAL_FILES_PREFIX = "Files ";
+	private static final String IDENTICAL_FILES_PREFIX = "Files ";
 
-	public static final String IDENTICAL_FILES_SUFFIX = " are identical";
+	private static final String IDENTICAL_FILES_SUFFIX = " are identical";
 
-	public static final String IDENTICAL_LINE_SPLIT_STR = " and ";
+	private static final String IDENTICAL_LINE_SPLIT_STR = " and ";
 
 	protected DiffToHtmlParameters params;
 
-	protected int resultCode = Main.EXIT_CODE_OK;
+	int resultCode = Main.EXIT_CODE_OK;
 
 	public JavaFileDiffToHtmlImpl(DiffToHtmlParameters params) {
 		this.params = params;
@@ -44,7 +44,7 @@ public class JavaFileDiffToHtmlImpl {
 		return new DiffToHtmlResult(html, resultCode);
 	}
 
-	protected FileDiffHtmlBuilder appendFileDiffToBuilder(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params)
+	FileDiffHtmlBuilder appendFileDiffToBuilder(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params)
 			throws IOException {
 		setFileInfos(htmlBuilder, params);
 
@@ -54,9 +54,18 @@ public class JavaFileDiffToHtmlImpl {
 		} else if (FileHelper.isFileBinary(params.getInputLeftPath())) {
 			return appendBinaryFilesDiffToBuilder(htmlBuilder, params);
 
-		} else {
+		} else if (FileHelper.isFileSizeDifferenceTooBig(params.getInputLeftPath(),params.getInputRightPath(),params.getMaxAllowedDifferenceInByte())) {
+			return appendFileSizeTooBigToBuilder(htmlBuilder);
+		}
+		else {
 			return appendTextFilesDiffToBuilder(htmlBuilder, params);
 		}
+	}
+
+	private FileDiffHtmlBuilder appendFileSizeTooBigToBuilder(FileDiffHtmlBuilder htmlBuilder) {
+		htmlBuilder.appendAttentionLine("Files differ but filesize difference too big to parse.");
+		resultCode = Main.EXIT_CODE_ERROR;
+		return  htmlBuilder;
 	}
 
 	private FileDiffHtmlBuilder appendIdenticalFilesToBuilder(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params) {
@@ -91,7 +100,7 @@ public class JavaFileDiffToHtmlImpl {
 		}
 	}
 
-	protected void setRightFileInfo(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params) throws IOException {
+	void setRightFileInfo(FileDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters params) throws IOException {
 		String fileRightPath = params.getInputRightPath();
 		if (Files.exists(Paths.get(fileRightPath))) {
 			String fileRightLastModified = Files.getLastModifiedTime(Paths.get(fileRightPath)).toString();
@@ -99,7 +108,7 @@ public class JavaFileDiffToHtmlImpl {
 		}
 	}
 
-	protected boolean isInputFilesAreIdentical(DiffToHtmlParameters params) throws IOException {
+	boolean isInputFilesAreIdentical(DiffToHtmlParameters params) throws IOException {
 		if(!FileHelper.isFileBinary(params.getInputLeftPath())) {
 			String text1 = new String(Files.readAllBytes(Paths.get(params.getInputLeftPath())));
 			String text2 = new String(Files.readAllBytes(Paths.get(params.getInputRightPath())));

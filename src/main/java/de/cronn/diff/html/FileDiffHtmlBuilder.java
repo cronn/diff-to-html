@@ -56,7 +56,7 @@ public class FileDiffHtmlBuilder extends HtmlBuilder {
 	}
 
 	public void appendInfoLineAt(int position, String line) {
-		appendLineAt(position, line, "--", "--", CSS_CLASS_INFO);
+		appendLineAt(position, line);
 	}
 
 	public void appendAttentionLine(String line) {
@@ -75,10 +75,6 @@ public class FileDiffHtmlBuilder extends HtmlBuilder {
 		appendLine(line, fileLeftLineNr.toString(), fileRightLineNr.toString(), CSS_CLASS_DELETE);
 	}
 
-	public void appendEmptyLine() {
-		diffLines.add(createEmptyLine());
-	}
-
 	public void appendEmptyLineAt(int position) {
 		diffLines.add(position, createEmptyLine());
 	}
@@ -95,8 +91,8 @@ public class FileDiffHtmlBuilder extends HtmlBuilder {
 		diffLines.add(createDiffLine(line, fileLeftLineNr, fileRightLineNr, lineClass));
 	}
 
-	private void appendLineAt(int position, String line, String fileLeftLineNr, String fileRightLineNr, String lineClass) {
-		diffLines.add(position, createDiffLine(line, fileLeftLineNr, fileRightLineNr, lineClass));
+	private void appendLineAt(int position, String line) {
+		diffLines.add(position, createDiffLine(line, "--", "--", HtmlBuilder.CSS_CLASS_INFO));
 	}
 
 	private ContainerTag createDiffLine(String line, String fileLeftLineNr, String fileRightLineNr, String lineClass) {

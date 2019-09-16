@@ -1,5 +1,6 @@
 package de.cronn.diff.impl.java;
 
+import static de.cronn.diff.Main.EXIT_CODE_ERROR;
 import static de.cronn.diff.util.DiffToHtmlParameters.DiffSide.LEFT;
 import static de.cronn.diff.util.DiffToHtmlParameters.DiffSide.RIGHT;
 
@@ -10,11 +11,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import de.cronn.diff.Main;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
-import de.cronn.diff.Main;
 import de.cronn.diff.html.DirectoryDiffHtmlBuilder;
 import de.cronn.diff.html.FileDiffHtmlBuilder;
 import de.cronn.diff.impl.DiffToHtmlResult;
@@ -23,10 +24,12 @@ import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
 import de.cronn.diff.util.FileHelper;
 
 public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
-	
-	public static final String UNIQUE_FILE_PREFIX = "Only in ";
 
-	public static final String UNIQUE_LINE_SPLIT_STR = ": ";
+	private static final String UNIQUE_FILE_PREFIX = "Only in ";
+
+	private static final String UNIQUE_LINE_SPLIT_STR = ": ";
+	public static final String tooManyDifferencesErrorMsg = "Empty directory or too many unique files. Abort!";
+
 
 	public JavaDirDiffToHtmlImpl(DiffToHtmlParameters params) {
 		super(params);
@@ -34,11 +37,35 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 
 	@Override
 	public DiffToHtmlResult runDiffToHtml() throws IOException {
-		DirectoryDiffHtmlBuilder dirDiffHtmlBuilder = new DirectoryDiffHtmlBuilder(params);
-		traverseLeftDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputLeftPath()));
-		traverseRightDirectory(dirDiffHtmlBuilder, getSortedFilesAndDirs(params.getInputRightPath()));
-		String html = dirDiffHtmlBuilder.toString();
-		return new DiffToHtmlResult(html, resultCode);
+		ArrayList<File> leftSortedFilesAndDirs = getSortedFilesAndDirs(params.getInputLeftPath());
+		ArrayList<File> rightSortedFilesAndDirs = getSortedFilesAndDirs(params.getInputRightPath());
+
+		if (dirsToDiffNotEmpty(leftSortedFilesAndDirs, rightSortedFilesAndDirs) && fileNumberToDiffNotTooDifferent(leftSortedFilesAndDirs, rightSortedFilesAndDirs)) {
+			DirectoryDiffHtmlBuilder dirDiffHtmlBuilder = new DirectoryDiffHtmlBuilder(params);
+			traverseLeftDirectory(dirDiffHtmlBuilder, leftSortedFilesAndDirs);
+			traverseRightDirectory(dirDiffHtmlBuilder, rightSortedFilesAndDirs);
+			return new DiffToHtmlResult(dirDiffHtmlBuilder.toString(), resultCode);
+		} else {
+			FileDiffHtmlBuilder fileDiffHtmlBuilder = new FileDiffHtmlBuilder(params);
+			System.out.println(tooManyDifferencesErrorMsg);
+			fileDiffHtmlBuilder.appendAttentionLine(tooManyDifferencesErrorMsg);
+			return new DiffToHtmlResult(fileDiffHtmlBuilder.toString(), EXIT_CODE_ERROR);
+		}
+	}
+
+	private boolean dirsToDiffNotEmpty(ArrayList<File> leftSortedFilesAndDirs, ArrayList<File> rightSortedFilesAndDirs) {
+		return leftSortedFilesAndDirs.size() > 2 && rightSortedFilesAndDirs.size() > 2;
+	}
+
+	private boolean fileNumberToDiffNotTooDifferent(ArrayList<File> leftSortedFilesAndDirs, ArrayList<File> rightSortedFilesAndDirs) {
+		int leftSize = leftSortedFilesAndDirs.size();
+		int rightSize = rightSortedFilesAndDirs.size();
+		if (leftSize > Main.getTooManyFilesAmount() || rightSize > Main.getTooManyFilesAmount()) {
+			int minSize = Math.min(leftSize, rightSize);
+			int maxSize = Math.max(leftSize, rightSize);
+			return minSize > maxSize / 2;
+		}
+		return true;
 	}
 
 	private ArrayList<File> getSortedFilesAndDirs(String dirPath) {
@@ -91,7 +118,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 		} else {
 			dirDiffHtmlBuilder.appendChangedTextFile(fileLeftPath, htmlTableBuilder.createDiffTable());
 		}
-		resultCode = Main.EXIT_CODE_ERROR;
+		resultCode = EXIT_CODE_ERROR;
 	}
 
 	private void makeUniqueFileEntry(DirectoryDiffHtmlBuilder htmlBuilder, DiffToHtmlParameters diffParams, DiffToHtmlParameters.DiffSide diffSide)
@@ -121,7 +148,7 @@ public class JavaDirDiffToHtmlImpl extends JavaFileDiffToHtmlImpl {
 		} else {
 			htmlBuilder.appendUniqueFileRight(filePath, htmlTableBuilder.createDiffTable());
 		}
-		resultCode = Main.EXIT_CODE_ERROR;
+		resultCode = EXIT_CODE_ERROR;
 	}
 
 	private String createUniqueFileMessage(String fileLeftPath) {

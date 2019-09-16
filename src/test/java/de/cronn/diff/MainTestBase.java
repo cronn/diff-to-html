@@ -30,6 +30,11 @@ public class MainTestBase extends TestBase {
 	protected static final String INPUT_DIR_WITHOUT_SPACES = TEST_DATA_INPUT_DIR + "dirWithoutSpaces";
 	protected static final String INPUT_TEXT_1_1 = TEST_DATA_INPUT_DIR + "text1_1.example";
 	protected static final String INPUT_TEXT_1_2 = TEST_DATA_INPUT_DIR + "text1_2.example";
+	protected static final String SMALL_FILE = TEST_DATA_INPUT_DIR + "smallfile";
+	protected static final String BIG_FILE = TEST_DATA_INPUT_DIR + "bigfile";
+	protected static final String SMALL_DIR = TEST_DATA_INPUT_DIR  + "smalldir";
+	protected static final String BIG_DIR = TEST_DATA_INPUT_DIR + "bigdir";
+	protected static final String MEDIUM_DIR = TEST_DATA_INPUT_DIR + "mediumdir";
 
 	private final ByteArrayOutputStream sysErr = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream sysOut = new ByteArrayOutputStream();
@@ -54,7 +59,7 @@ public class MainTestBase extends TestBase {
 		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 	}
 
-	protected class DefaultAssertion implements Assertion {
+	class DefaultAssertion implements Assertion {
 		@Override
 		public void checkAssertion() throws Exception {
 			assertSystemMessage();
@@ -62,14 +67,14 @@ public class MainTestBase extends TestBase {
 		}
 	}
 
-	protected class SystemMessageAssertion implements Assertion {
+	class SystemMessageAssertion implements Assertion {
 		@Override
 		public void checkAssertion() throws Exception {
 			assertSystemMessage();
 		}
 	}
 
-	protected void assertExceptionAndSystemMessage(String[] args, Class<?> clazz) throws IOException {
+	void assertExceptionAndSystemMessage(String[] args, Class<?> clazz) throws IOException {
 		try {
 			Main.main(args);
 		} catch (Exception e) {

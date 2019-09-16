@@ -38,9 +38,9 @@ public abstract class HtmlBuilder {
 
 	protected static final String CSS_CLASS_ATTENTION = "attention";
 
-	public static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
+	protected static final String PREFERRED_ENCODING = StandardCharsets.UTF_8.toString();
 	
-	private static boolean useSimpleFormatOnHtmls = false;
+	protected static boolean useSimpleFormatOnHtmls = false;
 
 	protected String outputDirForRelativePaths = null;
 
@@ -90,11 +90,11 @@ public abstract class HtmlBuilder {
 		return FilenameUtils.separatorsToUnix(path);
 	}
 
-	protected String newlineAllHtmlTags(String html) {
+	private String newlineAllHtmlTags(String html) {
 		return html.replaceAll("(<[^/].*?>)", System.lineSeparator() + "$1");
 	}
 
-	protected ContainerTag createStyleTag() {
+	ContainerTag createStyleTag() {
 		String styleSheet;
 		try(InputStream cssInputStream =  Main.class.getResourceAsStream("/" + CSS_FILE)) {
 			styleSheet = IOUtils.toString(cssInputStream, StandardCharsets.UTF_8);
@@ -102,10 +102,6 @@ public abstract class HtmlBuilder {
 			styleSheet = "<!-- stylesheet " + CSS_FILE + " could not be loaded -->";
 		}
 		return style(styleSheet);
-	}
-
-	public static boolean isUseSimpleFormatOnHtmls() {
-		return useSimpleFormatOnHtmls;
 	}
 
 	public static void setUseSimpleFormatOnHtmls(boolean useSimpleFormatOnHtmls) {
