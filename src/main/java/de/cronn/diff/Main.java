@@ -5,9 +5,10 @@ import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_LINE_ENDINGS;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_SPACE_CHANGE;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_UNIQUE_FILES;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_WHITESPACES;
+import static de.cronn.diff.util.cli.CliParser.OPT_LINEWISE_DIFF;
+import static de.cronn.diff.util.cli.CliParser.OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE;
 import static de.cronn.diff.util.cli.CliParser.OPT_ONLY_REPORTS;
 import static de.cronn.diff.util.cli.CliParser.OPT_UNIFIED_CONTEXT;
-import static de.cronn.diff.util.cli.CliParser.OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE;
 
 import de.cronn.diff.util.DiffToHtmlParameters;
 import de.cronn.diff.util.DiffToHtmlParameters.DiffType;
@@ -50,6 +51,7 @@ public final class Main {
 						.parseInt(cli.getOptionValue(OPT_UNIFIED_CONTEXT, Integer.toString(UNIFIED_CONTEXT_LINES))))
 				.withMaxAllowedDifferenceInByte(Long.parseLong(cli.getOptionValue(OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE,
 						Long.toString(MAX_ALLOWED_FILESIZE_DIFFERENCE_IN_BYTES))))
+				.withLinewiseDiff(cli.hasOption(OPT_LINEWISE_DIFF))
 				.build();
 		int status = new CronnDiffToHtml().generateDiffToHtmlReport(parameters);
 		System.exit(status);

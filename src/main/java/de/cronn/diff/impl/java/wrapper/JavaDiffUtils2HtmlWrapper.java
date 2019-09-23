@@ -14,6 +14,7 @@ import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
 import com.github.difflib.text.DiffRow;
 import com.github.difflib.text.DiffRowGenerator;
+import com.github.difflib.text.DiffRowGenerator.Builder;
 
 import de.cronn.diff.html.FileDiffHtmlBuilder;
 import de.cronn.diff.util.DiffToHtmlParameters;
@@ -189,12 +190,10 @@ public class JavaDiffUtils2HtmlWrapper {
 		
 		switch(delta.getType()) {
 		case CHANGE:
-			DiffRowGenerator diffGen = DiffRowGenerator.create()
-				.showInlineDiffs(true)
-				.oldTag(f -> f ? DELETION_OPEN_TAG : DELETION_CLOSE_TAG)
-				.newTag(f -> f ? INSERTION_OPEN_TAG : INSERTION_CLOSE_TAG)
-				.lineNormalizer(s -> s) //disable default normalizer to avoid replacing tab with spaces
-				.build();
+			Builder diffRowGeneratorBuilder = DiffRowGenerator.create();
+			diffRowGeneratorBuilder = disableNormalization(diffRowGeneratorBuilder);
+			diffRowGeneratorBuilder = setInlineDiff(diffRowGeneratorBuilder, !params.isLinewiseDiff());
+			DiffRowGenerator diffGen = diffRowGeneratorBuilder.build();
 			
 			List<DiffRow> diffRows = diffGen.generateDiffRows(sourceLines, targetLines);
 			
@@ -227,6 +226,18 @@ public class JavaDiffUtils2HtmlWrapper {
 		}
 		origLinesTotal += sourceLines.size();
 		revLinesTotal += targetLines.size();
+	}
+	
+	private Builder setInlineDiff(Builder builder, boolean isInlineDiff) {
+		return isInlineDiff ? 
+				builder.showInlineDiffs(true)
+				.oldTag(f -> f ? DELETION_OPEN_TAG : DELETION_CLOSE_TAG)
+				.newTag(f -> f ? INSERTION_OPEN_TAG : INSERTION_CLOSE_TAG) 
+				: builder;
+	}
+	
+	private Builder disableNormalization(Builder builder) {
+		return builder.lineNormalizer(s -> s);
 	}
 	
 	private void insertUnifiedDiffBlockHeaderAtStartOfHtml() {

@@ -28,6 +28,8 @@ public class CliParser {
 	public static final String OPT_UNIFIED_CONTEXT = "u";
 
 	public static final String OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE = "fs";
+	
+	public static final String OPT_LINEWISE_DIFF = "id";
 
 	private final Options options;
 
@@ -52,6 +54,7 @@ public class CliParser {
 		options.addOption(Option.builder(OPT_UNIFIED_CONTEXT).longOpt("unified").hasArg()
 				.desc("output <arg> (default 3) lines of unified context").build());
 		options.addOption(new Option(OPT_MAX_ALLOWED_FILESIZE_DIFFERENCE, "max-size-diff", true, "no textual diff if file size differs too much"));
+		options.addOption(new Option(OPT_LINEWISE_DIFF, "line-diff", false, "generate line-wise diffs (default: inline / character-wise)"));
 		return options;
 	}
 
