@@ -31,6 +31,8 @@ public class CliParser {
 	
 	public static final String OPT_LINEWISE_DIFF = "id";
 
+	public static final String OPT_HELP = "h";
+	
 	private final Options options;
 
 	private final HelpFormatter helpFormatter;
@@ -45,6 +47,7 @@ public class CliParser {
 
 	private Options createOptions() {
 		Options options = new Options();
+		options.addOption(new Option(OPT_HELP, "help", false, "print this help"));
 		options.addOption(new Option(OPT_IGNORE_WHITESPACES, "ignore-white-spaces", false, "ignore all white spaces"));
 		options.addOption(new Option(OPT_IGNORE_SPACE_CHANGE, "ignore-space-change", false, "ignore changes in the amount of white space"));
 		options.addOption(new Option(OPT_IGNORE_LINE_ENDINGS, "ignore-line-endings", false, "ignore line endings, i.e. normalize CRLF / LF while comparing files"));
@@ -72,11 +75,18 @@ public class CliParser {
 	public DiffToHtmlCommandLine parse(String[] args) throws ParseException {
 		try {
 			CommandLine cli = new DefaultParser().parse(options, args);
+			if(cli.hasOption(OPT_HELP)) {
+				printHelp();
+			}
 			return new DiffToHtmlCommandLine(cli, workingDir);
 		} catch (ParseException e) {
-			helpFormatter.printHelp(Main.PROGRAM_NAME + " <input_left> <input_right> [<output_html>] ", options, true);
+			printHelp();
 			System.err.println(format("Parsing failed. Reason: %1$s", e.getMessage()));
 			throw e;
 		}
+	}
+
+	public void printHelp() {
+		helpFormatter.printHelp(Main.PROGRAM_NAME + " <input_left> <input_right> [<output_html>] ", options, true);
 	}
 }

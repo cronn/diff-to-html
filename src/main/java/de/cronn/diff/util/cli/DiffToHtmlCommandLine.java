@@ -1,5 +1,7 @@
 package de.cronn.diff.util.cli;
 
+import static de.cronn.diff.util.cli.CliParser.OPT_HELP;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,6 +28,8 @@ public class DiffToHtmlCommandLine extends CommandLine {
 	private boolean inputsAreFiles;
 	
 	private final String workingDir;
+	
+	private boolean helpOnly = false;
 
 	public DiffToHtmlCommandLine(CommandLine cli, String workingDir) throws ParseException {
 		for(Option opt : cli.getOptions()) {
@@ -37,9 +41,13 @@ public class DiffToHtmlCommandLine extends CommandLine {
 		
 		this.workingDir = workingDir;
 		
-		checkCliArguments();
-		setupInputs();
-		setupOutput();
+		if (hasOption(OPT_HELP)) {
+			helpOnly = true;
+		} else {
+			checkCliArguments();
+			setupInputs();
+			setupOutput();
+		}
 	}
 
 	private void checkCliArguments() throws ParseException {
@@ -106,5 +114,9 @@ public class DiffToHtmlCommandLine extends CommandLine {
 
 	public String getOutput() {
 		return output;
+	}
+	
+	public boolean isHelpOnly() {
+		return helpOnly;
 	}
 }

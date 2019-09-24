@@ -1,7 +1,8 @@
 Parsing failed. Reason: Unrecognized option: --invalidOptionalArg
 
-usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
-       [-b] [-crlf] [-or] [-iu] [-de] [-u <arg>] [-fs <arg>] [-id]
+usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-h]
+       [-w] [-b] [-crlf] [-or] [-iu] [-de] [-u <arg>] [-fs <arg>] [-id]
+ -h,--help                     print this help
  -w,--ignore-white-spaces      ignore all white spaces
  -b,--ignore-space-change      ignore changes in the amount of white space
  -crlf,--ignore-line-endings   ignore line endings, i.e. normalize CRLF /

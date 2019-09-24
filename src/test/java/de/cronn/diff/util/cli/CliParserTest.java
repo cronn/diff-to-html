@@ -95,7 +95,7 @@ public class CliParserTest extends TestBase {
 				"-nothingAtAll" };
 		assertExceptionThrownHelpPrinted(commandLineOptions, UnrecognizedOptionException.class);
 	}
-
+	
 	@Test
 	public void testParse_Exception_help() throws Exception {
 		assertExceptionThrownHelpPrinted(new String[] { "" }, MissingArgumentException.class);

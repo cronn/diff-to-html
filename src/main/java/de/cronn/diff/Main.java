@@ -36,6 +36,10 @@ public final class Main {
 	public static void main(String[] args) throws Exception {
 		DiffToHtmlCommandLine cli;
 		cli = new CliParser(workingDir).parse(args);
+		if(cli.isHelpOnly()) {
+			System.exit(EXIT_CODE_OK);
+		}
+		
 		DiffToHtmlParameters parameters = DiffToHtmlParameters.builder()
 				.withDiffType(cli.isInputsFiles() ? DiffType.FILES : DiffType.DIRECTORIES)
 				.withInputLeftPath(cli.getInputLeft())

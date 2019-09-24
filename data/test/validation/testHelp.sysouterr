@@ -1,4 +1,3 @@
-Parsing failed. Reason: Too many arguments: data/test/input/dir1_1, data/test/input/code1_2.java.example, data/test/input/dir1_1, fileOut
 
 usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-h]
        [-w] [-b] [-crlf] [-or] [-iu] [-de] [-u <arg>] [-fs <arg>] [-id]

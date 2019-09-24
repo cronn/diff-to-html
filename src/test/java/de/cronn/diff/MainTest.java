@@ -1,5 +1,6 @@
 package de.cronn.diff;
 
+import static de.cronn.diff.util.cli.CliParser.OPT_HELP;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_SPACE_CHANGE;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_UNIQUE_FILES;
 import static de.cronn.diff.util.cli.CliParser.OPT_IGNORE_WHITESPACES;
@@ -249,5 +250,12 @@ public class MainTest extends MainTestBase {
 		exit.checkAssertionAfterwards(new DefaultAssertion());
 		Main.setTooManyFilesAmount(20);
 		Main.main(new String[] {BIG_DIR, MEDIUM_DIR, getOutHtmlFilePath()});
+	}
+	
+	@Test 
+	public void testHelp() throws Exception {
+		exit.expectSystemExitWithStatus(Main.EXIT_CODE_OK);
+		exit.checkAssertionAfterwards(new SystemMessageAssertion());
+		Main.main(new String[] { "-" + OPT_HELP });
 	}
 }
