@@ -9,7 +9,8 @@ Displays diffs in a convenient html page.
 
 * Useful when dealing with large validation text files or directory structures in automated builds, e.g. on Jenkins. 
 * Collapsible diff sections for each file make the result easy to read when comparing directories
-* Pure Java solution (optionally, use Linux diff under the hood - might be faster depending on your machine)
+* Inline-diff (character-wise) helps you to easily identify changes (optionally line-wise)
+* Pure Java solution 
 
 ##### Example outputs:
 ---
@@ -40,25 +41,23 @@ Directories differ!
 ```
 Call without arguments for help
 ```
-$ java -jar build/libs/cronn-diff-to-html-1.1.jar 
-usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-w]
-       [-b] [-crlf] [-or] [-od] [-iu] [-de] [-u <arg>]
- -w,--ignorewhitespaces      ignore all white spaces
- -b,--ignorespacechange      ignore changes in the amount of white space
- -crlf,--ignorelineendings   ignore line endings, i.e. normalize CRLF / LF
-                             while comparing files
- -or,--onlyreports           always exits with zero
- -od,--osdiff                uses operating system's diff instead of Java
-                             implementation and parses the output. Might
-                             slightly improve performance, depending on
-                             your machine. Try for large diffs in
-                             time-critial situations. Windows not
-                             supported currently
- -iu,--ignoreunique          ignore unique files
- -de,--detectencoding        tries to determine encoding type
- -u,--unified <arg>          output <arg> (default 3) lines of unified
-                             context
-Parsing failed. Reason: Input arguments are missing
+$ java -jar build/libs/diff-to-html-1.4.jar -h
+usage: cronn-diff-to-html <input_left> <input_right> [<output_html>]  [-h]
+       [-w] [-b] [-crlf] [-or] [-iu] [-de] [-u <arg>] [-fs <arg>] [-id]
+ -h,--help                     print this help
+ -w,--ignore-white-spaces      ignore all white spaces
+ -b,--ignore-space-change      ignore changes in the amount of white space
+ -crlf,--ignore-line-endings   ignore line endings, i.e. normalize CRLF /
+                               LF while comparing files
+ -or,--only-reports            always exits with zero
+ -iu,--ignore-unique           ignore unique files
+ -de,--detect-encoding         tries to determine encoding type
+ -u,--unified <arg>            output <arg> (default 3) lines of unified
+                               context
+ -fs,--max-size-diff <arg>     no textual diff if file size differs too
+                               much
+ -id,--line-diff               generate line-wise diffs (default: inline /
+                               character-wise)
 ```
 Generate your tar (or zip) to take wherever you want
 ```
@@ -69,9 +68,8 @@ diff-to-html-1.1.tar  diff-to-html-1.1.zip
 
 ### Prerequisites 
 - Java 8
-- On Unix system (only if you want to use OS diff under the hood)
 
 ### Related 
-- [java-diff-utils](https://github.com/dnaumenko/java-diff-utils)
+- [java-diff-utils](https://github.com/java-diff-utils/java-diff-utils)
 - [j2html](https://j2html.com/)
 - [System Rules](http://stefanbirkner.github.io/system-rules/)
