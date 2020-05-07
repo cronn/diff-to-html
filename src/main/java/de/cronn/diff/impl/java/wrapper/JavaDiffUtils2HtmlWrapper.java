@@ -196,16 +196,21 @@ public class JavaDiffUtils2HtmlWrapper {
 			DiffRowGenerator diffGen = diffRowGeneratorBuilder.build();
 			
 			List<DiffRow> diffRows = diffGen.generateDiffRows(sourceLines, targetLines);
-			
+
+			int origLinesCounterBefore = origLinesCounter;
+
 			for (int i = 0; i < sourceLines.size() && i < diffRows.size(); i++) {
-				htmlBuilder.appendDeletionLine("-" + diffRows.get(i).getOldLine(), getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
+				htmlBuilder.appendDeletionLine("-" + diffRows.get(i).getOldLine(), getOrigLineNr(origLinesStart),
+						getRevLineNr(revLinesStart));
 				origLinesCounter++;
 			}
+
 			for (int j = 0; j < targetLines.size() && j < diffRows.size(); j++) {
-				htmlBuilder.appendInsertionLine("+" + diffRows.get(j).getNewLine(), getOrigLineNr(origLinesStart), getRevLineNr(revLinesStart));
+				htmlBuilder.appendInsertionLine("+" + diffRows.get(j).getNewLine(),
+						origLinesStart + contextLinesCounter + origLinesCounterBefore, getRevLineNr(revLinesStart));
 				revLinesCounter++;
 			}
-			
+
 			break;
 		case DELETE:
 			for (String line : sourceLines) {
