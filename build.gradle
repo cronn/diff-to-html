@@ -186,4 +186,5 @@ dependencies {
         testCompile("org.assertj:assertj-core:${assertJVersion}")
 }
 
-
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
