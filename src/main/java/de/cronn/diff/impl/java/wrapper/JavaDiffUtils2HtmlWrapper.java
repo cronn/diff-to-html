@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.difflib.DiffUtils;
-import com.github.difflib.algorithm.DiffException;
 import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
 import com.github.difflib.text.DiffRow;
@@ -53,15 +52,11 @@ public class JavaDiffUtils2HtmlWrapper {
 
 		List<String> originalLines = readAllLinesWithCorrectEncoding(params.getInputLeftPath());
 		List<String> revisedLines = readAllLinesWithCorrectEncoding(params.getInputRightPath());
-		try {
-			appendDiffToBuilder(originalLines, revisedLines);
-		} catch (DiffException e) {
-			throw new DiffToHtmlRuntimeException("Error while atempting to generate diff.", e);
-		}
+		appendDiffToBuilder(originalLines, revisedLines);
 		return htmlBuilder;
 	}
 
-	private void appendDiffToBuilder(List<String> originalLines, List<String> revisedLines) throws DiffException {
+	private void appendDiffToBuilder(List<String> originalLines, List<String> revisedLines) {
 		Patch<String> diffPatches;
 		diffPatches = DiffUtils.diff(originalLines, revisedLines);
 		
@@ -107,7 +102,7 @@ public class JavaDiffUtils2HtmlWrapper {
 		return positionAfterCurrentDelta + params.getUnifiedContext() >= positionOfNextDelta - params.getUnifiedContext();
 	}
 
-	private void processDeltas(List<String> origLines, List<AbstractDelta<String>> deltas) throws DiffException {
+	private void processDeltas(List<String> origLines, List<AbstractDelta<String>> deltas) {
 		AbstractDelta<String> curDelta = deltas.get(0);
 		resetPositionsAndCounters(curDelta);
 
@@ -143,7 +138,7 @@ public class JavaDiffUtils2HtmlWrapper {
 		}
 	}
 
-	private void appendFirstContextAndDelta(List<String> origLines, AbstractDelta<String> curDelta) throws DiffException {
+	private void appendFirstContextAndDelta(List<String> origLines, AbstractDelta<String> curDelta) {
 		for (int line = contextLinesStart; line < curDelta.getSource().getPosition(); line++) {
 			appendContextToHtmlBuilder(origLines, line);
 		}
@@ -151,7 +146,7 @@ public class JavaDiffUtils2HtmlWrapper {
 	}
 
 	private AbstractDelta<String> appendFollowingDeltasWithLeadingContexts(List<String> origLines,
-			List<AbstractDelta<String>> deltas, AbstractDelta<String> curDelta) throws DiffException {
+			List<AbstractDelta<String>> deltas, AbstractDelta<String> curDelta) {
 		int deltaIndex = 1;
 		while (deltaIndex < deltas.size()) { // for each of the other Deltas
 			AbstractDelta<String> nextDelta = deltas.get(deltaIndex);
@@ -184,7 +179,7 @@ public class JavaDiffUtils2HtmlWrapper {
 		contextLinesCounter++;
 	}
 
-	private void appendDeltaTextToHtmlBuilder(AbstractDelta<String> delta) throws DiffException {
+	private void appendDeltaTextToHtmlBuilder(AbstractDelta<String> delta) {
 		List<String> sourceLines = delta.getSource().getLines();
 		List<String> targetLines = delta.getTarget().getLines();
 		
